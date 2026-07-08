@@ -12,6 +12,8 @@ import {
 } from "react-icons/fa";
 import { Space_Grotesk } from "next/font/google";
 
+
+
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -128,7 +130,7 @@ const artists = [
     name: "LUPRETINIA",
     legalName: "Agustina Scelzi",
     country: "Argentina",
-    city: "Buenos Aires",
+    city: "Entre Ríos",
     category: "Indie / Dreampop",
     description:
       "",
@@ -193,7 +195,7 @@ const artists = [
     legalName: "Carlín Levratto",
     country: "Uruguay",
     city: "Tacuarembó",
-    category: "Soul / Musica Disco / Funk",
+    category: "Música Popular Uruguaya",
     description: "",
     image: "/artists/carlin levratto.jpeg",
     avatar: "/artists/carlinavatar.jpg",
@@ -225,7 +227,7 @@ const artists = [
   legalName: "Amy Valeria Vázquez",
   country: "Uruguay",
   city: "Montevideo",
-  category: "Musica popular",
+  category: "Música Popular Uruguaya",
   description: "",
   image: "/artists/amysband.jpeg",
   avatar: "/artists/amyavatar.jpg",
@@ -529,7 +531,7 @@ sliderRef.current.scrollBy({
 
                 {selectedArtist.projects ? (
 
-  <div className="space-y-6">
+  <div className="space-y-6 overflow-y-auto max-h-[180px] md:max-h-[260px] pr-2">
 
     {selectedArtist.projects.map((project, index) => (
 
