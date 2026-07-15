@@ -1,10 +1,11 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Space_Grotesk } from "next/font/google";
 import type { Artist } from "../data/artists";
-import { MapPin, Disc3 } from "lucide-react";
+import { MapPin, Disc3, VolumeX, Volume2  } from "lucide-react";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -16,6 +17,75 @@ type ArtistHeroProps = {
 };
 
 export default function ArtistHero({ artist }: ArtistHeroProps) {
+  const [showHeroVideo, setShowHeroVideo] = useState(
+  Boolean(artist.heroVideo)
+  
+);
+const [isMuted, setIsMuted] = useState(true);
+const [isPreviewPlaying, setIsPreviewPlaying] = useState(false);
+const [videoFinished, setVideoFinished] = useState(false);
+const videoRef = useRef<HTMLVideoElement>(null);
+const previewTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+useEffect(() => {
+
+  return () => {
+
+    if (previewTimeoutRef.current) {
+      clearTimeout(previewTimeoutRef.current);
+    }
+
+  };
+
+}, []);
+
+const stopPreview = () => {
+
+  if (previewTimeoutRef.current) {
+    clearTimeout(previewTimeoutRef.current);
+    previewTimeoutRef.current = null;
+  }
+
+  if (!videoRef.current) return;
+
+  videoRef.current.pause();
+  videoRef.current.currentTime = 0;
+  videoRef.current.muted = true;
+
+  setShowHeroVideo(false);
+  setIsMuted(true);
+  setIsPreviewPlaying(false);
+
+};
+
+const startPreview = () => {
+
+  if (!videoRef.current) return;
+
+  if (previewTimeoutRef.current) {
+    clearTimeout(previewTimeoutRef.current);
+  }
+
+  setShowHeroVideo(true);
+
+  setIsMuted(false);
+
+  setIsPreviewPlaying(true);
+
+  videoRef.current.currentTime = 0;
+
+  videoRef.current.muted = false;
+
+  videoRef.current.play();
+
+  previewTimeoutRef.current = setTimeout(() => {
+
+    stopPreview();
+
+  }, 10000);
+
+};
+
   return (
     <section
       className="
@@ -43,21 +113,103 @@ export default function ArtistHero({ artist }: ArtistHeroProps) {
         "
       >
         <Image
-          src={artist.image}
-          alt={artist.name}
-          fill
-          priority
-          className="
-          object-cover
-          
-          transition-all
-          duration-700
-          
-          hover:scale-105
-          "
-        />
+  src={artist.image}
+  alt={artist.name}
+  fill
+  priority
+  className="
+    object-cover
+    transition-all
+    duration-700
+    hover:scale-105
+  "
+/>
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+{artist.heroVideo && (
+
+  <video
+  ref={videoRef}
+  autoPlay
+  muted={isMuted}
+  playsInline
+  preload="metadata"
+
+onEnded={() => {
+  stopPreview();
+}}
+
+ className={`
+  absolute
+  inset-0
+  w-full
+  h-full
+  object-cover
+  z-10
+  transition-opacity
+  duration-700
+  ${showHeroVideo ? "opacity-100" : "opacity-0"}
+`}
+>
+
+    <source
+      src={artist.heroVideo}
+      type="video/mp4"
+    />
+
+  </video>
+
+)}
+
+<div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-20" />
+<button
+ onClick={() => {
+
+  if (isPreviewPlaying) {
+
+    stopPreview();
+
+  } else {
+
+    startPreview();
+
+  }
+
+}}
+  className="
+    absolute
+    bottom-6
+    right-6
+    z-30
+
+    w-11
+    h-11
+
+    rounded-full
+
+    bg-black/50
+    backdrop-blur-md
+
+    border
+    border-white/10
+
+    flex
+    items-center
+    justify-center
+
+    transition-all
+    duration-300
+
+    hover:bg-[#E50914]
+    hover:scale-105
+  "
+>
+{isPreviewPlaying ? (
+  <Volume2 size={18}/>
+) : (
+  <VolumeX size={18}/>
+)}
+
+</button>
       </motion.div>
 
       {/* =======================================================

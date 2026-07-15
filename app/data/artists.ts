@@ -64,6 +64,8 @@ export interface Artist {
   image: string;
   avatar: string;
 
+    heroVideo?: string;
+
   instagram?: string;
   facebook?: string;
   youtube?: string;
@@ -232,6 +234,7 @@ export const artists: Artist[] = [
       "",
     image: "/artists/lupretinia.jpeg",
     avatar: "/artists/lupretiniaavatar.jpg",
+    heroVideo: "/artists/lupretinia/intro.mp4",
     instagram: "https://www.instagram.com/lupretinia/ ",
     youtube: "https://www.youtube.com/@lupretinia ",
     spotify: "https://open.spotify.com/intl-es/artist/6960ZeP0HXwRLo81fBpAlW?si=jy_tH49xQyKtc5ACjbgATg",
