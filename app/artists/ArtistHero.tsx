@@ -82,7 +82,7 @@ const startPreview = () => {
 
     stopPreview();
 
-  }, 10000);
+  }, 15000);
 
 };
 

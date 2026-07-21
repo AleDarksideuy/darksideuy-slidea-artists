@@ -11,6 +11,7 @@ import NextTerritory from "./sections/NextTerritory";
 import Releases from "./sections/Releases";
 import Contact from "./sections/Contact";
 import Artists from "./sections/Artists";
+import Discover from "./sections/Discover";
 export default function Home() {
   return (
     <main >
@@ -19,6 +20,7 @@ export default function Home() {
       <About/>
       <Artists/>
       <CallToArtists/>
+      <Discover />
       <FIC/>
       <Partners/>
       
