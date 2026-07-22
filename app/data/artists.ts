@@ -418,8 +418,8 @@ export const artists: Artist[] = [
   },
 
   {
-    slug: "johan-heyss",
-    name: "JOHAN HEYSS",
+    slug: "johann-heyss",
+    name: "JOHANN HEYSS",
     legalName: "Alexandre Gomes Soares",
     country: "BRASIL",
     countryCode: "br",
