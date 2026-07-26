@@ -91,7 +91,7 @@ export const artists: Artist[] = [
   description: "",
   image: "/artists/martinarbelo.jpeg",
   avatar: "/artists/martinavatar.jpg",
-  heroVideo: "/artists/martin arbelo/Martinarbeloclip.mp4",
+  heroVideo: "/artists/martin arbelo/martinarbeloclip.mp4",
  projects: [
   {
     name: "ANTAGÓNICA",
@@ -127,7 +127,7 @@ export const artists: Artist[] = [
     description: "",
     image: "/artists/bereshith.jpg",
     avatar: "/artists/bereshitavatar.jpg",
-    heroVideo: "/artists/bereshith/Bereshithclip.mp4",
+    heroVideo: "/artists/bereshith/bereshithclip.mp4",
     instagram: "https://www.instagram.com/BRESHITHB/",
     youtube: "https://www.youtube.com/@BreshithB",
     spotify: "https://open.spotify.com/intl-es/artist/1WtMR7arixVIgC9ckyhyOE",
@@ -138,7 +138,7 @@ export const artists: Artist[] = [
 
     type: "Single",
 
-    cover: "/artists/releases/idolos_Cover.jpg",
+    cover: "/artists/releases/Idolos_Cover.jpg",
 
     description:
       "Próximo sencillo que marcará el inicio de una nueva etapa artística.",
@@ -259,7 +259,7 @@ export const artists: Artist[] = [
     description: "",
     image: "/artists/losespejos.jpeg",
     avatar: "/artists/losespejosavatar.jpg",
-    heroVideo: "/artists/los espejos/Losespejosclip.mp4",
+    heroVideo: "/artists/los espejos/losespejosclip.mp4",
     instagram: "https://www.instagram.com/losespejosuy/",
     youtube: "https://www.youtube.com/@losespejosuy",
     spotify: "https://open.spotify.com/intl-es/artist/5P08EnfFwAuPjUGX6ZMR2w?si=1jPw7mTGRWOHjVA2sKp97g",
@@ -374,7 +374,7 @@ export const artists: Artist[] = [
     description: "",
     image: "/artists/carlin levratto.jpeg",
     avatar: "/artists/carlinavatar.jpg",
-    heroVideo: "/artists/carlin levratto/Carlinlevrattoclip.mp4",
+    heroVideo: "/artists/carlin levratto/carlinlevrattoclip.mp4",
     instagram: "https://www.instagram.com/carlin.levratto/",
     youtube: "https://www.youtube.com/@carlevai",
     spotify: "https://open.spotify.com/intl-es/artist/7Lq6Vty6qBho4kbSmhnckh",
