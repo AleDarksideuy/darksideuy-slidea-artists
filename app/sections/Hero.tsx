@@ -35,53 +35,427 @@ const letter: Variants = {
 };
 
 export default function Hero() {
-  return (
-    <section className="relative h-screen w-full overflow-hidden text-white">
 
-      {/* Overlay */}
+  return (
+
+    <section
+      className="
+        relative
+
+        min-h-screen
+
+        w-full
+
+        overflow-hidden
+
+        text-white
+      "
+    >
+
+      {/* =======================================================
+                            OVERLAY
+      ======================================================= */}
+
       <div className="absolute inset-0 bg-black/30" />
 
-      {/* Contenido */}
-      <div className="relative z-10 flex flex-col justify-center items-center h-full text-center px-4 md:px-6">
+      {/* =======================================================
+                            CONTENT
+      ======================================================= */}
 
-        {/* LOGO */}
-        <motion.div
-          initial={{ opacity: 0, y: 20, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="relative flex justify-center items-center"
-        >
-          <Image
-            src="/Darksideuy.png" 
-            alt="Darkside"
-            width={600}
-            height={200}
-            priority
-            className="w-[220px] sm:w-[300px] md:w-[500px] h-auto"
-          />
-        </motion.div>
+      <div
+        className="
+          relative
+          z-10
 
-        {/* SUBTEXTO */}
-        <motion.p
-          className={`${spaceGrotesk.className} mt-4 md:mt-6 text-[9px] sm:text-[10px] md:text-xs tracking-[0.25em] md:tracking-[0.35em] text-gray-400 uppercase max-w-xs sm:max-w-md md:max-w-none`}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-        >
-          Productora cultural independiente — Mercedes, Uruguay — 2026
-        </motion.p>
+          max-w-6xl
+          mx-auto
 
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
-          className="absolute bottom-8 md:bottom-12"
+          min-h-screen
+
+          flex
+          flex-col
+
+          items-center
+
+          px-4
+          md:px-6
+
+          pt-20
+          pb-24
+        "
+      >
+
+        {/* =======================================================
+                              HERO
+        ======================================================= */}
+
+        <div
+          className="
+            flex
+            flex-col
+
+            items-center
+            text-center
+
+            pt-16
+            md:pt-24
+          "
         >
-          <div className="w-[1px] h-12 md:h-16 bg-white/30 animate-pulse" />
-        </motion.div>
+
+          {/* LOGO */}
+
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 20,
+              scale: 0.95,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+            }}
+            transition={{
+              duration: 1,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="
+              relative
+
+              flex
+              justify-center
+              items-center
+            "
+          >
+
+            <Image
+              src="/Darksideuy.png"
+              alt="Darkside"
+              width={600}
+              height={200}
+              priority
+              className="
+                w-[220px]
+                sm:w-[300px]
+                md:w-[500px]
+
+                h-auto
+              "
+            />
+
+          </motion.div>
+
+          {/* SUBTITLE */}
+
+          <motion.p
+            className={`
+              ${spaceGrotesk.className}
+
+              mt-4
+              md:mt-6
+
+              text-[9px]
+              sm:text-[10px]
+              md:text-xs
+
+              tracking-[0.25em]
+              md:tracking-[0.35em]
+
+              uppercase
+
+              text-gray-400
+
+              max-w-xs
+              sm:max-w-md
+              md:max-w-none
+            `}
+            initial={{
+              opacity: 0,
+              y: 20,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              delay: 1.2,
+              duration: .8,
+            }}
+          >
+
+            Productora cultural independiente — Mercedes, Uruguay — 2026
+
+          </motion.p>
+
+        </div>
+{/* =======================================================
+                        ABOUT
+======================================================= */}
+
+<motion.div
+  initial={{
+    opacity: 0,
+    y: 40,
+  }}
+  whileInView={{
+    opacity: 1,
+    y: 0,
+  }}
+  viewport={{
+    once: true,
+  }}
+  transition={{
+    duration: .8,
+    delay: .2,
+  }}
+  className="
+    mt-20
+
+    w-full
+
+    max-w-5xl
+  "
+>
+
+  <div
+    className="
+      grid
+
+      grid-cols-1
+      md:grid-cols-2
+
+      gap-8
+      md:gap-12
+
+      text-center
+      md:text-left
+    "
+  >
+
+    <p
+      className="
+        text-sm
+        md:text-base
+
+        leading-8
+
+        text-gray-300
+      "
+    >
+      Antes de que llegáramos, nadie lo concebía posible.
+      Llegamos a una ciudad del interior profundo de Uruguay
+      sin red, sin capital, sin historia ahí.
+      Con tres personas y una convicción:
+      que el vacío cultural no es una condición permanente.
+      Es una oportunidad.
+    </p>
+
+    <p
+      className="
+        text-sm
+        md:text-base
+
+        leading-8
+
+        text-gray-300
+      "
+    >
+      Construimos un ecosistema desde cero.
+      Eventos, artistas, contenido audiovisual,
+      relaciones institucionales.
+      No como servicios.
+      Como sistema.
+
+      <br />
+      <br />
+
+      Darkside UY no es una productora de eventos.
+      Es una metodología aplicada al territorio.
+      Y el territorio cambió.
+    </p>
+
+  </div>
+
+</motion.div>
+
+{/* =======================================================
+                        METRICS
+======================================================= */}
+
+<motion.div
+  initial={{
+    opacity: 0,
+    y: 30,
+  }}
+  whileInView={{
+    opacity: 1,
+    y: 0,
+  }}
+  viewport={{
+    once: true,
+  }}
+  transition={{
+    duration: .8,
+    delay: .35,
+  }}
+  className="
+    mt-20
+
+    w-full
+
+    grid
+    grid-cols-3
+
+    gap-4
+
+    text-center
+  "
+>
+
+  <div>
+
+    <h3
+      className={`
+        ${spaceGrotesk.className}
+
+        text-4xl
+        sm:text-5xl
+        md:text-7xl
+
+        font-bold
+      `}
+    >
+      33
+    </h3>
+
+    <p
+      className="
+        mt-2
+
+        text-[10px]
+        md:text-xs
+
+        uppercase
+        tracking-[0.2em]
+
+        text-gray-500
+      "
+    >
+      Eventos en vivo
+    </p>
+
+  </div>
+
+  <div>
+
+    <h3
+      className={`
+        ${spaceGrotesk.className}
+
+        text-4xl
+        sm:text-5xl
+        md:text-7xl
+
+        font-bold
+      `}
+    >
+      10
+    </h3>
+
+    <p
+      className="
+        mt-2
+
+        text-[10px]
+        md:text-xs
+
+        uppercase
+        tracking-[0.2em]
+
+        text-gray-500
+      "
+    >
+      Formatos digitales
+    </p>
+
+  </div>
+
+  <div>
+
+    <h3
+      className={`
+        ${spaceGrotesk.className}
+
+        text-4xl
+        sm:text-5xl
+        md:text-7xl
+
+        font-bold
+      `}
+    >
+      15
+    </h3>
+
+    <p
+      className="
+        mt-2
+
+        text-[10px]
+        md:text-xs
+
+        uppercase
+        tracking-[0.2em]
+
+        text-gray-500
+      "
+    >
+      Meses de experimento
+    </p>
+
+  </div>
+
+</motion.div>
+
+{/* =======================================================
+                    SCROLL INDICATOR
+======================================================= */}
+
+<motion.div
+  initial={{
+    opacity: 0,
+  }}
+  animate={{
+    opacity: 1,
+  }}
+  transition={{
+    delay: 2,
+  }}
+  className="
+    mt-20
+    mb-6
+
+    flex
+    justify-center
+  "
+>
+
+  <div
+    className="
+      w-[1px]
+      h-16
+
+      bg-white/30
+
+      animate-pulse
+    "
+  />
+
+</motion.div>
 
       </div>
+
     </section>
+
   );
+
 }

@@ -169,24 +169,7 @@ export const artists: Artist[] = [
     spotify: "",
     facebook: "",
   },
-  {
-    slug: "arian",
-    name: "ARIAN MW",
-    legalName: "Criss IldDrage y Nelson Turra",
-    country: "Chile",
-    countryCode: "cl",
-    city: "Santiago de Chile",
-    category: "Rock Alternativo",
-    description:
-      "",
-    image: "/artists/arian.jpeg",
-    avatar: "/artists/arianavatar.jpg",
-    heroVideo: "/artists/arian/arianclip.mp4",
-    instagram: "https://www.instagram.com/arian.worldmusic/?hl=es",
-    youtube: "https://www.youtube.com/@arianworldmusicband",
-    spotify: "",
-    facebook: "",
-  },
+ 
 
   {
     slug: "zonno",

@@ -17,14 +17,16 @@ export default function Home() {
     <main >
       
       <Hero />
-      <About/>
+      
+      <Underfest/>
       <Artists/>
-      <CallToArtists/>
       <Discover />
+      <CallToArtists/>
+      
       <FIC/>
       <Partners/>
       
-      <Underfest/>
+      
       <Magazine/>
       <Production/>
       <Releases/>

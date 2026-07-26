@@ -3,23 +3,23 @@ export const spotlightArtists = [
   {
     id: 1,
 
-    artist: "Arian",
+    artist: "Los Espejos",
 
-    release: "Natural",
+    release: "No La Mires Mas",
 
-    type: "Single",
+    type: "Album",
 
     year: "2025",
 
-    genre: "Alternative Rock",
+    genre: "Rock",
 
-    image: "/spotlight/arian.jpeg",
-
-    
+    image: "/spotlight/No_La_Mires_Mas_Cover.jpg",
 
     
 
-    soundcloud: "https://soundcloud.com/arianchile/bucle",
+    
+
+    spotify: "https://open.spotify.com/intl-es/album/6mFX6M5lqDCX8uDC2nGuy9?si=N3NihFvrQUCHzim80uHGWQ",
   },
 
   {
