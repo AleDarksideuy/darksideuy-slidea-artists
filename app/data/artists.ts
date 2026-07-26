@@ -450,7 +450,7 @@ export const artists: Artist[] = [
   description: "",
   image: "/artists/amysband.jpeg",
   avatar: "/artists/amyavatar.jpg",
-  heroVideo: "/artists/amys band/Amysbandclip.mp4",
+  heroVideo: "/artists/amys band/amysbandclip.mp4",
   instagram: "https://www.instagram.com/amy_sbandstudio/",
   facebook: "",
   youtube: "https://www.youtube.com/channel/UCxxOUibNVeQUC4zCT1H3duA",
