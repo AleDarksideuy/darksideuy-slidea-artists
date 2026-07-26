@@ -304,47 +304,7 @@ export default function WeeklyTop() {
 
 )}
 
-    {artist.soundcloud && (
-
-  <a
-    href={artist.soundcloud}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="
-  inline-flex
-  items-center
-  gap-2
-
-  rounded-full
-
-  border
-  border-white/10
-
-  bg-white/[0.02]
-
-  px-3.5
-  py-1.5
-
-  text-[11px]
-  font-medium
-
-  transition-all
-  duration-300
-
-  hover:bg-white/[0.05]
-
-  hover:border-[#FF5500]
-  hover:text-[#FF5500]
-"
-  >
-
-    <FaSoundcloud size={14} />
-
-    <span>SoundCloud</span>
-
-  </a>
-
-)}
+ 
 
   </div>
 
