@@ -97,7 +97,7 @@ export default function Underfest() {
     >
 
       <Image
-        src="/underfest/banner-1.jpg"
+        src="/underfest/banner-1 .jpg"
         alt="Underfest"
         fill
         className="
