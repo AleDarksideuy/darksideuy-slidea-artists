@@ -424,6 +424,140 @@ onEnded={() => {
 <div className="my-12 border-t border-white/10" />
 
 {/* =======================================================
+                    ÚLTIMAS FECHAS
+======================================================== */}
+
+{artist.latestDates && artist.latestDates.length > 0 && (
+
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.6 }}
+    className="mb-12"
+  >
+
+    <div className="flex items-center gap-4 mb-8">
+
+      <div className="w-12 h-px bg-[#E50914]" />
+
+      <h2
+        className={`
+          ${spaceGrotesk.className}
+          uppercase
+          tracking-[0.25em]
+          text-sm
+        `}
+      >
+        Últimas fechas
+      </h2>
+
+    </div>
+
+    <div className="space-y-5">
+
+      {artist.latestDates.map((event, index) => (
+
+        <motion.div
+          key={`${event.title}-${index}`}
+          initial={{ opacity: 0, x: -15 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{
+            delay: 0.65 + index * 0.1,
+            duration: 0.5,
+          }}
+          className="
+            rounded-2xl
+            border
+            border-white/10
+            bg-white/[0.03]
+            p-6
+            md:p-7
+          "
+        >
+
+          <div className="
+            flex
+            flex-col
+            md:flex-row
+            md:items-start
+            md:justify-between
+            gap-5
+          ">
+
+            <div className="min-w-0">
+
+              <p className="
+                text-[10px]
+                uppercase
+                tracking-[0.3em]
+                text-[#E50914]
+                mb-2
+              ">
+                Última presentación
+              </p>
+
+              <h3
+                className={`
+                  ${spaceGrotesk.className}
+                  text-xl
+                  md:text-2xl
+                  font-bold
+                  uppercase
+                `}
+              >
+                {event.title}
+              </h3>
+
+              <p className="text-sm text-gray-400 mt-2">
+                {event.location}
+              </p>
+
+            </div>
+
+            <div className="
+              shrink-0
+              px-4
+              py-2
+              rounded-full
+              border
+              border-white/10
+              bg-white/5
+              text-[11px]
+              uppercase
+              tracking-[0.15em]
+              text-gray-300
+              w-fit
+            ">
+              {event.date}
+            </div>
+
+          </div>
+
+          <div className="mt-6 pt-5 border-t border-white/10">
+
+            <p className="
+              text-sm
+              md:text-[15px]
+              text-gray-400
+              leading-7
+              max-w-3xl
+            ">
+              {event.description}
+            </p>
+
+          </div>
+
+        </motion.div>
+
+      ))}
+
+    </div>
+
+  </motion.div>
+
+)}
+
+{/* =======================================================
                         RELEASES
 ======================================================== */}
 
@@ -524,11 +658,21 @@ onEnded={() => {
           {release.title}
         </h3>
 
-        <p className="text-sm text-gray-500 mt-1">
+       <p className="text-sm text-gray-500 mt-1">
+  {release.type}
+</p>
 
-          {release.type}
+{release.type === "Live Session" && (
+  <p className="text-xs text-gray-500 mt-2 leading-5 max-w-sm">
+    Sesiones en vivo actualmente en producción.
+  </p>
+)}
 
-        </p>
+{release.type === "Live Show" && (
+  <p className="text-xs text-gray-500 mt-2 leading-5 max-w-sm">
+    Registro audiovisual del show en vivo de Skatepark Underfest.
+  </p>
+)}
 
         <div className="flex items-center gap-3 mt-3">
 
@@ -569,6 +713,88 @@ onEnded={() => {
 </div>
 
 </motion.div>
+
+)}
+
+{/* =======================================================
+                    YOUTUBE PLAYLIST
+======================================================== */}
+
+{artist.youtubePlaylist && (
+
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.65 }}
+    className="mb-14"
+  >
+
+    <div className="flex items-center gap-4 mb-8">
+
+      <div className="w-12 h-px bg-[#E50914]" />
+
+      <h2
+        className={`
+          ${spaceGrotesk.className}
+          uppercase
+          tracking-[0.25em]
+          text-sm
+        `}
+      >
+        Contenido Educativo
+      </h2>
+
+    </div>
+
+    <div
+      className="
+        rounded-2xl
+        overflow-hidden
+        border
+        border-white/10
+        bg-black
+        shadow-2xl
+      "
+    >
+
+      <div className="relative w-full aspect-video">
+
+        <iframe
+          src={`${artist.youtubePlaylist.replace(
+            "https://www.youtube.com/playlist?list=",
+            "https://www.youtube.com/embed/videoseries?list="
+          )}`}
+          title={`Playlist de YouTube de ${artist.name}`}
+          className="
+            absolute
+            inset-0
+            w-full
+            h-full
+          "
+          allow="
+            accelerometer;
+            autoplay;
+            clipboard-write;
+            encrypted-media;
+            gyroscope;
+            picture-in-picture;
+            web-share
+          "
+          allowFullScreen
+        />
+
+      </div>
+
+    </div>
+
+    <p className="mt-4 text-sm text-gray-500 leading-6">
+      Videos educativos sobre guitarra eléctrica seleccionados por{" "}
+      <span className="text-gray-300">
+        {artist.name}
+      </span>.
+    </p>
+
+  </motion.div>
 
 )}
 

@@ -25,7 +25,7 @@ export interface Project {
 export interface Release {
   title: string;
 
-  type: "Single" | "EP" | "Album";
+  type: "Single" | "EP" | "Album" | "Live Session" | "Live Show";
 
   status:
     | "Lanzado"
@@ -71,7 +71,17 @@ export interface Artist {
   youtube?: string;
   spotify?: string;
 
+    youtubePlaylist?: string;
+
+    latestDates?: {
+  title: string;
+  date: string;
+  location: string;
+  description: string;
+}[];
+
   projects?: Project[];
+  
   releases?: Release[];
 }
 
@@ -294,7 +304,7 @@ export const artists: Artist[] = [
     country: "Argentina",
     countryCode: "ar",
     city: "Buenos Aires",
-    category: "Rock",
+    category: "Rock Instrumental",
     description: "",
     image: "/artists/teoavila.jpeg",
     avatar: "/artists/teoavatar.jpg",
@@ -303,25 +313,34 @@ export const artists: Artist[] = [
     youtube: "https://youtube.com/@teoavila_?si=pEUyJzsT5qzK81uu",
     spotify: "https://open.spotify.com/artist/42tN9bb1iRlIkPX7fUN58h?si=mQfczjLGSHO6sMg9iyg75g",
     facebook: "",
-             releases: [
+     youtubePlaylist:
+    "https://www.youtube.com/playlist?list=PLZz0qpO44mee4dKXKjT1Z5edRmeoQcsTB",
+
+    latestDates: [
   {
-    title: "Genki-Dama",
-
-    type: "Single",
-
-    cover: "/artists/releases/Genki-Dama_Cover.jpg",
-
+    title: "SKATEPARK UNDERFEST",
+    date: "11 JUL 2026",
+    location: "Mercedes, Uruguay",
     description:
-      "Próximo sencillo que marcará el inicio de una nueva etapa artística.",
-
-    status: "Lanzado",
-
-    releaseDate: "Octubre 2024",
-
-    
+      "Evento multitudinario que combina show en vivo, skate sesh, feria de emprendedores locales y exposición de artes visuales.",
   },
-  
 ],
+
+           releases: [
+  {
+    title: "El Patio Session",
+    type: "Live Session",
+    status: "Próximamente",
+    releaseDate: "Próximamente",
+  },
+  {
+    title: "GRABACIONES SKATEPARK UNDERFEST",
+    type: "Live Show",
+    status: "Próximamente",
+    releaseDate: "Próximamente",
+  },
+],
+
   },
 
   {
