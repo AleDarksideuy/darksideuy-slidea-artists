@@ -114,7 +114,9 @@ sliderRef.current.scrollBy({
 
   return (
   <>
-    <section className="relative py-32 overflow-hidden">
+    <section 
+    id="artists"
+    className="relative py-32 overflow-hidden">
 
       <div className="absolute inset-0 bg-black/30" />
 

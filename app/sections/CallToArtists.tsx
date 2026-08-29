@@ -159,7 +159,9 @@ export default function CallToArtists() {
   return (
 
     
-    <section className="relative h-screen w-full text-white flex items-center justify-center px-4 md:px-6">
+    <section 
+     id="llamado-artistas"
+    className="relative h-screen w-full text-white flex items-center justify-center px-4 md:px-6">
        
       <div className="absolute inset-0 bg-black/30" />
           

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Image from "next/image";
 import "./globals.css";
-
+import Header from "./components/Header";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -51,6 +51,8 @@ export default function RootLayout({
           <div className="absolute inset-0 opacity-[0.08] mix-blend-overlay noise-texture" />
 
         </div>
+          {/* ================= HEADER ================= */}
+        <Header />
 
         {/* CONTENIDO */}
         <div className="relative z-10">

@@ -75,68 +75,233 @@ export default function About() {
         </motion.h2>
 
         {/* TEXTO */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed text-center md:text-left">
 
-          <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            custom={1}
-            className="mx-auto md:mx-0 max-w-md"
-          >
-            Antes de que llegáramos, nadie lo concebía posible. Llegamos a una
-            ciudad del interior profundo de Uruguay sin red, sin capital, sin
-            historia ahí. Con tres personas y una convicción: que el vacío
-            cultural no es una condición permanente. Es una oportunidad.
-          </motion.p>
+<div
+  className="
+    grid
+    grid-cols-1
+    md:grid-cols-2
+    gap-10
+    md:gap-16
+    text-center
+    md:text-left
+  "
+>
 
-          <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            custom={2}
-            className="mx-auto md:mx-0 max-w-md"
-          >
-            Construimos un ecosistema desde cero. Eventos, artistas, contenido
-            audiovisual, relaciones institucionales. No como servicios. Como
-            sistema.
-            <br /><br />
-            Darkside UY no es una productora de eventos. Es una metodología
-            aplicada al territorio. Y el territorio cambió.
-          </motion.p>
+  {/* BLOQUE 1 */}
 
-        </div>
+  <motion.div
+    variants={fadeUp}
+    initial="hidden"
+    whileInView="show"
+    viewport={{ once: true }}
+    custom={1}
+    className="
+      flex
+      flex-col
+      items-center
+      md:items-start
+      gap-5
+    "
+  >
 
-        {/* METRICAS */}
-        <div className="grid grid-cols-3 mt-10 md:mt-16 text-center gap-2 md:gap-0">
+    <p
+      className="
+        text-[10px]
+        sm:text-xs
+        tracking-[0.3em]
+        uppercase
+        text-[#E50914]
+      "
+    >
+      El comienzo
+    </p>
 
-          {metrics.map((num, i) => (
-            <motion.div
-              key={i}
-              className="flex flex-col items-center gap-1"
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              custom={i + 3}
-            >
-              <h3 className={`${spaceGrotesk.className} text-4xl sm:text-5xl md:text-7xl font-bold`}>
-                {num}
-              </h3>
+    <h3
+      className={`
+        ${spaceGrotesk.className}
+        text-2xl
+        sm:text-3xl
+        md:text-4xl
+        font-bold
+        leading-[1.05]
+        uppercase
+        max-w-md
+      `}
+    >
+      Antes de que llegáramos,
+      <br />
+      nadie lo concebía
+      <br />
+      posible.
+    </h3>
 
-              <p className="text-[9px] sm:text-[10px] tracking-wider text-gray-400 uppercase">
-                {i === 0
-                  ? "Eventos en vivo"
-                  : i === 1
-                  ? "Formatos digitales"
-                  : "Meses de experimento"}
-              </p>
-            </motion.div>
-          ))}
+    <div className="w-12 h-px bg-white/20" />
 
-        </div>
+    <p
+      className="
+        text-xs
+        sm:text-sm
+        text-gray-400
+        leading-relaxed
+        max-w-md
+      "
+    >
+      Llegamos a una ciudad del interior profundo de Uruguay.
+      Sin red. Sin capital. Sin historia ahí.
+    </p>
+
+    <p
+      className="
+        text-sm
+        sm:text-base
+        text-gray-200
+        leading-relaxed
+        max-w-md
+      "
+    >
+      Con tres personas y una convicción: que el vacío cultural
+      no es una condición permanente.
+    </p>
+
+    <p
+      className={`
+        ${spaceGrotesk.className}
+        text-lg
+        sm:text-xl
+        font-bold
+        uppercase
+        text-white
+      `}
+    >
+      Es una oportunidad.
+    </p>
+
+  </motion.div>
+
+
+  {/* BLOQUE 2 */}
+
+  <motion.div
+    variants={fadeUp}
+    initial="hidden"
+    whileInView="show"
+    viewport={{ once: true }}
+    custom={2}
+    className="
+      flex
+      flex-col
+      items-center
+      md:items-start
+      gap-5
+    "
+  >
+
+    <p
+      className="
+        text-[10px]
+        sm:text-xs
+        tracking-[0.3em]
+        uppercase
+        text-[#E50914]
+      "
+    >
+      El sistema
+    </p>
+
+    <h3
+      className={`
+        ${spaceGrotesk.className}
+        text-2xl
+        sm:text-3xl
+        md:text-4xl
+        font-bold
+        leading-[1.05]
+        uppercase
+        max-w-md
+      `}
+    >
+      Construimos un
+      <br />
+      ecosistema
+      <br />
+      desde cero.
+    </h3>
+
+    <div className="w-12 h-px bg-white/20" />
+
+    <p
+      className="
+        text-xs
+        sm:text-sm
+        text-gray-400
+        leading-relaxed
+        max-w-md
+      "
+    >
+      Eventos. Artistas. Contenido audiovisual.
+      Relaciones institucionales.
+    </p>
+
+    <p
+      className="
+        text-sm
+        sm:text-base
+        text-gray-200
+        leading-relaxed
+        max-w-md
+      "
+    >
+      No como servicios.
+    </p>
+
+    <p
+      className={`
+        ${spaceGrotesk.className}
+        text-lg
+        sm:text-xl
+        font-bold
+        uppercase
+        text-white
+      `}
+    >
+      Como sistema.
+    </p>
+
+    <div className="pt-2">
+
+      <p
+        className="
+          text-[10px]
+          sm:text-xs
+          tracking-[0.22em]
+          uppercase
+          text-gray-500
+          leading-relaxed
+        "
+      >
+        Darkside UY no es una productora.
+      </p>
+
+      <p
+        className={`
+          ${spaceGrotesk.className}
+          mt-2
+          text-sm
+          sm:text-base
+          font-bold
+          uppercase
+          text-white
+        `}
+      >
+        Es una metodología aplicada al territorio.
+      </p>
+
+    </div>
+
+  </motion.div>
+
+</div>
 
       </div>
     </section>
