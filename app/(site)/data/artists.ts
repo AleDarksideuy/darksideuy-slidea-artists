@@ -195,22 +195,22 @@ export const artists: Artist[] = [
     heroVideo: "/artists/zonno/zonnoclip.mp4",
     instagram: "https://www.instagram.com/zonnobanda/",
     youtube: "https://www.youtube.com/@zonnobanda",
-    spotify: "https://open.spotify.com/intl-es/artist/1xamWQ8W4EaJKACaFKtwEl?si=SP0NTWHnSROBFzgmkQsmdA",
+    spotify: "https://open.spotify.com/intl-es/track/1AKc89yAyiN4prGhTUMvQv?nd=1&dlsi=3a65f028d2714121&autoplay_ok=1",
     facebook: "",
       releases: [
   {
-    title: "No Da",
+    title: "TE ESPERO",
 
     type: "Single",
 
-    cover: "/artists/releases/No_Da_Cover.jpg",
+    cover: "/releases/TE_ESPERO_Cover.jpg",
 
     description:
       "Próximo sencillo que marcará el inicio de una nueva etapa artística.",
 
     status: "Lanzado",
 
-    releaseDate: "Diciembre 2023",
+    releaseDate: "SEPTIEMBRE 2026",
 
     
   },
