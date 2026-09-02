@@ -1,3 +1,4 @@
+import WelcomeModal from "./components/WelcomeModal";
 import Hero from "./sections/Hero";
 import About from "./sections/About";
 import CallToArtists from "./sections/CallToArtists";
@@ -15,7 +16,8 @@ import Discover from "./sections/Discover";
 export default function Home() {
   return (
     <main >
-      
+      <WelcomeModal />
+
       <Hero />
       
       <Underfest/>
