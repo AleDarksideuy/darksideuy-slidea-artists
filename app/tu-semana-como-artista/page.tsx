@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 import styles from "./tu-semana-como-artista.module.css";
 
@@ -92,8 +93,14 @@ export default function TuSemanaComoArtistaPage() {
       <div className={styles.top}>
         <div className={styles.wrap}>
           <div className={styles.brand}>
-            <span className={styles.mark}>DS</span> DARKSIDE{" "}
-            <span style={{ color: "var(--redb)" }}>UY</span>
+            <Image
+              src="/LOGO1.png"
+              alt="Darkside UY"
+              width={26}
+              height={26}
+              className={styles.mark}
+            />{" "}
+            DARKSIDE <span style={{ color: "var(--redb)" }}>UY</span>
           </div>
           <a className={styles.topcta} href="#precio">
             Quiero el archivo
@@ -478,10 +485,7 @@ export default function TuSemanaComoArtistaPage() {
               Quiero el archivo
             </a>
             <div className={styles.pay}>
-              Tarjeta de crédito o débito, Abitab, RedPagos o transferencia.
-              Si estás fuera de Uruguay, también con los medios de pago de tu
-              país.
-            </div>
+Tarjeta de crédito o débito (incluye Prex, Midinero y prepagas habilitadas para pagos internacionales) o PayPal. Si estás fuera de Uruguay, contás con varios métodos de pago que se ajustan a tus necesidades. Todos los pagos se procesan a través de Hotmart, plataforma líder en venta de productos digitales en Latinoamérica, con más de 20 años en el mercado y protocolos de seguridad certificados.            </div>
           </div>
         </section>
 
