@@ -40,6 +40,21 @@ body {
   animation: slowZoom 25s ease-in-out infinite;
 }
 
+/* pulso/glow sutil para el CTA del navbar */
+@keyframes navPulseGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 14px 3px rgba(229, 9, 20, 0.45);
+  }
+}
+
+.animate-nav-glow {
+  animation: navPulseGlow 2.8s ease-in-out infinite;
+}
+
 /* ruido/grano cinematográfico */
 .noise-texture {
   background-image: url("https://grainy-gradients.vercel.app/noise.svg");

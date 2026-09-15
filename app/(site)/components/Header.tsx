@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Headphones, Mic2, Users } from "lucide-react";
+import { Headphones, Mic2, Users, Sparkles } from "lucide-react";
 
 const navigationItems = [
   {
@@ -174,6 +174,106 @@ export default function Header() {
               </Link>
             );
           })}
+
+          <div
+            className="
+              hidden
+              sm:block
+              h-6
+              w-px
+              bg-white/10
+              mx-0.5
+            "
+          />
+
+          <Link
+            href="/tu-semana-como-artista"
+            className="
+              group
+              relative
+
+              flex
+              items-center
+              gap-2
+              md:gap-3
+
+              rounded-xl
+
+              px-3
+              py-2.5
+
+              md:px-4
+              md:py-3
+
+              border
+              border-[#E50914]/50
+
+              bg-[#E50914]/15
+
+              transition-all
+              duration-300
+
+              hover:bg-[#E50914]/25
+              hover:-translate-y-0.5
+
+              animate-nav-glow
+            "
+          >
+            <Sparkles
+              className="
+                h-[18px]
+                w-[18px]
+
+                shrink-0
+
+                text-[#E50914]
+
+                transition-transform
+                duration-300
+
+                group-hover:scale-110
+              "
+              strokeWidth={1.9}
+            />
+
+            <span
+              className="
+                hidden
+                lg:block
+
+                whitespace-nowrap
+
+                text-[10px]
+                font-bold
+
+                tracking-[0.14em]
+
+                text-white
+              "
+            >
+              TU SEMANA COMO ARTISTA
+            </span>
+
+            {/* Texto reducido para pantallas medianas */}
+            <span
+              className="
+                hidden
+                sm:block
+                lg:hidden
+
+                whitespace-nowrap
+
+                text-[9px]
+                font-bold
+
+                tracking-[0.12em]
+
+                text-white
+              "
+            >
+              TU SEMANA
+            </span>
+          </Link>
         </nav>
       </div>
     </header>

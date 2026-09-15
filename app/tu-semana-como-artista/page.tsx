@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import styles from "./tu-semana-como-artista.module.css";
 
@@ -92,7 +93,7 @@ export default function TuSemanaComoArtistaPage() {
     <div className={styles.page}>
       <div className={styles.top}>
         <div className={styles.wrap}>
-          <div className={styles.brand}>
+          <Link href="/" className={styles.brand}>
             <Image
               src="/LOGO1.png"
               alt="Darkside UY"
@@ -101,7 +102,7 @@ export default function TuSemanaComoArtistaPage() {
               className={styles.mark}
             />{" "}
             DARKSIDE <span style={{ color: "var(--redb)" }}>UY</span>
-          </div>
+          </Link>
           <a className={styles.topcta} href="#precio">
             Quiero el archivo
           </a>
