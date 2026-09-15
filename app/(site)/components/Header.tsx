@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 import { Headphones, Mic2, Users, Sparkles } from "lucide-react";
+import { useCtaVisibility } from "../context/CtaVisibilityContext";
 
 const navigationItems = [
   {
@@ -22,6 +24,8 @@ const navigationItems = [
 ];
 
 export default function Header() {
+  const { isCtaVisible } = useCtaVisibility();
+
   return (
     <header
       className="
@@ -175,105 +179,118 @@ export default function Header() {
             );
           })}
 
-          <div
-            className="
-              hidden
-              sm:block
-              h-6
-              w-px
-              bg-white/10
-              mx-0.5
-            "
-          />
+          <AnimatePresence>
+            {isCtaVisible && (
+              <motion.div
+                key="cta-tu-semana"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="flex items-center gap-2 md:gap-3"
+              >
+                <div
+                  className="
+                    hidden
+                    sm:block
+                    h-6
+                    w-px
+                    bg-white/10
+                    mx-0.5
+                  "
+                />
 
-          <Link
-            href="/tu-semana-como-artista"
-            className="
-              group
-              relative
+                <Link
+                  href="/tu-semana-como-artista"
+                  className="
+                    group
+                    relative
 
-              flex
-              items-center
-              gap-2
-              md:gap-3
+                    flex
+                    items-center
+                    gap-2
+                    md:gap-3
 
-              rounded-xl
+                    rounded-xl
 
-              px-3
-              py-2.5
+                    px-3
+                    py-2.5
 
-              md:px-4
-              md:py-3
+                    md:px-4
+                    md:py-3
 
-              border
-              border-[#E50914]/50
+                    border
+                    border-[#E50914]/50
 
-              bg-[#E50914]/15
+                    bg-[#E50914]/15
 
-              transition-all
-              duration-300
+                    transition-all
+                    duration-300
 
-              hover:bg-[#E50914]/25
-              hover:-translate-y-0.5
+                    hover:bg-[#E50914]/25
+                    hover:-translate-y-0.5
 
-              animate-nav-glow
-            "
-          >
-            <Sparkles
-              className="
-                h-[18px]
-                w-[18px]
+                    animate-nav-glow
+                  "
+                >
+                  <Sparkles
+                    className="
+                      h-[18px]
+                      w-[18px]
 
-                shrink-0
+                      shrink-0
 
-                text-[#E50914]
+                      text-[#E50914]
 
-                transition-transform
-                duration-300
+                      transition-transform
+                      duration-300
 
-                group-hover:scale-110
-              "
-              strokeWidth={1.9}
-            />
+                      group-hover:scale-110
+                    "
+                    strokeWidth={1.9}
+                  />
 
-            <span
-              className="
-                hidden
-                lg:block
+                  <span
+                    className="
+                      hidden
+                      lg:block
 
-                whitespace-nowrap
+                      whitespace-nowrap
 
-                text-[10px]
-                font-bold
+                      text-[10px]
+                      font-bold
 
-                tracking-[0.14em]
+                      tracking-[0.14em]
 
-                text-white
-              "
-            >
-              TU SEMANA COMO ARTISTA
-            </span>
+                      text-white
+                    "
+                  >
+                    TU SEMANA COMO ARTISTA
+                  </span>
 
-            {/* Texto reducido para pantallas medianas */}
-            <span
-              className="
-                hidden
-                sm:block
-                lg:hidden
+                  {/* Texto reducido para pantallas medianas */}
+                  <span
+                    className="
+                      hidden
+                      sm:block
+                      lg:hidden
 
-                whitespace-nowrap
+                      whitespace-nowrap
 
-                text-[9px]
-                font-bold
+                      text-[9px]
+                      font-bold
 
-                tracking-[0.12em]
+                      tracking-[0.12em]
 
-                text-white
-              "
-            >
-              TU SEMANA
-            </span>
-          </Link>
+                      text-white
+                    "
+                  >
+                    TU SEMANA
+                  </span>
+                </Link>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </nav>
       </div>
     </header>
