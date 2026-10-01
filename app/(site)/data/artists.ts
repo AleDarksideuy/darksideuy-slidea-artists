@@ -128,42 +128,6 @@ export const artists: Artist[] = [
   },
 ],
 },
-{   
-    slug: "breshith",
-    name: "B'RESHITH",
-    legalName: "B'reshith Burstens Santome",
-    country: "Perú",
-    countryCode: "pe",
-    city: "Lima",
-    category: "Rock Andino Fusión",
-    description: "",
-    image: "/artists/bereshith.jpg",
-    avatar: "/artists/bereshitavatar.jpg",
-    heroVideo: "/artists/bereshith/bereshithclip.mp4",
-    instagram: "https://www.instagram.com/BRESHITHB/",
-    youtube: "https://www.youtube.com/@BreshithB",
-    spotify: "https://open.spotify.com/intl-es/artist/1WtMR7arixVIgC9ckyhyOE",
-    facebook: "https://www.facebook.com/BreshithB/",
-    releases: [
-  {
-    title: "Ídolos",
-
-    type: "Single",
-
-    cover: "/artists/releases/Idolos_Cover.jpg",
-
-    description:
-      "Próximo sencillo que marcará el inicio de una nueva etapa artística.",
-
-    status: "Lanzado",
-
-    releaseDate: "Marzo 2026",
-
-    
-  },
-  
-],
-  },
    {
     slug: "el-asturiano",
     name: "EL ASTURIANO",
@@ -311,88 +275,7 @@ export const artists: Artist[] = [
 
  
 
-  {
-    slug: "teo-avila",
-    name: "TEO AVILA",
-    legalName: "Teo Avila",
-    country: "Argentina",
-    countryCode: "ar",
-    city: "Buenos Aires",
-    category: "Rock Instrumental",
-    description: "",
-    image: "/artists/teoavila.jpeg",
-    avatar: "/artists/teoavatar.jpg",
-    heroVideo: "/artists/teo avila/teoavila.mp4",
-    instagram: "https://www.instagram.com/teoavila_guitar?igsh=a3RvZnZscXZwcmt2",
-    youtube: "https://youtube.com/@teoavila_?si=pEUyJzsT5qzK81uu",
-    spotify: "https://open.spotify.com/artist/42tN9bb1iRlIkPX7fUN58h?si=mQfczjLGSHO6sMg9iyg75g",
-    facebook: "",
-     youtubePlaylist:
-    "https://www.youtube.com/playlist?list=PLZz0qpO44mee4dKXKjT1Z5edRmeoQcsTB",
 
-    latestDates: [
-  {
-    title: "SKATEPARK UNDERFEST",
-    date: "11 JUL 2026",
-    location: "Mercedes, Uruguay",
-    description:
-      "Evento multitudinario que combina show en vivo, skate sesh, feria de emprendedores locales y exposición de artes visuales.",
-  },
-],
-
-           releases: [
-  {
-    title: "El Patio Session",
-    type: "Live Session",
-    status: "Próximamente",
-    releaseDate: "Próximamente",
-  },
-  {
-    title: "GRABACIONES SKATEPARK UNDERFEST",
-    type: "Live Show",
-    status: "Próximamente",
-    releaseDate: "Próximamente",
-  },
-],
-
-  },
-
-  {
-    slug: "sofi-carrique",
-    name: "SOFI CARRIQUE",
-    legalName: "Sofia Carrique",
-    country: "ESTADOS UNIDOS / URUGUAY",
-    countryCode: "us",
-    city: "MIAMI",
-    category: "Pop Latino",
-    description: "",
-    image: "/artists/soficarrique.jpeg",
-    avatar: "/artists/sofiavatar.jpg",
-    heroVideo: "/artists/sofi carrique/sofiacarriqueclip.mp4",
-    instagram: "https://www.instagram.com/sofi.carrique/",
-    youtube: "https://youtu.be/64LCJ-PppFI?si=oxh3yF1XG0jN-Xfh",
-    spotify: "https://open.spotify.com/track/12F0ivCgOcFKBON42Qkft2?si=6WJRUak6Tv2gMMgtUPNnGg",
-    facebook: "",
-              releases: [
-  {
-    title: "En Miami",
-
-    type: "Single",
-
-    cover: "/artists/releases/En_Miami_Cover.jpg",
-
-    description:
-      "Próximo sencillo que marcará el inicio de una nueva etapa artística.",
-
-    status: "Lanzado",
-
-    releaseDate: "Marzo 2026",
-
-    
-  },
-  
-],
-  },
 
   
 
