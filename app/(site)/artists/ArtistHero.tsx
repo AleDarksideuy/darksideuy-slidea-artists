@@ -608,19 +608,9 @@ onEnded={() => {
 
       {/* Cover */}
 
-      <div
-        className="
-          relative
-          w-[68px]
-          h-[68px]
-          rounded-xl
-          overflow-hidden
-          bg-neutral-900
-          shrink-0
-        "
-      >
+      {(() => {
 
-        {release.cover ? (
+        const coverContent = release.cover ? (
 
           <Image
             src={release.cover}
@@ -640,9 +630,39 @@ onEnded={() => {
 
           </div>
 
-        )}
+        );
 
-      </div>
+        const coverClassName = `
+          relative
+          w-[68px]
+          h-[68px]
+          rounded-xl
+          overflow-hidden
+          bg-neutral-900
+          shrink-0
+        `;
+
+        return release.spotify ? (
+
+          <a
+            href={release.spotify}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Escuchar ${release.title} en Spotify`}
+            className={`${coverClassName} block transition hover:opacity-80 hover:ring-2 hover:ring-[#1DB954]`}
+          >
+            {coverContent}
+          </a>
+
+        ) : (
+
+          <div className={coverClassName}>
+            {coverContent}
+          </div>
+
+        );
+
+      })()}
 
       {/* Información */}
 

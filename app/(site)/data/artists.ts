@@ -199,20 +199,20 @@ export const artists: Artist[] = [
     facebook: "",
       releases: [
   {
-    title: "TE ESPERO",
+    title: "Otra Vez En La Luna",
 
-    type: "Single",
+    type: "Album",
 
-    cover: "/releases/TE_ESPERO_Cover.jpg",
+    cover: "/releases/otra vez en la luna.jpg",
 
     description:
-      "Próximo sencillo que marcará el inicio de una nueva etapa artística.",
+      "No te pierdas el nuevo álbum de Zonno.",
 
     status: "Lanzado",
 
-    releaseDate: "SEPTIEMBRE 2026",
+    releaseDate: "Octubre 2026",
 
-    
+    spotify: "https://open.spotify.com/intl-es/album/4h0wRnIF4f49OemwwCOgnD",
   },
   
 ],
