@@ -23,7 +23,7 @@
 /* topbar */
 .top{position:sticky;top:0;z-index:60;background:rgba(10,10,11,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 20px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:13px;letter-spacing:.14em}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:13px;letter-spacing:.14em;color:inherit;text-decoration:none;cursor:pointer}
 .mark{display:block;filter:brightness(0) invert(1)}
 .topcta{background:var(--red);color:#fff;text-decoration:none;border-radius:999px;padding:9px 18px;font-size:12.5px;font-weight:800;letter-spacing:.04em;white-space:nowrap}
 

@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
+import { useCtaVisibility } from "../context/CtaVisibilityContext";
 
 const SHOW_DELAY_MS = 3000;
 
 export default function WelcomeModal() {
   const [open, setOpen] = useState(false);
+  const { showCta } = useCtaVisibility();
 
   useEffect(() => {
     // Punto de extensión: cuando se agregue "solo una vez por usuario",
@@ -18,7 +20,10 @@ export default function WelcomeModal() {
     return () => clearTimeout(timer);
   }, []);
 
-  const close = () => setOpen(false);
+  const close = () => {
+    setOpen(false);
+    showCta();
+  };
 
   return (
     <AnimatePresence>
