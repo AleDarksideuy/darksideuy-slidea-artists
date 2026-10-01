@@ -52,31 +52,6 @@ export const undergroundTracks: Track[] = [
 
   },
 
-  {
-
-    id: "sofi-carrique-02",
-
-    title: "En Miami",
-
-    artist: "Sofi Carrique",
-
-    cover: "/discover/covers/sofi-carrique.jpeg",
-
-    preview: "/discover/previews/En Miami.mp3",
-
-    releaseDate: "2025-08-01",
-
-    genre: "Latin Pop",
-
-    duration: "3:22",
-
-    spotify: "https://open.spotify.com/intl-es/track/12F0ivCgOcFKBON42Qkft2?si=c3135f0d27a54cd5",
-
-    youtube: "",
-
-    soundcloud: ""
-
-  },
 
    {
 
@@ -120,31 +95,6 @@ export const undergroundTracks: Track[] = [
     genre: "Dreampop",
 
     duration: "3:02",
-
-    spotify: "",
-
-    youtube: "",
-
-    soundcloud: ""
-
-  },
-    {
-
-    id: "bereshith-05",
-
-    title: "Ídolos",
-
-    artist: "B'RESHITH",
-
-    cover: "/discover/covers/bereshith.jpeg",
-
-    preview: "/discover/previews/Ídolos.mp3",
-
-    releaseDate: "2025-08-01",
-
-    genre: "Rock",
-
-    duration: "3:21",
 
     spotify: "",
 
@@ -245,31 +195,6 @@ export const undergroundTracks: Track[] = [
     genre: "Techno",
 
     duration: "2:44",
-
-    spotify: "",
-
-    youtube: "",
-
-    soundcloud: ""
-
-  },
-   {
-
-    id: "teo-avila-10",
-
-    title: "Genki-Dama",
-
-    artist: "Teo Avila",
-
-    cover: "/discover/covers/teo-avila.jpeg",
-
-    preview: "/discover/previews/Genki-Dama.mp3",
-
-    releaseDate: "2025-08-01",
-
-    genre: "Rock",
-
-    duration: "7:29",
 
     spotify: "",
 

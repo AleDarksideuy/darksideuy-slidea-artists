@@ -22,27 +22,6 @@ export const spotlightArtists = [
     spotify: "https://open.spotify.com/intl-es/album/6mFX6M5lqDCX8uDC2nGuy9?si=N3NihFvrQUCHzim80uHGWQ",
   },
 
-  {
-    id: 2,
-
-    artist: "Teo Avila",
-
-    release: "Genki-Dama",
-
-    type: "Single",
-
-    year: "2024",
-
-    genre: "Rock",
-
-    image: "/spotlight/teoavila.jpeg",
-
-    spotify: "https://open.spotify.com/intl-es/album/1JpA5X4Zs5sknC3H7gn4oH?si=Zn-28BtqQymuXq-6dD3vEQ",
-
-    youtube: "https://www.youtube.com/watch?v=QwKnmFOTUqE",
-
-    
-  },
 
   {
     id: 3,
