@@ -598,12 +598,12 @@ onEnded={() => {
     <motion.div
       key={index}
       whileHover={{ x: 4 }}
-      className="
+      className={`
         flex
-        items-center
+        ${release.tracks?.length ? "items-start" : "items-center"}
         gap-5
         py-3
-      "
+      `}
     >
 
       {/* Cover */}
@@ -723,6 +723,47 @@ onEnded={() => {
           )}
 
         </div>
+
+        {/* Tracklist */}
+
+        {release.tracks && release.tracks.length > 0 && (
+
+          <ol
+            className="
+              mt-5
+              grid
+              grid-cols-1
+              sm:grid-cols-2
+              gap-x-8
+              gap-y-2
+              border-t
+              border-white/10
+              pt-4
+            "
+          >
+
+            {release.tracks.map((track, trackIndex) => (
+
+              <li
+                key={track}
+                className="flex items-baseline gap-3 text-sm text-gray-300"
+              >
+
+                <span className="w-5 shrink-0 text-[11px] tabular-nums text-gray-500">
+                  {String(trackIndex + 1).padStart(2, "0")}
+                </span>
+
+                <span className="whitespace-nowrap">
+                  {track}
+                </span>
+
+              </li>
+
+            ))}
+
+          </ol>
+
+        )}
 
       </div>
 

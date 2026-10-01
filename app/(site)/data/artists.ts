@@ -49,6 +49,8 @@ export interface Release {
   soundcloud?: string;
 
   presave?: string;
+
+  tracks?: string[];
 }
 
 export interface Artist {
@@ -213,6 +215,18 @@ export const artists: Artist[] = [
     releaseDate: "Octubre 2026",
 
     spotify: "https://open.spotify.com/intl-es/album/4h0wRnIF4f49OemwwCOgnD",
+
+    tracks: [
+      "Si Para Buscarte",
+      "Te Espero",
+      "Otra Vez En La Luna",
+      "No Verbal",
+      "Dame Una Moneda",
+      "No Hay Problemas",
+      "No Hay Mas Venenos",
+      "Quiero Ver",
+      "Solo Sentir",
+    ],
   },
   
 ],
