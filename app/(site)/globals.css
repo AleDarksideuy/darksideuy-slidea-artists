@@ -98,3 +98,60 @@ html, body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+/* ═══════════════════════════════════════════════════════════════
+   LA LINTERNA
+   --lx / --ly son la posición de la luz (px), las escribe useFlashlight.
+   ═══════════════════════════════════════════════════════════════ */
+
+.linterna-stage {
+  --lx: 62%;
+  --ly: 32%;
+}
+
+/* Resplandor rojo sobre el fondo */
+.linterna-glow {
+  background: radial-gradient(circle 460px at var(--lx) var(--ly), rgba(229, 9, 20, 0.13), transparent 70%);
+}
+
+/* Texto negro sobre negro: solo se lee donde pega la luz */
+.linterna-phrase {
+  font-size: clamp(2.4rem, 9vw, 9rem);
+  color: transparent;
+  background-image: radial-gradient(
+    circle 240px at var(--lx) var(--ly),
+    rgba(229, 9, 20, 0.95) 0%,
+    rgba(229, 9, 20, 0.35) 40%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Artistas en penumbra: la oscuridad tiene un agujero donde está la luz */
+.linterna-dark {
+  /* Se extiende --pad más allá del muro y se funde en los bordes,
+     para que la oscuridad no termine en una línea recta */
+  --pad: 80px;
+  inset: calc(var(--pad) * -1);
+  background: radial-gradient(
+    circle var(--lr, 230px) at calc(var(--lx) + var(--pad)) calc(var(--ly) + var(--pad)),
+    transparent 0%,
+    rgba(0, 0, 0, 0.35) 45%,
+    rgba(0, 0, 0, 0.93) 100%
+  );
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, #000 var(--pad), #000 calc(100% - var(--pad)), transparent),
+    linear-gradient(to bottom, transparent, #000 var(--pad), #000 calc(100% - var(--pad)), transparent);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent, #000 var(--pad), #000 calc(100% - var(--pad)), transparent),
+    linear-gradient(to bottom, transparent, #000 var(--pad), #000 calc(100% - var(--pad)), transparent);
+  mask-composite: intersect;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Sin linterna: todo iluminado y quieto */
+  .linterna-dark {
+    display: none;
+  }
+}

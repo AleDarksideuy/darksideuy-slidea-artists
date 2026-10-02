@@ -5,6 +5,9 @@ import { Variants } from "framer-motion";
 import Image from "next/image";
 import { Space_Grotesk } from "next/font/google";
 
+import LinternaStage from "../components/linterna/LinternaStage";
+import { useIsTouch } from "../components/linterna/device";
+
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -35,14 +38,13 @@ const letter: Variants = {
 };
 
 export default function Hero() {
+  const isTouch = useIsTouch();
 
   return (
 
     <section
       className="
         relative
-
-        min-h-screen
 
         w-full
 
@@ -59,46 +61,30 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/30" />
 
       {/* =======================================================
-                            CONTENT
+                  EL LADO OSCURO — LA LINTERNA
+          El monograma D en 3D, a oscuras. El cursor (o el dedo)
+          es una linterna roja que lo ilumina y revela la frase
+          del manifiesto escondida detrás.
       ======================================================= */}
 
-      <div
-        className="
-          relative
-          z-10
-
-          max-w-6xl
-          mx-auto
-
-          min-h-screen
-
-          flex
-          flex-col
-
-          items-center
-
-          px-4
-          md:px-6
-
-          pt-20
-          pb-24
-        "
+      <LinternaStage
+        hiddenPhrase="El vacío cultural no es una condición permanente. Es una oportunidad."
+        className="h-[100svh] min-h-[560px] w-full"
       >
-
-        {/* =======================================================
-                              HERO
-        ======================================================= */}
 
         <div
           className="
             flex
+            h-full
             flex-col
 
             items-center
+            justify-end
             text-center
 
-            pt-16
-            md:pt-24
+            px-4
+            pb-10
+            md:pb-14
           "
         >
 
@@ -119,29 +105,24 @@ export default function Hero() {
               duration: 1,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="
-              relative
-
-              flex
-              justify-center
-              items-center
-            "
           >
 
-            <Image
-              src="/Darksideuy.png"
-              alt="Darkside"
-              width={600}
-              height={200}
-              priority
-              className="
-                w-[220px]
-                sm:w-[300px]
-                md:w-[500px]
+            <h1>
+              <Image
+                src="/Darksideuy.png"
+                alt="Darkside UY"
+                width={600}
+                height={200}
+                priority
+                className="
+                  w-[200px]
+                  sm:w-[260px]
+                  md:w-[380px]
 
-                h-auto
-              "
-            />
+                  h-auto
+                "
+              />
+            </h1>
 
           </motion.div>
 
@@ -152,7 +133,6 @@ export default function Hero() {
               ${spaceGrotesk.className}
 
               mt-4
-              md:mt-6
 
               text-[9px]
               sm:text-[10px]
@@ -187,7 +167,65 @@ export default function Hero() {
 
           </motion.p>
 
+          {/* CÓMO SE USA LA LINTERNA + SCROLL */}
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2 }}
+            className="mt-8 flex flex-col items-center gap-3"
+          >
+
+            <p
+              className={`
+                ${spaceGrotesk.className}
+
+                text-[10px]
+                uppercase
+                tracking-[0.3em]
+
+                text-[#E50914]
+              `}
+            >
+              {isTouch ? "Tocá la oscuridad" : "Mové la luz"}
+            </p>
+
+            <div
+              className="
+                w-[1px]
+                h-12
+
+                bg-white/30
+
+                animate-pulse
+              "
+            />
+
+          </motion.div>
+
         </div>
+
+      </LinternaStage>
+
+      <div
+        className="
+          relative
+          z-10
+
+          max-w-6xl
+          mx-auto
+
+          flex
+          flex-col
+          items-center
+
+          px-4
+          md:px-6
+
+          pb-24
+        "
+      >
+
 {/* =======================================================
                         ABOUT
 ======================================================= */}
@@ -413,42 +451,6 @@ export default function Hero() {
     </p>
 
   </div>
-
-</motion.div>
-
-{/* =======================================================
-                    SCROLL INDICATOR
-======================================================= */}
-
-<motion.div
-  initial={{
-    opacity: 0,
-  }}
-  animate={{
-    opacity: 1,
-  }}
-  transition={{
-    delay: 2,
-  }}
-  className="
-    mt-20
-    mb-6
-
-    flex
-    justify-center
-  "
->
-
-  <div
-    className="
-      w-[1px]
-      h-16
-
-      bg-white/30
-
-      animate-pulse
-    "
-  />
 
 </motion.div>
 
