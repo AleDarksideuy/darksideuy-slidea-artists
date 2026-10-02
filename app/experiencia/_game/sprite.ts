@@ -101,33 +101,3 @@ export function createPlayerSheet() {
 
   return { texture, aspect: W / H };
 }
-
-/* Cartel de texto pixelado (nombres, títulos de zona) */
-export function createLabelTexture(
-  text: string,
-  { color = "#ffffff", background = "", font = "bold 44px monospace" } = {}
-) {
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d")!;
-  ctx.font = font;
-  const width = Math.ceil(ctx.measureText(text).width) + 48;
-  canvas.width = width;
-  canvas.height = 72;
-
-  if (background) {
-    ctx.fillStyle = background;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-  }
-
-  ctx.font = font;
-  ctx.fillStyle = color;
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.fillText(text, canvas.width / 2, canvas.height / 2 + 2);
-
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.colorSpace = THREE.SRGBColorSpace;
-  texture.anisotropy = 4;
-
-  return { texture, aspect: canvas.width / canvas.height };
-}

@@ -1,35 +1,51 @@
 import type { Metadata } from "next";
 
 import { artists } from "../(site)/data/artists";
+import { isZoneId, zones } from "./_game/zones";
 import Experiencia from "./Experiencia";
 
 type PageProps = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-/* Link directo: /experiencia?artista=zonno abre la ficha de ese artista
-   dentro del mundo. Acá armamos el título y la imagen para compartir. */
-function findArtist(param: string | string[] | undefined) {
-  const slug = Array.isArray(param) ? param[0] : param;
-  return artists.find((artist) => artist.slug === slug) ?? null;
+/* Links directos:
+   /experiencia?artista=zonno  → ficha de ese artista dentro del mundo
+   /experiencia?zona=musica    → entra directo a esa zona */
+function first(param: string | string[] | undefined) {
+  return Array.isArray(param) ? param[0] : param;
 }
 
-export async function generateMetadata({
-  searchParams,
-}: PageProps): Promise<Metadata> {
-  const artist = findArtist((await searchParams).artista);
-
-  if (!artist) return {};
-
+async function resolve(searchParams: PageProps["searchParams"]) {
+  const params = await searchParams;
+  const slug = first(params.artista);
+  const zona = first(params.zona);
   return {
-    title: `${artist.name} — Darkside UY`,
-    description: `${artist.category} · ${artist.city}, ${artist.country}`,
-    openGraph: { images: [encodeURI(artist.image)] },
+    artist: artists.find((a) => a.slug === slug) ?? null,
+    zone: isZoneId(zona) ? zona : null,
   };
 }
 
-export default async function ExperienciaPage({ searchParams }: PageProps) {
-  const artist = findArtist((await searchParams).artista);
+export async function generateMetadata({ searchParams }: PageProps): Promise<Metadata> {
+  const { artist, zone } = await resolve(searchParams);
 
-  return <Experiencia initialSlug={artist?.slug ?? null} />;
+  if (artist) {
+    return {
+      title: `${artist.name} — Darkside UY`,
+      description: `${artist.category} · ${artist.city}, ${artist.country}`,
+      openGraph: { images: [encodeURI(artist.image)] },
+    };
+  }
+  if (zone && zone !== "lobby") {
+    return {
+      title: `${zones[zone].title} — Darkside UY`,
+      description: zones[zone].description,
+    };
+  }
+  return {};
+}
+
+export default async function ExperienciaPage({ searchParams }: PageProps) {
+  const { artist, zone } = await resolve(searchParams);
+
+  return <Experiencia initialZone={zone} initialArtist={artist?.slug ?? null} />;
 }

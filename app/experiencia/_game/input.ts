@@ -1,14 +1,22 @@
-/* Estado de controles compartido entre el HUD (React) y el loop del
-   juego (useFrame). Es un objeto mutable a propósito: se lee 60 veces
-   por segundo y no tiene que disparar renders. */
+/* Estado compartido entre el HUD (React) y el loop del juego (useFrame).
+   Son objetos mutables a propósito: se leen 60 veces por segundo y no
+   tienen que disparar renders. */
 
 export const input = {
   keys: new Set<string>(),
   /* Joystick táctil, valores entre -1 y 1 */
   joyX: 0,
   joyY: 0,
-  /* Mientras hay una ficha abierta el personaje no se mueve */
+  /* Destino al tocar/clickear el piso */
+  target: null as [number, number] | null,
+  /* Mientras hay un panel abierto el personaje no se mueve */
   frozen: false,
+};
+
+/* Posición del personaje en el piso (x, z) */
+export const player = {
+  x: 0,
+  z: 0,
 };
 
 const MOVE_KEYS: Record<string, [number, number]> = {
@@ -41,14 +49,19 @@ export function readDirection(): [number, number] {
     }
   }
 
+  /* Teclado o joystick cancelan el "ir hasta acá" */
+  if (x !== 0 || z !== 0) {
+    input.target = null;
+  } else if (input.target) {
+    x = input.target[0] - player.x;
+    z = input.target[1] - player.z;
+    if (Math.hypot(x, z) < 0.15) {
+      input.target = null;
+      return [0, 0];
+    }
+  }
+
   const len = Math.hypot(x, z);
   if (len > 1) return [x / len, z / len];
   return [x, z];
 }
-
-/* Posición del personaje en el piso (x, z). La lee la cámara y la
-   escribe el directorio de artistas cuando teletransporta. */
-export const player = {
-  x: 0,
-  z: 4,
-};
