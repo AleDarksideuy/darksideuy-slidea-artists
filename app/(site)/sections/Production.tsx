@@ -24,9 +24,9 @@ const fadeUp: Variants = {
 };
 
 const items = [
-  { id: "01", title: "LIVING SESSIONS", url: "https://youtube.com/playlist?list=PLKYACo2D96OLjeM5eS2j981odUL3hZpZ5&si=DxIZDk50foa63hU6", thumbnail: "/thumbnails/living.png" },
+  { id: "01", title: "LIVING SESSIONS", url: "https://youtube.com/playlist?list=PLKYACo2D96OLjeM5eS2j981odUL3hZpZ5&si=DxIZDk50foa63hU6", thumbnail: "/thumbnails/living.webp" },
   { id: "02", title: "INTERVENCIÓN MERCEDES", url: "", thumbnail: null },
-  { id: "03", title: "LA ISLA SESSIONS", url: "https://youtube.com/playlist?list=PLKYACo2D96OKVr4-x-E5oBngll0YJxtpu&si=Oc-KVIUsELmZxwlh", thumbnail: "/thumbnails/isla.png" },
+  { id: "03", title: "LA ISLA SESSIONS", url: "https://youtube.com/playlist?list=PLKYACo2D96OKVr4-x-E5oBngll0YJxtpu&si=Oc-KVIUsELmZxwlh", thumbnail: "/thumbnails/isla.webp" },
 ];
 
 export default function Production() {

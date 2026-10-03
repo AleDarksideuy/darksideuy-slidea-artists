@@ -113,7 +113,7 @@ export default function Works() {
 
               <div className="relative w-full aspect-square">
                 <Image
-                  src="/releases/naz-cover.jpeg"
+                  src="/releases/naz-cover.webp"
                   alt="Naz"
                   fill
                   className="object-coover"
@@ -165,7 +165,7 @@ export default function Works() {
                   {group.map((img) => (
                     <div key={img} className="relative aspect-video">
                       <Image
-                        src={`/releases/visualizer-${img}.jpeg`}
+                        src={`/releases/visualizer-${img}.webp`}
                         alt="viz"
                         fill
                         className="object-cover"
@@ -185,7 +185,7 @@ export default function Works() {
 
               <div className="relative w-full aspect-square">
                 <Image
-                  src="/releases/porfiao-cover2.jpeg"
+                  src="/releases/porfiao-cover2.webp"
                   alt="Cimarrones"
                   fill
                   className="object-contain"
@@ -237,7 +237,7 @@ export default function Works() {
                   {group.map((img) => (
                     <div key={img} className="relative aspect-video">
                       <Image
-                        src={`/releases/porfiao-${img}.png`}
+                        src={`/releases/porfiao-${img}.webp`}
                         alt="viz"
                         fill
                         className="object-cover"

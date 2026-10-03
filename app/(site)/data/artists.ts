@@ -101,7 +101,7 @@ export const artists: Artist[] = [
   city: "Paysandú",
   category: "Rock pop",
   description: "",
-  image: "/artists/martinarbelo.jpeg",
+  image: "/artists/martinarbelo.webp",
   avatar: "/artists/martinavatar.jpg",
   heroVideo: "/artists/martin arbelo/martinarbeloclip.mp4",
  projects: [
@@ -156,7 +156,7 @@ export const artists: Artist[] = [
     city: "Tacuarembó",
     category: "Soul / Musica Disco / Funk",
     description: "",
-    image: "/artists/zonno.jpeg",
+    image: "/artists/zonno.webp",
     avatar: "/artists/zonnoavatar.jpg",
     heroVideo: "/artists/zonno/zonnoclip.mp4",
     instagram: "https://www.instagram.com/zonnobanda/",
@@ -169,7 +169,7 @@ export const artists: Artist[] = [
 
     type: "Album",
 
-    cover: "/releases/otra vez en la luna.jpg",
+    cover: "/releases/otra vez en la luna.webp",
 
     description:
       "No te pierdas el nuevo álbum de Zonno.",
@@ -220,7 +220,7 @@ export const artists: Artist[] = [
 
     type: "Album",
 
-    cover: "/artists/releases/202X_Cover.jpg",
+    cover: "/artists/releases/202X_Cover.webp",
 
     description:
       "Próximo sencillo que marcará el inicio de una nueva etapa artística.",
@@ -245,7 +245,7 @@ export const artists: Artist[] = [
     city: "Montevideo",
     category: "Rock",
     description: "",
-    image: "/artists/losespejos.jpeg",
+    image: "/artists/losespejos.webp",
     avatar: "/artists/losespejosavatar.jpg",
     heroVideo: "/artists/los espejos/losespejosclip.mp4",
     instagram: "https://www.instagram.com/losespejosuy/",
@@ -288,7 +288,7 @@ export const artists: Artist[] = [
     city: "Tacuarembó",
     category: "Música Popular Uruguaya",
     description: "",
-    image: "/artists/carlin levratto.jpeg",
+    image: "/artists/carlin levratto.webp",
     avatar: "/artists/carlinavatar.jpg",
     heroVideo: "/artists/carlin levratto/carlinlevrattoclip.mp4",
     instagram: "https://www.instagram.com/carlin.levratto/",
@@ -301,7 +301,7 @@ export const artists: Artist[] = [
 
     type: "EP",
 
-    cover: "/artists/releases/El_Viaje_Cover.jpg",
+    cover: "/artists/releases/El_Viaje_Cover.webp",
 
     description:
       "Próximo sencillo que marcará el inicio de una nueva etapa artística.",
@@ -364,7 +364,7 @@ export const artists: Artist[] = [
   city: "Montevideo",
   category: "Música Popular Uruguaya",
   description: "",
-  image: "/artists/amysband.jpeg",
+  image: "/artists/amysband.webp",
   avatar: "/artists/amyavatar.jpg",
   heroVideo: "/artists/amys band/amysbandclip.mp4",
   instagram: "https://www.instagram.com/amy_sbandstudio/",
