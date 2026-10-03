@@ -13,7 +13,7 @@ export const spotlightArtists = [
 
     genre: "Rock",
 
-    image: "/spotlight/No_La_Mires_Mas_Cover.jpg",
+    image: "/artists/releases/No_La_Mires_Mas_Cover.jpg",
 
     
 
@@ -36,7 +36,7 @@ export const spotlightArtists = [
 
     genre: "Música Popular",
 
-    image: "/spotlight/carlin levratto.jpeg",
+    image: "/artists/carlin levratto.webp",
 
     spotify: "https://open.spotify.com/intl-es/album/4cE85eWxivS3nw7NC5sxZU?si=I4U2Xei3SMOJhlJpCr3-kg",
 
@@ -56,7 +56,7 @@ export const spotlightArtists = [
 
     genre: "Dreampop",
 
-    image: "/spotlight/lupretinia.jpeg",
+    image: "/artists/lupretinia.jpeg",
 
     spotify: "https://open.spotify.com/intl-es/album/2K0WBdwP9MfmNdWYNMzWmd?si=SY8rXus3ROCpQw2vYhkJaA",
 

@@ -37,7 +37,7 @@ export default function RootLayout({
           {/* IMAGE LAYER (con zoom + parallax suave) */}
           <div className="absolute inset-0 scale-110 animate-slow-zoom">
             <Image
-              src="/background-image.jpeg"
+              src="/background-image.webp"
               alt="Background"
               fill
               priority

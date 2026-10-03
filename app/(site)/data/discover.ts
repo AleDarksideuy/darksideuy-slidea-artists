@@ -34,9 +34,9 @@ export const undergroundTracks: Track[] = [
 
     artist: "Alejandro Camarano",
 
-    cover: "/discover/covers/alejandro-camarano.jpeg",
+    cover: "/discover/covers/alejandro-camarano.webp",
 
-    preview: "/discover/previews/ntvav.wav",
+    preview: "/discover/previews/ntvav.mp3",
 
     releaseDate: "2025-08-01",
 
@@ -61,7 +61,7 @@ export const undergroundTracks: Track[] = [
 
     artist: "La Casa del Dinosaurio",
 
-    cover: "/discover/covers/La Casa del Dinosaurio.jpeg",
+    cover: "/discover/covers/La Casa del Dinosaurio.webp",
 
     preview: "/discover/previews/Pienso.mp3",
 
@@ -86,7 +86,7 @@ export const undergroundTracks: Track[] = [
 
     artist: "Lupretinia",
 
-    cover: "/discover/covers/lupretinia.jpeg",
+    cover: "/artists/releases/202X_Cover.webp",
 
     preview: "/discover/previews/Hablarte de los dias.mp3",
 
@@ -136,7 +136,7 @@ export const undergroundTracks: Track[] = [
 
     artist: "Los Espejos",
 
-    cover: "/discover/covers/los-espejos.jpeg",
+    cover: "/artists/releases/No_La_Mires_Mas_Cover.jpg",
 
     preview: "/discover/previews/Tan Igual.mp3",
 
@@ -161,9 +161,9 @@ export const undergroundTracks: Track[] = [
 
     artist: "Alejandro Camarano",
 
-    cover: "/discover/covers/alejandro-camarano.jpeg",
+    cover: "/discover/covers/alejandro-camarano.webp",
 
-    preview: "/discover/previews/Dime.wav",
+    preview: "/discover/previews/Dime.mp3",
 
     releaseDate: "2025-08-01",
 
@@ -186,7 +186,7 @@ export const undergroundTracks: Track[] = [
 
     artist: "Johann Heyss",
 
-    cover: "/discover/covers/johann-heyss.jpeg",
+    cover: "/artists/releases/Adepto_Cover.jpg",
 
     preview: "/discover/previews/Sea Song.mp3",
 

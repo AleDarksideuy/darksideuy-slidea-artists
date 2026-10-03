@@ -20,7 +20,7 @@ export default function Background() {
       <div
         className="fixed inset-0 -z-10 bg-black/100 bg-cover bg-center "
         style={{
-  backgroundImage: `url(/background-image.jpeg)`,
+  backgroundImage: `url(/background-image.webp)`,
   transform: `translateY(${offset}px) scale(1.1)`,
   filter: "blur(2px)",
 }}
