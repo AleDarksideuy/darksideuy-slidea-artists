@@ -20,7 +20,19 @@
 body {
   background: #0a0a0a;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Saltos a secciones (#artists, #llamado-artistas…) suaves y sin quedar
+   tapados por el menú */
+html {
+  scroll-padding-top: 5.5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 /* zoom lento infinito tipo cine */

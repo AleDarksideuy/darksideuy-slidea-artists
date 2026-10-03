@@ -69,7 +69,7 @@ export default function Hero() {
 
       <LinternaStage
         hiddenPhrase="El vacío cultural no es una condición permanente. Es una oportunidad."
-        className="h-[100svh] min-h-[560px] w-full"
+        className="h-[88svh] min-h-[540px] w-full md:h-[100svh] md:min-h-[640px]"
       >
 
         <div
@@ -83,7 +83,7 @@ export default function Hero() {
             text-center
 
             px-4
-            pb-10
+            pb-6
             md:pb-14
           "
         >
@@ -167,41 +167,53 @@ export default function Hero() {
 
           </motion.p>
 
-          {/* CÓMO SE USA LA LINTERNA + SCROLL */}
+          {/* ACCESOS DIRECTOS: los dos pasos principales, al alcance del pulgar */}
 
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2 }}
-            className="mt-8 flex flex-col items-center gap-3"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.5, duration: 0.6 }}
+            className="mt-7 flex w-full max-w-sm flex-col gap-3 sm:w-auto sm:max-w-none sm:flex-row"
           >
 
-            <p
-              className={`
-                ${spaceGrotesk.className}
-
-                text-[10px]
-                uppercase
-                tracking-[0.3em]
-
-                text-[#E50914]
-              `}
+            <a
+              href="#artists"
+              className={`${spaceGrotesk.className} flex min-h-[52px] flex-1 items-center justify-center whitespace-nowrap rounded-2xl bg-[#E50914] px-6 text-sm font-bold uppercase tracking-[0.18em] text-white shadow-[0_0_40px_rgba(229,9,20,0.35)] transition active:scale-[0.98] md:hover:brightness-110`}
             >
-              {isTouch ? "Tocá la oscuridad" : "Mové la luz"}
-            </p>
+              Conocé a los artistas
+            </a>
 
-            <div
-              className="
-                w-[1px]
-                h-12
-
-                bg-white/30
-
-                animate-pulse
-              "
-            />
+            <a
+              href="#llamado-artistas"
+              className={`${spaceGrotesk.className} flex min-h-[52px] flex-1 items-center justify-center whitespace-nowrap rounded-2xl border border-white/20 bg-black/40 px-6 text-sm font-bold uppercase tracking-[0.18em] text-white transition active:scale-[0.98] md:hover:border-[#E50914]`}
+            >
+              Sumate al llamado
+            </a>
 
           </motion.div>
+
+          {/* CÓMO SE USA LA LINTERNA */}
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2.2 }}
+            className={`
+              ${spaceGrotesk.className}
+
+              mt-5
+
+              text-[10px]
+              uppercase
+              tracking-[0.3em]
+
+              text-[#E50914]
+
+              motion-reduce:hidden
+            `}
+          >
+            {isTouch ? "Tocá la oscuridad" : "Mové la luz"}
+          </motion.p>
 
         </div>
 
