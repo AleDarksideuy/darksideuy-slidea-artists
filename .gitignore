@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# capturas, pruebas y versiones exploratorias (no viajan a Vercel)
+/.local/
