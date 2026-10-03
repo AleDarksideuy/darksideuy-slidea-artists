@@ -1,30 +1,30 @@
 @import "tailwindcss";
 
-:root {
-  
-  --foreground: #171717;
-}
+/* ═══════════════════════════════════════════════════════════════
+   BASE VISUAL DARKSIDE
+   Paleta y fuentes del sitio: negro, rojo #E50914, blanco y grises.
+   Space Grotesk para títulos (font-display), Geist para texto
+   (font-sans) y Geist Mono para datos (font-mono).
+   ═══════════════════════════════════════════════════════════════ */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: #0a0a0a;
+  --color-foreground: #ededed;
+  --color-ds-red: #e50914;
+  --color-ds-red-soft: #ff5b63;
+  --color-ds-ink: #0b0b0b;
+  --font-sans: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-display: var(--font-space-grotesk), var(--font-geist-sans), sans-serif;
 }
 
-:root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-}
-
+html,
 body {
-  background: #0a0a0a;
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  background: #000;
+  color: #ededed;
 }
 
-/* Saltos a secciones (#artists, #llamado-artistas…) suaves y sin quedar
-   tapados por el menú */
+/* Saltos a secciones suaves y sin quedar tapados por el menú */
 html {
   scroll-padding-top: 5.5rem;
 }
@@ -35,135 +35,74 @@ html {
   }
 }
 
-/* zoom lento infinito tipo cine */
-@keyframes slowZoom {
-  0% {
-    transform: scale(1.1);
-  }
-  50% {
-    transform: scale(1.18);
-  }
-  100% {
-    transform: scale(1.1);
-  }
+/* Grano de película: ruido SVG en línea, sin pedir nada a otro servidor */
+.grain {
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
-.animate-slow-zoom {
-  animation: slowZoom 25s ease-in-out infinite;
-}
-
-/* pulso/glow sutil para el CTA del navbar */
-@keyframes navPulseGlow {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 14px 3px rgba(229, 9, 20, 0.45);
-  }
-}
-
-.animate-nav-glow {
-  animation: navPulseGlow 2.8s ease-in-out infinite;
-}
-
-/* ruido/grano cinematográfico */
-.noise-texture {
-  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-  background-size: 200px 200px;
-}
-
-/* ===== DARKSIDE SCROLLBAR FIX ===== */
-
-html, body {
-  background: #0a0a0a;
-}
-
-/* Chrome / Brave / Edge */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent; /* clave para eliminar “blanco” */
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
-}
-
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+/* Scroll horizontal sin barra (carruseles táctiles) */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-/* ═══════════════════════════════════════════════════════════════
-   LA LINTERNA
-   --lx / --ly son la posición de la luz (px), las escribe useFlashlight.
-   ═══════════════════════════════════════════════════════════════ */
 
-.linterna-stage {
-  --lx: 62%;
-  --ly: 32%;
+/* Barra de scroll fina en escritorio */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
 }
 
-/* Resplandor rojo sobre el fondo */
-.linterna-glow {
-  background: radial-gradient(circle 460px at var(--lx) var(--ly), rgba(229, 9, 20, 0.13), transparent 70%);
-}
-
-/* Texto negro sobre negro: solo se lee donde pega la luz */
-.linterna-phrase {
-  font-size: clamp(2.4rem, 9vw, 9rem);
+/* Texto con contorno (titulares grandes tipo afiche) */
+.text-outline {
   color: transparent;
-  background-image: radial-gradient(
-    circle 240px at var(--lx) var(--ly),
-    rgba(229, 9, 20, 0.95) 0%,
-    rgba(229, 9, 20, 0.35) 40%,
-    rgba(255, 255, 255, 0.03) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.35);
 }
 
-/* Artistas en penumbra: la oscuridad tiene un agujero donde está la luz */
-.linterna-dark {
-  /* Se extiende --pad más allá del muro y se funde en los bordes,
-     para que la oscuridad no termine en una línea recta */
-  --pad: 80px;
-  inset: calc(var(--pad) * -1);
-  background: radial-gradient(
-    circle var(--lr, 230px) at calc(var(--lx) + var(--pad)) calc(var(--ly) + var(--pad)),
-    transparent 0%,
-    rgba(0, 0, 0, 0.35) 45%,
-    rgba(0, 0, 0, 0.93) 100%
-  );
-  -webkit-mask-image:
-    linear-gradient(to right, transparent, #000 var(--pad), #000 calc(100% - var(--pad)), transparent),
-    linear-gradient(to bottom, transparent, #000 var(--pad), #000 calc(100% - var(--pad)), transparent);
-  -webkit-mask-composite: source-in;
-  mask-image:
-    linear-gradient(to right, transparent, #000 var(--pad), #000 calc(100% - var(--pad)), transparent),
-    linear-gradient(to bottom, transparent, #000 var(--pad), #000 calc(100% - var(--pad)), transparent);
-  mask-composite: intersect;
+/* Barras del ecualizador del reproductor */
+@keyframes eq {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.eq-bar {
+  transform-origin: bottom;
+  animation: eq 0.9s ease-in-out infinite;
+}
+
+/* Barra de progreso de las historias del Underfest */
+@keyframes story-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Cinta de texto que se desplaza */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  animation: marquee 30s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  /* Sin linterna: todo iluminado y quieto */
-  .linterna-dark {
-    display: none;
+  .eq-bar,
+  .marquee {
+    animation: none;
   }
 }

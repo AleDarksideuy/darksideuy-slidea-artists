@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 import { artists } from "../../data/artists";
-import ArtistPageClient from "./ArtistPageClient";
+import ArtistProfile from "./ArtistProfile";
 
 type ArtistPageProps = {
   params: Promise<{ slug: string }>;
@@ -33,5 +34,7 @@ export async function generateMetadata({ params }: ArtistPageProps): Promise<Met
 
 export default async function ArtistPage({ params }: ArtistPageProps) {
   const { slug } = await params;
-  return <ArtistPageClient slug={slug} />;
+  const artist = artists.find((a) => a.slug === slug);
+  if (!artist) notFound();
+  return <ArtistProfile artist={artist} />;
 }

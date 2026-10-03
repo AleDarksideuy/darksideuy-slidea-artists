@@ -23,13 +23,14 @@ function useActiveSection(enabled: boolean) {
 
   useEffect(() => {
     if (!enabled) return;
-    const sections = ITEMS.map((item) => document.getElementById(item.id)).filter(
-      (el): el is HTMLElement => el !== null
-    );
+    /* Se observan todas las secciones: en las que no están en el menú
+       (Underfest, Producciones…) no se marca nada */
+    const sections = [...document.querySelectorAll<HTMLElement>("main section[id]")];
+    const inMenu = new Set(ITEMS.map((item) => item.id));
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) setActive(entry.target.id);
+          if (entry.isIntersecting) setActive(inMenu.has(entry.target.id) ? entry.target.id : null);
         }
       },
       /* una franja en el medio de la pantalla */
@@ -70,12 +71,14 @@ export default function Navigation() {
   const active = useActiveSection(isHome);
   const pastHero = usePastHero();
   const showLogo = !isHome || pastHero;
+  /* En celular, las fichas de artista tienen su propia barra arriba */
+  const showMobileLogo = isHome && pastHero;
 
   return (
     <>
       {/* ═══════════════ CELULAR: logo arriba ═══════════════ */}
       <AnimatePresence>
-        {showLogo && (
+        {showMobileLogo && (
           <motion.div
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}

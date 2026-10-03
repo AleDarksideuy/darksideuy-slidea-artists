@@ -1,39 +1,30 @@
 import WelcomeModal from "./components/WelcomeModal";
-import Hero from "./sections/Hero";
-import About from "./sections/About";
-import CallToArtists from "./sections/CallToArtists";
-import FIC from "./sections/FIC";
-import Partners from "./sections/Partners";
-import Events from "./sections/Events";
-import Underfest from "./sections/Underfest";
-import Magazine from "./sections/Magazine";
-import Production from "./sections/Production";
-import NextTerritory from "./sections/NextTerritory";
-import Releases from "./sections/Releases";
-import Contact from "./sections/Contact";
-import Artists from "./sections/Artists";
-import Discover from "./sections/Discover";
+import Hero from "./home/Hero";
+import Lineup from "./home/Lineup";
+import Musica from "./home/Musica";
+import Llamado from "./home/Llamado";
+import Underfest from "./home/Underfest";
+import Producciones from "./home/Producciones";
+import TuSemana from "./home/TuSemana";
+import Productora from "./home/Productora";
+import Contacto from "./home/Contacto";
+
+/* El recorrido de la home, pensado para quien llega desde Instagram:
+   quiénes somos → artistas → música → sumarse → eventos → trabajos →
+   infoproducto → la productora → contacto. */
 export default function Home() {
   return (
-    <main >
+    <main>
       <WelcomeModal />
-
       <Hero />
-      
-      <Underfest/>
-      <Artists/>
-      <Discover />
-      <CallToArtists/>
-      
-      <FIC/>
-      <Partners/>
-      
-      
-      <Magazine/>
-      <Production/>
-      <Releases/>
-      <NextTerritory/>
-      <Contact/>
+      <Lineup />
+      <Musica />
+      <Llamado />
+      <Underfest />
+      <Producciones />
+      <TuSemana />
+      <Productora />
+      <Contacto />
     </main>
   );
 }
