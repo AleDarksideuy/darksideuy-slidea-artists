@@ -2,8 +2,9 @@ import Image from "next/image";
 
 /* ═══════════════════════════════════════════════════════════════
    FONDO: EL PÚBLICO
-   La foto de público de la página original, fija detrás de todo,
-   con zoom lento y degradados para que el texto se lea.
+   La foto de público de la página original, fija detrás de todo y muy
+   tenue (con un leve desenfoque), como textura. Sin el zoom de la
+   página original, para que el rediseño tenga identidad propia.
    En la home, apagada se ve en penumbra y al tocar la D se ilumina
    ("se prenden las luces"): lo controla data-power en <html>
    (ver home/power.tsx y .site-bg en globals.css).
@@ -12,7 +13,7 @@ import Image from "next/image";
 export default function SiteBackground() {
   return (
     <div aria-hidden className="site-bg pointer-events-none fixed inset-0 z-0 overflow-hidden">
-      <div className="site-bg-photo absolute inset-0 scale-110 animate-slow-zoom motion-reduce:animate-none">
+      <div className="site-bg-photo absolute inset-0 scale-105">
         <Image
           src="/background-image.webp"
           alt=""

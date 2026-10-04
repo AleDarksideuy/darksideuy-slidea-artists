@@ -56,28 +56,16 @@ html {
   animation: site-bg-in 1.2s ease-out both;
 }
 
+/* Bien sutil: una textura de público, no una foto protagonista.
+   Un leve desenfoque la separa de la página original. */
 .site-bg-photo {
-  opacity: 0.28;
+  opacity: 0.12;
+  filter: blur(2px);
   transition: opacity 1.2s ease;
 }
 
 html[data-power="off"] .site-bg-photo {
-  opacity: 0.1;
-}
-
-/* zoom lento, como en la página original */
-@keyframes slow-zoom {
-  0%,
-  100% {
-    transform: scale(1.1);
-  }
-  50% {
-    transform: scale(1.18);
-  }
-}
-
-.animate-slow-zoom {
-  animation: slow-zoom 25s ease-in-out infinite;
+  opacity: 0.05;
 }
 
 /* Scroll horizontal sin barra (carruseles táctiles) */
