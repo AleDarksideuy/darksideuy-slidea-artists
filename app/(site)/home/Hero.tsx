@@ -20,6 +20,7 @@ import { requestPowerOn } from "./power";
 export default function Hero() {
   const [open, setOpen] = useState(false);
 
+
   return (
     <section id="inicio" className="relative overflow-hidden">
       {/* Resplandor rojo detrás de la D */}
@@ -74,10 +75,18 @@ export default function Hero() {
         {open && (
           <motion.div
             id="conoce-darksideuy"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
+            variants={{ closed: { height: 0, opacity: 0 }, animate: { height: "auto", opacity: 1 } }}
+            initial="closed"
+            animate="animate"
+            exit="closed"
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            /* Cuando termina de abrirse, la página baja sola hasta el texto
+               (como los botones del menú). Suave, salvo con movimiento reducido. */
+            onAnimationComplete={(definition) => {
+              if (definition === "animate") {
+                document.getElementById("conoce-darksideuy")?.scrollIntoView({ block: "start" });
+              }
+            }}
             className="relative overflow-hidden"
           >
             <div className="mx-auto max-w-6xl px-5 pb-14 md:px-10">

@@ -59,13 +59,13 @@ html {
 /* Bien sutil: una textura de público, no una foto protagonista.
    Un leve desenfoque la separa de la página original. */
 .site-bg-photo {
-  opacity: 0.12;
+  opacity: 0.08;
   filter: blur(2px);
   transition: opacity 1.2s ease;
 }
 
 html[data-power="off"] .site-bg-photo {
-  opacity: 0.05;
+  opacity: 0.03;
 }
 
 /* Scroll horizontal sin barra (carruseles táctiles) */
