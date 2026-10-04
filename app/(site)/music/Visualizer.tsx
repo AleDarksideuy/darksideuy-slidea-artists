@@ -14,15 +14,22 @@ import { useMusic } from "./MusicProvider";
 
 const BARS = 72;
 
-export default function Visualizer({ innerRatio = 0.62 }: { innerRatio?: number }) {
+export default function Visualizer({ innerRatio = 0.62, level = 1 }: { innerRatio?: number; level?: number }) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const { analyser, isPlaying } = useMusic();
   const reducedMotion = useReducedMotion();
   const playing = useRef(isPlaying);
+  /* Nivel de señal (Darkside Radio): 1 = normal; menos = barras más bajas
+     y con temblor de estática */
+  const signal = useRef(level);
 
   useEffect(() => {
     playing.current = isPlaying;
   }, [isPlaying]);
+
+  useEffect(() => {
+    signal.current = level;
+  }, [level]);
 
   useEffect(() => {
     const el = canvas.current;
@@ -80,6 +87,10 @@ export default function Visualizer({ innerRatio = 0.62 }: { innerRatio?: number 
         } else if (playing.current) {
           target = 0.3;
         }
+        if (playing.current && signal.current < 1) {
+          const sig = signal.current;
+          target = target * sig + (reducedMotion ? 0.1 : Math.random() * 0.22) * (1 - sig);
+        }
         levels[i] += (target - levels[i]) * 0.35;
       }
 
@@ -110,7 +121,7 @@ export default function Visualizer({ innerRatio = 0.62 }: { innerRatio?: number 
       ro.disconnect();
       io.disconnect();
     };
-  }, [analyser, innerRatio, reducedMotion, isPlaying]);
+  }, [analyser, innerRatio, reducedMotion, isPlaying, level]);
 
   return <canvas ref={canvas} aria-hidden className="pointer-events-none absolute inset-0 h-full w-full" />;
 }

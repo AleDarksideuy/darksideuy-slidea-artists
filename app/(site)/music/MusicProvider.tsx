@@ -20,6 +20,11 @@ type MusicContextValue = {
   audio: React.RefObject<HTMLAudioElement | null>;
   /* Analizador de frecuencias (null hasta el primer play, o si el navegador no lo permite) */
   analyser: React.RefObject<AnalyserNode | null>;
+  /* Para Darkside Radio: contexto de audio (estática), volumen del tema
+     y sintonizar un tema desde un buen momento (no desde la intro) */
+  getAudioContext: () => AudioContext | null;
+  setTrackVolume: (volume: number) => void;
+  tune: (id: string) => void;
   /* Reproductor a pantalla completa (desde el mini reproductor) */
   sheetOpen: boolean;
   setSheetOpen: (open: boolean) => void;
@@ -42,6 +47,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
   const audio = useRef<HTMLAudioElement | null>(null);
   const analyser = useRef<AnalyserNode | null>(null);
   const audioCtx = useRef<AudioContext | null>(null);
+  const trackGain = useRef<GainNode | null>(null);
   const [currentId, setCurrentId] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
@@ -68,13 +74,16 @@ export function MusicProvider({ children }: { children: ReactNode }) {
         const Ctx = window.AudioContext ?? (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
         const ctx = new Ctx();
         const source = ctx.createMediaElementSource(el);
+        const gain = ctx.createGain();
         const node = ctx.createAnalyser();
         node.fftSize = 256;
         node.smoothingTimeConstant = 0.78;
-        source.connect(node);
+        source.connect(gain);
+        gain.connect(node);
         node.connect(ctx.destination);
         audioCtx.current = ctx;
         analyser.current = node;
+        trackGain.current = gain;
       }
       if (audioCtx.current.state === "suspended") audioCtx.current.resume().catch(() => {});
     } catch {
@@ -140,6 +149,45 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     if (el && Number.isFinite(seconds)) el.currentTime = Math.max(0, Math.min(seconds, el.duration || seconds));
   }, []);
 
+  const getAudioContext = useCallback(() => {
+    ensureAnalyser();
+    return audioCtx.current;
+  }, [ensureAnalyser]);
+
+  /* Volumen del tema (la radio lo mezcla con la estática). En iPhone el
+     volumen del <audio> no se puede cambiar, por eso va por el contexto. */
+  const setTrackVolume = useCallback((volume: number) => {
+    const v = Math.max(0, Math.min(1, volume));
+    const gain = trackGain.current;
+    if (gain && audioCtx.current) gain.gain.setTargetAtTime(v, audioCtx.current.currentTime, 0.04);
+    else if (audio.current) audio.current.volume = v;
+  }, []);
+
+  /* Sintonizar: el tema arranca en un buen momento (no en la intro) */
+  const tune = useCallback(
+    (id: string) => {
+      const el = audio.current;
+      const track = undergroundTracks.find((t) => t.id === id);
+      if (!el || !track) return;
+      ensureAnalyser();
+      if (id === currentId && el.src) {
+        if (el.paused) el.play().catch(() => {});
+        return;
+      }
+      el.src = encodeURI(track.preview);
+      el.addEventListener(
+        "loadedmetadata",
+        () => {
+          if (Number.isFinite(el.duration)) el.currentTime = Math.min(45, el.duration * 0.3);
+        },
+        { once: true }
+      );
+      el.play().catch(() => {});
+      setCurrentId(id);
+    },
+    [currentId, ensureAnalyser]
+  );
+
   const close = useCallback(() => {
     audio.current?.pause();
     setSheetOpen(false);
@@ -170,13 +218,16 @@ export function MusicProvider({ children }: { children: ReactNode }) {
       analyser,
       sheetOpen,
       setSheetOpen,
+      getAudioContext,
+      setTrackVolume,
+      tune,
       toggle,
       next,
       prev,
       seek,
       close,
     }),
-    [current, isPlaying, sheetOpen, toggle, next, prev, seek, close]
+    [current, isPlaying, sheetOpen, getAudioContext, setTrackVolume, tune, toggle, next, prev, seek, close]
   );
 
   return (

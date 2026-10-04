@@ -5,12 +5,12 @@ import { FaSpotify, FaYoutube } from "react-icons/fa";
 
 import { spotlightArtists } from "../data/spotlight";
 import { PLAYLISTS } from "../data/home";
-import Player from "../music/Player";
+import Radio from "../music/Radio";
 
 /* ═══════════════════════════════════════════════════════════════
    MÚSICA
-   Darkside's Pick en el Darkside Player (music/Player.tsx), más el
-   Spotlight de lanzamientos y las playlists.
+   Darkside's Pick como Darkside Radio (music/Radio.tsx): se sintoniza
+   con un dial. Más el Spotlight de lanzamientos y las playlists.
    ═══════════════════════════════════════════════════════════════ */
 
 export default function Musica() {
@@ -18,16 +18,20 @@ export default function Musica() {
     <section id="darkside-pick" className="relative overflow-hidden pt-24 md:pt-36">
       <header className="mx-auto max-w-7xl px-5 md:px-10">
         <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red-soft">Darkside&apos;s Pick</p>
-        <h2 className="mt-3 font-display text-[clamp(2.6rem,11vw,6rem)] font-bold uppercase leading-[0.9]">Música</h2>
+        <h2 className="mt-3 font-display text-[clamp(2.6rem,11vw,6rem)] font-bold uppercase leading-[0.9]">
+          Darkside
+          <br />
+          <span className="text-ds-red">Radio</span>
+        </h2>
         <p className="mt-4 max-w-md text-sm text-white/55">
-          Descubrí música de artistas emergentes seleccionada por Darkside. Tocá el disco para escuchar y deslizalo para cambiar de tema.
+          Música de artistas emergentes seleccionada por Darkside. Cada tema es una estación: girá el dial y sintonizá.
         </p>
       </header>
 
-      {/* El Darkside Player (en celular, el mini reproductor de abajo se
-          oculta mientras este está en pantalla) */}
-      <div id="darkside-player" className="mx-auto mt-10 max-w-6xl px-4 md:px-10">
-        <Player />
+      {/* Darkside Radio (el mini reproductor de abajo se oculta mientras
+          la radio está en pantalla) */}
+      <div id="darkside-player" className="mx-auto mt-10 max-w-5xl px-4 md:px-10">
+        <Radio />
       </div>
 
       <div className="mx-auto mt-20 grid max-w-7xl gap-14 px-5 md:mt-28 md:grid-cols-[1.4fr_1fr] md:gap-16 md:px-10">
