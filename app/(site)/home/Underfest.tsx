@@ -46,7 +46,7 @@ export default function Underfest() {
     <section id="underfest" className="relative px-5 pt-24 md:px-10 md:pt-36">
       <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[minmax(0,26rem)_1fr] md:items-center md:gap-16">
         <header className="md:order-2">
-          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red">
+          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red-soft">
             {UNDERFEST.since} · {UNDERFEST.place}
           </p>
           <h2 className="mt-3 font-display text-[clamp(2.6rem,11vw,6rem)] font-bold uppercase leading-[0.9]">
@@ -64,7 +64,7 @@ export default function Underfest() {
                   aria-current={i === index}
                   className={`flex w-full items-baseline gap-4 py-4 text-left transition-colors ${i === index ? "text-white" : "text-white/40 hover:text-white/80"}`}
                 >
-                  <span className={`font-mono text-xs ${i === index ? "text-ds-red" : ""}`}>{e.number}</span>
+                  <span className={`font-mono text-xs ${i === index ? "text-ds-red-soft" : ""}`}>{e.number}</span>
                   <span className="font-display text-xl font-bold uppercase">{e.title}</span>
                 </button>
               </li>
@@ -99,7 +99,7 @@ export default function Underfest() {
               <div
                 key={e.title}
                 aria-hidden
-                className={`absolute inset-0 flex items-start justify-end bg-ds-red p-6 transition-opacity duration-500 ${i === index ? "opacity-100" : "opacity-0"}`}
+                className={`absolute inset-0 flex items-start justify-end bg-ds-red text-white p-6 transition-opacity duration-500 ${i === index ? "opacity-100" : "opacity-0"}`}
               >
                 <span className="font-display text-[11rem] font-bold leading-none text-black/25">{e.number}</span>
               </div>

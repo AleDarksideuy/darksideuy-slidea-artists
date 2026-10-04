@@ -40,7 +40,7 @@ export default function TuSemana() {
           <div className="p-6 md:px-12 md:pb-12">
             <Link
               href={TU_SEMANA.href}
-              className="flex min-h-[54px] w-full items-center justify-center gap-2 rounded-2xl bg-ds-red px-8 font-display text-sm font-bold uppercase tracking-[0.18em] active:scale-[0.98] md:w-auto md:inline-flex md:hover:brightness-110"
+              className="flex min-h-[54px] w-full items-center justify-center gap-2 rounded-2xl bg-ds-red text-white px-8 font-display text-sm font-bold uppercase tracking-[0.18em] active:scale-[0.98] md:w-auto md:inline-flex md:hover:brightness-110"
             >
               Quiero verlo <ArrowRight size={17} />
             </Link>

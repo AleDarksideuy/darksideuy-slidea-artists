@@ -16,7 +16,7 @@ export default function Contacto() {
     <>
       <section id="contacto" className="relative px-5 pt-24 md:px-10 md:pt-36">
         <div className="mx-auto max-w-6xl">
-          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red">Contacto</p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red-soft">Contacto</p>
           <h2 className="mt-3 font-display text-[clamp(2.6rem,11vw,6rem)] font-bold uppercase leading-[0.9]">Hablemos</h2>
 
           <div className="mt-10 grid gap-4 md:grid-cols-2">
@@ -36,7 +36,7 @@ export default function Contacto() {
               href={CONTACT.emailHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex min-h-[54px] flex-1 items-center justify-center gap-2 rounded-2xl bg-ds-red px-6 font-display text-sm font-bold uppercase tracking-[0.14em] active:scale-[0.98] sm:flex-none md:hover:brightness-110"
+              className="flex min-h-[54px] flex-1 items-center justify-center gap-2 rounded-2xl bg-ds-red text-white px-6 font-display text-sm font-bold uppercase tracking-[0.14em] active:scale-[0.98] sm:flex-none md:hover:brightness-110"
             >
               <Mail size={17} /> {CONTACT.email}
             </a>

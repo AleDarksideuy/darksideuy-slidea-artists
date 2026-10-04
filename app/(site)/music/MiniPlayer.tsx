@@ -82,7 +82,7 @@ export default function MiniPlayer() {
               <button
                 onClick={() => toggle()}
                 aria-label={isPlaying ? "Pausar" : "Reproducir"}
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-ds-red active:scale-95"
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-ds-red text-white active:scale-95"
               >
                 {isPlaying ? <Pause size={18} fill="currentColor" /> : <Play size={18} fill="currentColor" className="ml-0.5" />}
               </button>
@@ -91,7 +91,7 @@ export default function MiniPlayer() {
               </button>
             </div>
             <div className="h-0.5 w-full bg-white/10">
-              <div ref={bar} className="h-full origin-left scale-x-0 bg-ds-red" />
+              <div ref={bar} className="h-full origin-left scale-x-0 bg-ds-red text-white" />
             </div>
           </div>
         </motion.div>

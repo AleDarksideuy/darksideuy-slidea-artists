@@ -81,7 +81,7 @@ export default function Hero() {
             className="relative overflow-hidden"
           >
             <div className="mx-auto max-w-6xl px-5 pb-14 md:px-10">
-              <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red">Conocé a Darksideuy</p>
+              <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red-soft">Conocé a Darksideuy</p>
               <p className="mt-4 font-display text-[clamp(1.9rem,7.5vw,4.2rem)] font-bold uppercase leading-[0.95]">
                 {MANIFESTO.lead}
               </p>
@@ -113,7 +113,7 @@ export default function Hero() {
                   className="flex items-center gap-6 px-6 font-display text-sm font-bold uppercase tracking-[0.2em] text-white/70"
                 >
                   {service}
-                  <span className="h-1.5 w-1.5 rounded-full bg-ds-red" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-ds-red text-white" />
                 </li>
               ))}
             </ul>
@@ -132,7 +132,7 @@ function HeroLinks({ open, onToggle }: { open: boolean; onToggle: () => void }) 
         onClick={onToggle}
         aria-expanded={open}
         aria-controls="conoce-darksideuy"
-        className="flex min-h-[52px] flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-ds-red px-6 font-display text-sm font-bold uppercase tracking-[0.18em] shadow-[0_0_40px_rgba(229,9,20,0.35)] transition active:scale-[0.98] md:flex-none md:hover:brightness-110"
+        className="flex min-h-[52px] flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-ds-red text-white px-6 font-display text-sm font-bold uppercase tracking-[0.18em] shadow-[0_0_40px_rgba(229,9,20,0.35)] transition active:scale-[0.98] md:flex-none md:hover:brightness-110"
       >
         Conocé a Darksideuy
         <ChevronDown size={17} className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`} />

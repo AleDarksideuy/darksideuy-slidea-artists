@@ -41,7 +41,7 @@ export default function Llamado() {
   return (
     <section id="llamado-artistas" className="relative px-5 pt-24 md:px-10 md:pt-36">
       <div className="mx-auto max-w-5xl">
-        <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red">Convocatoria abierta</p>
+        <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red-soft">Convocatoria abierta</p>
         <h2 className="mt-3 font-display text-[clamp(2.6rem,11vw,6rem)] font-bold uppercase leading-[0.9]">
           Llamado de
           <br />
@@ -50,7 +50,7 @@ export default function Llamado() {
 
         {/* La entrada */}
         <div className="mt-10 flex flex-col overflow-hidden rounded-3xl md:flex-row">
-          <div className="relative flex-1 bg-ds-red p-6 md:p-10">
+          <div className="relative flex-1 bg-ds-red text-white p-6 md:p-10">
             <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/80">Darkside UY · Admite 1 artista</p>
             <p className="mt-6 font-display text-[clamp(4rem,22vw,9rem)] font-bold leading-[0.85] tabular-nums">{count}</p>
             <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.25em] text-white/85">Artistas inscriptos</p>
@@ -64,7 +64,7 @@ export default function Llamado() {
           </div>
 
           {/* Talón */}
-          <div className="flex flex-col justify-between gap-6 bg-[#c40812] p-6 md:w-72 md:p-8">
+          <div className="flex flex-col justify-between gap-6 bg-[#c40812] p-6 md:w-80 md:p-8">
             <div>
               <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/70">Tu lugar</p>
               <p className="mt-1 font-mono text-3xl font-bold tabular-nums">N° {String(count + 1).padStart(4, "0")}</p>
@@ -72,7 +72,7 @@ export default function Llamado() {
             </div>
             <button
               onClick={() => setOpen(true)}
-              className="flex min-h-[54px] items-center justify-center gap-2 rounded-2xl bg-black px-6 font-display text-sm font-bold uppercase tracking-[0.18em] active:scale-[0.98] md:hover:bg-black/80"
+              className="flex min-h-[54px] items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-black px-6 font-display text-sm font-bold uppercase tracking-[0.18em] active:scale-[0.98] md:hover:bg-black/80"
             >
               <UserPlus size={17} /> Quiero participar
             </button>
@@ -138,7 +138,7 @@ function ApplicationForm({ onClose }: { onClose: () => void }) {
 
         {status === "sent" ? (
           <div className="py-8 text-center">
-            <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-ds-red">
+            <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-ds-red text-white">
               <Check size={26} />
             </span>
             <p className="mt-4 font-display text-xl font-bold uppercase">Aplicación enviada</p>
@@ -167,7 +167,7 @@ function ApplicationForm({ onClose }: { onClose: () => void }) {
             <button
               type="submit"
               disabled={status === "sending"}
-              className="mt-2 min-h-[54px] rounded-2xl bg-ds-red font-display text-sm font-bold uppercase tracking-[0.18em] disabled:opacity-60"
+              className="mt-2 min-h-[54px] rounded-2xl bg-ds-red text-white font-display text-sm font-bold uppercase tracking-[0.18em] disabled:opacity-60"
             >
               {status === "sending" ? "Enviando…" : "Enviar aplicación"}
             </button>

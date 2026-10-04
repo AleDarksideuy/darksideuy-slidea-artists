@@ -64,7 +64,7 @@ export default function Lineup() {
       <div className="mx-auto max-w-7xl">
         <header className="mb-8 flex items-end justify-between gap-4 md:mb-14">
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red">
+            <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red-soft">
               Lineup · {String(artists.length).padStart(2, "0")} artistas
             </p>
             <h2 className="mt-3 font-display text-[clamp(2.6rem,11vw,6rem)] font-bold uppercase leading-[0.9]">
@@ -89,7 +89,6 @@ export default function Lineup() {
                   alt={i === active ? a.name : ""}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  priority={i === 0}
                   className={`object-cover transition-[opacity,transform] duration-700 motion-reduce:transition-none ${
                     i === active ? "scale-100 opacity-100" : "scale-105 opacity-0"
                   }`}
@@ -112,7 +111,7 @@ export default function Lineup() {
                 <div className="mt-4 flex gap-2">
                   <Link
                     href={`/artists/${artist.slug}`}
-                    className="flex min-h-[46px] flex-1 items-center justify-center gap-2 rounded-xl bg-ds-red px-5 font-display text-xs font-bold uppercase tracking-[0.16em] active:scale-[0.98] md:flex-none md:hover:brightness-110"
+                    className="flex min-h-[46px] flex-1 items-center justify-center gap-2 rounded-xl bg-ds-red text-white px-5 font-display text-xs font-bold uppercase tracking-[0.16em] active:scale-[0.98] md:flex-none md:hover:brightness-110"
                   >
                     Ver artista <ArrowUpRight size={16} />
                   </Link>
@@ -146,7 +145,7 @@ export default function Lineup() {
                     aria-pressed={on}
                     className="flex w-full items-baseline gap-3 py-5 text-left md:py-7"
                   >
-                    <span className={`font-mono text-[11px] transition-colors ${on ? "text-ds-red" : "text-white/30"}`}>
+                    <span className={`font-mono text-[11px] transition-colors ${on ? "text-ds-red-soft" : "text-white/30"}`}>
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span

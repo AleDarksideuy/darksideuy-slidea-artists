@@ -17,7 +17,7 @@ export default function Productora() {
   return (
     <section id="productora" className="relative px-5 pt-24 md:px-10 md:pt-36">
       <div className="mx-auto max-w-6xl">
-        <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red">La productora</p>
+        <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red-soft">La productora</p>
         <h2 className="mt-3 font-display text-[clamp(2.6rem,11vw,6rem)] font-bold uppercase leading-[0.9]">Respaldo</h2>
 
         {/* Respaldo */}
@@ -90,7 +90,7 @@ function Territorio() {
 
   return (
     <div className="mt-16 overflow-hidden rounded-3xl border border-white/10 p-6 md:p-12">
-      <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red">Próximo territorio · Est. 2026</p>
+      <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red-soft">Próximo territorio · Est. 2026</p>
       <p className="relative mt-3 h-[1.05em] font-display text-[clamp(2.6rem,12vw,7rem)] font-bold uppercase leading-none" aria-live="off">
         {departamentos.map((d, i) => (
           <span

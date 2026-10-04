@@ -1,8 +1,21 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import * as THREE from "three";
+import { useEffect, useRef } from "react";
+import {
+  ACESFilmicToneMapping,
+  AmbientLight,
+  DirectionalLight,
+  ExtrudeGeometry,
+  Mesh,
+  MeshStandardMaterial,
+  Path,
+  PerspectiveCamera,
+  PointLight,
+  Scene,
+  Shape,
+  Vector2,
+  WebGLRenderer,
+} from "three";
 
 import type { Quality } from "../lib/device";
 import { MONOGRAM, MONOGRAM_ASPECT } from "./monogram";
@@ -12,9 +25,12 @@ import { MONOGRAM, MONOGRAM_ASPECT } from "./monogram";
    El monograma de Darkside extruido (trazado desde LOGO1.png).
    Apagada: casi negra, con una luz roja que la recorre despacio.
    Al encender: da un giro y se ilumina.
+   Escrita con three.js directo (solo las piezas que usa) para que el
+   celular descargue y procese lo mínimo.
    ═══════════════════════════════════════════════════════════════ */
 
-const RED = "#E50914";
+const RED = 0xe50914;
+const FOV = 32;
 
 type DSceneProps = {
   on: boolean;
@@ -26,98 +42,142 @@ type DSceneProps = {
 };
 
 export default function DScene({ on, visible, quality, onReady, onContextLost, onContextRestored }: DSceneProps) {
-  return (
-    <Canvas
-      frameloop={visible ? "always" : "never"}
-      dpr={quality === "low" ? 1 : [1, 1.75]}
-      gl={{ antialias: quality === "high", alpha: true, powerPreference: "high-performance" }}
-      camera={{ fov: 32, position: [0, 0, 5] }}
-      onCreated={({ gl }) => {
-        /* El celular puede liberar la placa de video al ir a otra app:
-           mientras tanto se ve la D plana */
-        gl.domElement.addEventListener("webglcontextlost", onContextLost);
-        gl.domElement.addEventListener("webglcontextrestored", onContextRestored);
-        onReady();
-      }}
-      style={{ pointerEvents: "none" }}
-      aria-hidden
-    >
-      <Monogram on={on} quality={quality} />
-    </Canvas>
-  );
-}
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  /* Estado que lee el loop sin reiniciar la escena */
+  const live = useRef({ on, visible, spinStart: null as number | null });
+  const callbacks = useRef({ onReady, onContextLost, onContextRestored });
 
-function Monogram({ on, quality }: { on: boolean; quality: Quality }) {
-  const mesh = useRef<THREE.Mesh>(null);
-  const lamp = useRef<THREE.PointLight>(null);
-  const key = useRef<THREE.DirectionalLight>(null);
-  const material = useRef<THREE.MeshStandardMaterial>(null);
-  const spinStart = useRef<number | null>(null);
-  const { viewport, clock } = useThree();
+  useEffect(() => {
+    callbacks.current = { onReady, onContextLost, onContextRestored };
+  });
 
-  const geometry = useMemo(() => {
+  useEffect(() => {
+    if (on && !live.current.on) live.current.spinStart = performance.now() / 1000;
+    live.current.on = on;
+  }, [on]);
+
+  useEffect(() => {
+    live.current.visible = visible;
+  }, [visible]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: quality === "high", powerPreference: "high-performance" });
+    renderer.setPixelRatio(quality === "low" ? 1 : Math.min(window.devicePixelRatio, 1.75));
+    /* mismo ajuste de color "de cine" que tenía la versión anterior */
+    renderer.toneMapping = ACESFilmicToneMapping;
+
+    const scene = new Scene();
+    const camera = new PerspectiveCamera(FOV, 1, 0.1, 50);
+    camera.position.set(0, 0, 5);
+
+    /* Luces: contraluz tenue, luz de frente (sube al encender) y la roja que gira */
+    scene.add(new AmbientLight(0xffffff, 0.05));
+    const rim = new DirectionalLight(0xffffff, 0.9);
+    rim.position.set(-2, 3, -4);
+    const key = new DirectionalLight(0xffffff, 0.05);
+    key.position.set(0, 1.5, 4);
+    const lamp = new PointLight(RED, 16, 0, 2);
+    scene.add(rim, key, lamp);
+
+    /* La letra */
     const shapes = MONOGRAM.map(({ outer, holes }) => {
-      const shape = new THREE.Shape(outer.map(([x, y]) => new THREE.Vector2(x, y)));
-      shape.holes = holes.map((hole) => new THREE.Path(hole.map(([x, y]) => new THREE.Vector2(x, y))));
+      const shape = new Shape(outer.map(([x, y]) => new Vector2(x, y)));
+      shape.holes = holes.map((hole) => new Path(hole.map(([x, y]) => new Vector2(x, y))));
       return shape;
     });
-    const geo = new THREE.ExtrudeGeometry(shapes, {
+    const geometry = new ExtrudeGeometry(shapes, {
       depth: 0.16,
       bevelEnabled: true,
       bevelThickness: 0.022,
       bevelSize: 0.01,
       bevelSegments: quality === "low" ? 1 : 4,
     });
-    geo.center();
-    return geo;
+    geometry.center();
+    const material = new MeshStandardMaterial({
+      color: 0x0d0d0f,
+      emissive: RED,
+      emissiveIntensity: 0,
+      metalness: 0.65,
+      roughness: 0.3,
+    });
+    const mesh = new Mesh(geometry, material);
+    scene.add(mesh);
+
+    /* Tamaño: que la letra entre en el cuadro */
+    const resize = () => {
+      const { clientWidth: w, clientHeight: h } = canvas;
+      if (!w || !h) return;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      const viewH = 2 * Math.tan((FOV * Math.PI) / 360) * camera.position.z;
+      const viewW = viewH * camera.aspect;
+      mesh.scale.setScalar(Math.min(viewH * 0.8, (viewW * 0.8) / MONOGRAM_ASPECT));
+    };
+    resize();
+    const observer = new ResizeObserver(resize);
+    observer.observe(canvas);
+
+    /* Si el navegador libera la placa de video, se ve la D plana */
+    const lost = (e: Event) => {
+      e.preventDefault();
+      callbacks.current.onContextLost();
+    };
+    const restored = () => callbacks.current.onContextRestored();
+    canvas.addEventListener("webglcontextlost", lost);
+    canvas.addEventListener("webglcontextrestored", restored);
+
+    let last = performance.now();
+    let frame = 0;
+    let first = true;
+    const tick = () => {
+      frame = requestAnimationFrame(tick);
+      /* fuera de pantalla no dibuja (ahorra batería) */
+      if (!live.current.visible && !first) return;
+
+      const now = performance.now();
+      const delta = Math.min((now - last) / 1000, 0.1);
+      last = now;
+      const t = now / 1000;
+      const k = 1 - Math.exp(-delta * 3);
+      const isOn = live.current.on;
+
+      lamp.position.set(Math.sin(t * 0.7) * 1.6, Math.cos(t * 0.9) * 1.1, 1.5);
+      lamp.intensity += ((isOn ? 48 : 16) - lamp.intensity) * k;
+      key.intensity += ((isOn ? 2.6 : 0.05) - key.intensity) * k;
+      material.emissiveIntensity += ((isOn ? 0.35 : 0) - material.emissiveIntensity) * k;
+
+      let spin = 0;
+      const start = live.current.spinStart;
+      if (start !== null) {
+        const p = Math.min(1, (t - start) / 1.2);
+        spin = (1 - Math.pow(1 - p, 3)) * Math.PI * 2;
+        if (p >= 1) live.current.spinStart = null;
+      }
+      mesh.rotation.y = Math.sin(t * 0.5) * 0.28 + spin;
+      mesh.rotation.x = Math.sin(t * 0.35) * 0.08;
+
+      renderer.render(scene, camera);
+      if (first) {
+        first = false;
+        callbacks.current.onReady();
+      }
+    };
+    frame = requestAnimationFrame(tick);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      canvas.removeEventListener("webglcontextlost", lost);
+      canvas.removeEventListener("webglcontextrestored", restored);
+      geometry.dispose();
+      material.dispose();
+      renderer.dispose();
+    };
   }, [quality]);
 
-  useEffect(() => () => geometry.dispose(), [geometry]);
-
-  /* Al encender: un giro completo */
-  useEffect(() => {
-    if (on) spinStart.current = clock.elapsedTime;
-  }, [on, clock]);
-
-  const scale = Math.min(viewport.height * 0.8, (viewport.width * 0.8) / MONOGRAM_ASPECT);
-
-  useFrame((state, delta) => {
-    const t = state.clock.elapsedTime;
-    const k = 1 - Math.exp(-delta * 3);
-
-    /* La luz roja da vueltas delante de la letra */
-    if (lamp.current) {
-      lamp.current.position.set(Math.sin(t * 0.7) * 1.6, Math.cos(t * 0.9) * 1.1, 1.5);
-      lamp.current.intensity += ((on ? 48 : 16) - lamp.current.intensity) * k;
-    }
-    /* Encendida: entra una luz blanca de frente */
-    if (key.current) key.current.intensity += ((on ? 2.6 : 0.05) - key.current.intensity) * k;
-    /* y la letra toma un brillo rojo propio */
-    if (material.current) material.current.emissiveIntensity += ((on ? 0.35 : 0) - material.current.emissiveIntensity) * k;
-
-    if (!mesh.current) return;
-    let spin = 0;
-    if (spinStart.current !== null) {
-      const p = Math.min(1, (t - spinStart.current) / 1.2);
-      spin = (1 - Math.pow(1 - p, 3)) * Math.PI * 2;
-      if (p >= 1) spinStart.current = null;
-    }
-    /* Balanceo suave + el giro del encendido */
-    mesh.current.rotation.y = Math.sin(t * 0.5) * 0.28 + spin;
-    mesh.current.rotation.x = Math.sin(t * 0.35) * 0.08;
-  });
-
-  return (
-    <>
-      <ambientLight intensity={0.05} />
-      {/* Contraluz blanco tenue: el contorno se adivine en la oscuridad */}
-      <directionalLight position={[-2, 3, -4]} intensity={0.9} />
-      <directionalLight ref={key} position={[0, 1.5, 4]} intensity={0.05} />
-      <pointLight ref={lamp} color={RED} intensity={16} decay={2} />
-
-      <mesh ref={mesh} geometry={geometry} scale={scale}>
-        <meshStandardMaterial ref={material} color="#0d0d0f" emissive="#E50914" emissiveIntensity={0} metalness={0.65} roughness={0.3} />
-      </mesh>
-    </>
-  );
+  return <canvas ref={canvasRef} aria-hidden className="pointer-events-none block h-full w-full" />;
 }

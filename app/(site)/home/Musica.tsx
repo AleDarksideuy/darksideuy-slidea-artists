@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Pause, Play, Share2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pause, Play, Share2 } from "lucide-react";
 import { FaSpotify, FaYoutube } from "react-icons/fa";
 
 import { spotlightArtists } from "../data/spotlight";
@@ -22,7 +22,7 @@ export default function Musica() {
   return (
     <section id="darkside-pick" className="relative overflow-hidden pt-24 md:pt-36">
       <header className="mx-auto max-w-7xl px-5 md:px-10">
-        <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red">Darkside&apos;s Pick</p>
+        <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red-soft">Darkside&apos;s Pick</p>
         <h2 className="mt-3 font-display text-[clamp(2.6rem,11vw,6rem)] font-bold uppercase leading-[0.9]">Música</h2>
         <p className="mt-4 max-w-md text-sm text-white/55">
           Descubrí música de artistas emergentes seleccionada por Darkside. Deslizá la batea y tocá un disco.
@@ -99,6 +99,18 @@ function Batea() {
     if (item) rail.current.scrollTo({ left: item.offsetLeft - (rail.current.clientWidth - item.offsetWidth) / 2, behavior: reducedMotion ? "auto" : "smooth" });
   }, [current, tracks, reducedMotion]);
 
+  /* En la compu (sin deslizar con el dedo): flechas en pantalla y del teclado */
+  const step = (dir: number) => {
+    const target = Math.max(0, Math.min(tracks.length - 1, centered + dir));
+    const item = sleeves.current[target]?.parentElement;
+    if (item && rail.current) {
+      rail.current.scrollTo({
+        left: item.offsetLeft - (rail.current.clientWidth - item.offsetWidth) / 2,
+        behavior: reducedMotion ? "auto" : "smooth",
+      });
+    }
+  };
+
   const info = tracks[centered];
   const infoPlaying = isPlaying && current?.id === info.id;
 
@@ -115,10 +127,37 @@ function Batea() {
   };
 
   return (
-    <div className="mt-10">
+    <div className="relative mt-10">
+      {/* Flechas (escritorio) */}
+      {[-1, 1].map((dir) => (
+        <button
+          key={dir}
+          onClick={() => step(dir)}
+          disabled={dir < 0 ? centered === 0 : centered === tracks.length - 1}
+          aria-label={dir < 0 ? "Disco anterior" : "Disco siguiente"}
+          className={`absolute top-[calc(1.5rem+min(24vw,22rem)/2)] z-10 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/70 backdrop-blur transition hover:border-ds-red hover:bg-ds-red text-white disabled:pointer-events-none disabled:opacity-25 md:flex ${
+            dir < 0 ? "left-[max(1.5rem,calc(50%-min(24vw,22rem)/2-6rem))]" : "right-[max(1.5rem,calc(50%-min(24vw,22rem)/2-6rem))]"
+          }`}
+        >
+          {dir < 0 ? <ChevronLeft size={26} /> : <ChevronRight size={26} />}
+        </button>
+      ))}
+
       <div
         ref={rail}
-        className="no-scrollbar flex snap-x snap-mandatory gap-3 overflow-x-auto px-[22vw] py-6 [perspective:1100px] md:px-[38vw]"
+        tabIndex={0}
+        role="region"
+        aria-label="Batea de discos: usá las flechas para pasar"
+        onKeyDown={(e) => {
+          if (e.key === "ArrowRight") {
+            e.preventDefault();
+            step(1);
+          } else if (e.key === "ArrowLeft") {
+            e.preventDefault();
+            step(-1);
+          }
+        }}
+        className="no-scrollbar outline-none focus-visible:ring-2 focus-visible:ring-ds-red/60 flex snap-x snap-mandatory gap-3 overflow-x-auto px-[22vw] py-6 [perspective:1100px] md:px-[38vw]"
       >
         {tracks.map((track, i) => {
           const on = current?.id === track.id;
@@ -151,7 +190,7 @@ function Batea() {
                 >
                   <Image src={track.cover} alt="" fill sizes="(max-width: 768px) 56vw, 24vw" className="object-cover" />
                   <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                  <span className="absolute bottom-3 left-3 flex h-11 w-11 items-center justify-center rounded-full bg-ds-red shadow-lg">
+                  <span className="absolute bottom-3 left-3 flex h-11 w-11 items-center justify-center rounded-full bg-ds-red text-white shadow-lg">
                     {on && isPlaying ? <Pause size={18} fill="currentColor" /> : <Play size={18} fill="currentColor" className="ml-0.5" />}
                   </span>
                   <span className="absolute right-3 top-3 font-mono text-[10px] text-white/70">
@@ -174,7 +213,7 @@ function Batea() {
         <div className="mt-4 flex items-center gap-2">
           <button
             onClick={() => toggle(info.id)}
-            className="flex min-h-[46px] items-center gap-2 rounded-xl bg-ds-red px-5 font-display text-xs font-bold uppercase tracking-[0.16em] active:scale-[0.98]"
+            className="flex min-h-[46px] items-center gap-2 rounded-xl bg-ds-red text-white px-5 font-display text-xs font-bold uppercase tracking-[0.16em] active:scale-[0.98]"
           >
             {infoPlaying ? <Pause size={15} fill="currentColor" /> : <Play size={15} fill="currentColor" />}
             {infoPlaying ? "Pausar" : "Escuchar"}
@@ -217,7 +256,7 @@ function Batea() {
 function Spotlight() {
   return (
     <div>
-      <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red">Spotlight</p>
+      <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red-soft">Spotlight</p>
       <h3 className="mt-2 font-display text-3xl font-bold uppercase md:text-4xl">Últimos lanzamientos</h3>
       <p className="mt-2 text-sm text-white/55">Descubrí a artistas y sus últimos lanzamientos en distintas plataformas.</p>
 

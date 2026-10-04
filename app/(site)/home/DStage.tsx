@@ -40,6 +40,31 @@ class SceneBoundary extends Component<{ onError: () => void; children: ReactNode
   }
 }
 
+/* El motor 3D pesa ~240 KB: se descarga recién cuando la página ya cargó
+   y el navegador está libre. Así el titular y los botones aparecen
+   primero (con la D plana, que se ve igual) y el 3D entra después. */
+function useWhenIdle() {
+  const [idle, setIdle] = useState(false);
+  useEffect(() => {
+    let idleId = 0;
+    let timer = 0;
+    const go = () => {
+      const w = window as Window & { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number };
+      if (w.requestIdleCallback) idleId = w.requestIdleCallback(() => setIdle(true), { timeout: 2500 });
+      else timer = window.setTimeout(() => setIdle(true), 1200);
+    };
+    if (document.readyState === "complete") go();
+    else window.addEventListener("load", go, { once: true });
+    return () => {
+      window.removeEventListener("load", go);
+      const w = window as Window & { cancelIdleCallback?: (id: number) => void };
+      if (idleId) w.cancelIdleCallback?.(idleId);
+      clearTimeout(timer);
+    };
+  }, []);
+  return idle;
+}
+
 /* La D de la portada: tocarla prende la página */
 export default function DStage() {
   const { on, turnOn } = usePower();
@@ -50,10 +75,11 @@ export default function DStage() {
   const visible = useVisible(stage);
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
+  const idle = useWhenIdle();
 
   /* La D en 3D también en celular (más liviana: menos resolución y
      detalle). La plana queda para movimiento reducido o si el 3D falla. */
-  const use3D = webgl && !reducedMotion && !failed;
+  const use3D = webgl && !reducedMotion && !failed && idle;
 
   return (
     <div className="flex flex-col items-center">
@@ -68,7 +94,7 @@ export default function DStage() {
         {/* Resplandor que crece al encender */}
         <span
           aria-hidden
-          className={`absolute inset-[12%] rounded-full bg-ds-red blur-[70px] transition-opacity duration-700 ${on ? "opacity-40" : "opacity-15"}`}
+          className={`absolute inset-[12%] rounded-full bg-ds-red text-white blur-[70px] transition-opacity duration-700 ${on ? "opacity-40" : "opacity-15"}`}
         />
 
         {(!use3D || !ready) && (

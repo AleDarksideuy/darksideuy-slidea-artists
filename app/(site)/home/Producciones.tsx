@@ -19,7 +19,7 @@ export default function Producciones() {
   return (
     <section id="producciones" className="relative px-5 pt-24 md:px-10 md:pt-36">
       <div className="mx-auto max-w-6xl">
-        <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red">
+        <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red-soft">
           Producciones / Dirección creativa / Sistema aplicado
         </p>
         <h2 className="mt-3 font-display text-[clamp(2.6rem,11vw,6rem)] font-bold uppercase leading-[0.9]">Producciones</h2>
@@ -48,7 +48,7 @@ export default function Producciones() {
                     <span className="mt-1 block text-sm text-white/55">{p.text}</span>
                   </span>
                   <span
-                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 transition-transform duration-300 ${expanded ? "rotate-45 bg-ds-red" : ""}`}
+                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 transition-transform duration-300 ${expanded ? "rotate-45 bg-ds-red text-white" : ""}`}
                   >
                     <Plus size={18} />
                   </span>
@@ -62,10 +62,10 @@ export default function Producciones() {
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <div className="no-scrollbar flex snap-x snap-mandatory gap-3 overflow-x-auto px-3 pb-2 md:px-4">
+                      <div className="no-scrollbar flex snap-x snap-mandatory gap-3 overflow-x-auto px-3 pb-2 md:grid md:grid-cols-4 md:overflow-visible md:px-4 lg:grid-cols-5">
                         {p.gallery.map((src, i) => (
-                          <span key={src} className="relative aspect-video w-[78%] shrink-0 snap-start overflow-hidden rounded-xl md:w-[32%]">
-                            <Image src={src} alt={`${p.title} · visual ${i + 1}`} fill sizes="(max-width: 768px) 78vw, 32vw" className="object-cover" />
+                          <span key={src} className="relative aspect-video w-[78%] shrink-0 snap-start overflow-hidden rounded-xl md:w-auto">
+                            <Image src={src} alt={`${p.title} · visual ${i + 1}`} fill sizes="(max-width: 768px) 78vw, 20vw" className="object-cover" />
                           </span>
                         ))}
                       </div>
@@ -76,7 +76,7 @@ export default function Producciones() {
                             href={link.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex min-h-[44px] items-center gap-1 rounded-xl bg-ds-red px-4 font-display text-xs font-bold uppercase tracking-[0.16em]"
+                            className="flex min-h-[44px] items-center gap-1 rounded-xl bg-ds-red text-white px-4 font-display text-xs font-bold uppercase tracking-[0.16em]"
                           >
                             {link.label} <ArrowUpRight size={15} />
                           </a>
@@ -92,7 +92,7 @@ export default function Producciones() {
 
         {/* ── Formatos visuales ── */}
         <div className="mt-20 md:mt-28">
-          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red">{FORMATS.subtitle}</p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red-soft">{FORMATS.subtitle}</p>
           <h3 className="mt-3 font-display text-4xl font-bold uppercase md:text-5xl">Formatos visuales</h3>
 
           <ul className="mt-8 grid gap-4 md:grid-cols-3">
