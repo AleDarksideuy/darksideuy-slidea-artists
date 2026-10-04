@@ -1,42 +1,40 @@
-"use client";
-
-import { use } from "react";
-import { useRouter } from "next/navigation";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 import { artists } from "../../data/artists";
-import ArtistOverlay from "../ArtistOverlay";
+import ArtistProfile from "./ArtistProfile";
 
 type ArtistPageProps = {
-  params: Promise<{
-    slug: string;
-  }>;
+  params: Promise<{ slug: string }>;
 };
 
-export default function ArtistPage({
-  params,
-}: ArtistPageProps) {
-  const { slug } = use(params);
+/* Las fichas se generan de antemano: cargan al instante */
+export function generateStaticParams() {
+  return artists.map((artist) => ({ slug: artist.slug }));
+}
 
-  const router = useRouter();
+/* Título y descripción al compartir el link del artista.
+   La imagen la genera opengraph-image.tsx con la foto del artista. */
+export async function generateMetadata({ params }: ArtistPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const artist = artists.find((a) => a.slug === slug);
+  if (!artist) return { title: "Artista no encontrado" };
 
-  const artist = artists.find(
-    (artist) => artist.slug === slug
-  );
+  const description =
+    artist.description ||
+    `${artist.category} · ${artist.city}, ${artist.country}. Artista del ecosistema Darkside UY.`;
 
-  if (!artist) {
-    return (
-      <main className="min-h-screen bg-black flex items-center justify-center text-white">
-        <h1 className="text-4xl font-bold">
-          Artista no encontrado
-        </h1>
-      </main>
-    );
-  }
+  return {
+    title: artist.name,
+    description,
+    openGraph: { title: `${artist.name} — Darkside UY`, description, type: "profile" },
+    twitter: { title: `${artist.name} — Darkside UY`, description },
+  };
+}
 
-  return (
-    <ArtistOverlay
-      artist={artist}
-      onClose={() => router.push("/")}
-    />
-  );
+export default async function ArtistPage({ params }: ArtistPageProps) {
+  const { slug } = await params;
+  const artist = artists.find((a) => a.slug === slug);
+  if (!artist) notFound();
+  return <ArtistProfile artist={artist} />;
 }

@@ -223,7 +223,7 @@ export const artists: Artist[] = [
     cover: "/artists/releases/202X_Cover.webp",
 
     description:
-      "Próximo sencillo que marcará el inicio de una nueva etapa artística.",
+      "Nuevo álbum, ya disponible en todas las plataformas.",
 
     status: "Lanzado",
 
@@ -261,7 +261,7 @@ export const artists: Artist[] = [
     cover: "/artists/releases/No_La_Mires_Mas_Cover.jpg",
 
     description:
-      "Próximo sencillo que marcará el inicio de una nueva etapa artística.",
+      "Nuevo álbum, ya disponible en todas las plataformas.",
 
     status: "Lanzado",
 
@@ -304,7 +304,7 @@ export const artists: Artist[] = [
     cover: "/artists/releases/El_Viaje_Cover.webp",
 
     description:
-      "Próximo sencillo que marcará el inicio de una nueva etapa artística.",
+      "Nuevo EP, ya disponible en todas las plataformas.",
 
     status: "Lanzado",
 
@@ -341,7 +341,7 @@ export const artists: Artist[] = [
     cover: "/artists/releases/Adepto_Cover.jpg",
 
     description:
-      "Próximo sencillo que marcará el inicio de una nueva etapa artística.",
+      "Nuevo álbum, ya disponible en todas las plataformas.",
 
     status: "Lanzado",
 

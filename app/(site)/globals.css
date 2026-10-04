@@ -1,100 +1,157 @@
 @import "tailwindcss";
 
-:root {
-  
-  --foreground: #171717;
-}
+/* ═══════════════════════════════════════════════════════════════
+   BASE VISUAL DARKSIDE
+   Paleta y fuentes del sitio: negro, rojo #E50914, blanco y grises.
+   Space Grotesk para títulos (font-display), Geist para texto
+   (font-sans) y Geist Mono para datos (font-mono).
+   ═══════════════════════════════════════════════════════════════ */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: #0a0a0a;
+  --color-foreground: #ededed;
+  --color-ds-red: #e50914;
+  --color-ds-red-soft: #ff5b63;
+  --color-ds-ink: #0b0b0b;
+  --font-sans: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-display: var(--font-space-grotesk), var(--font-geist-sans), sans-serif;
 }
 
-:root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-}
-
+html,
 body {
-  background: #0a0a0a;
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #000;
+  color: #ededed;
 }
 
-/* zoom lento infinito tipo cine */
-@keyframes slowZoom {
-  0% {
-    transform: scale(1.1);
-  }
-  50% {
-    transform: scale(1.18);
-  }
-  100% {
-    transform: scale(1.1);
+/* Saltos a secciones suaves y sin quedar tapados por el menú */
+html {
+  scroll-padding-top: 5.5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
 
-.animate-slow-zoom {
-  animation: slowZoom 25s ease-in-out infinite;
+/* Grano de película: ruido SVG en línea, sin pedir nada a otro servidor */
+.grain {
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
-/* pulso/glow sutil para el CTA del navbar */
-@keyframes navPulseGlow {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.4);
+/* Fondo de público: aparece suave al cargar y se ilumina al prender la
+   página (data-power lo pone home/power.tsx; sin él, se ve iluminado) */
+@keyframes site-bg-in {
+  from {
+    opacity: 0;
   }
-  50% {
-    box-shadow: 0 0 14px 3px rgba(229, 9, 20, 0.45);
+  to {
+    opacity: 1;
   }
 }
 
-.animate-nav-glow {
-  animation: navPulseGlow 2.8s ease-in-out infinite;
+.site-bg {
+  animation: site-bg-in 1.2s ease-out both;
 }
 
-/* ruido/grano cinematográfico */
-.noise-texture {
-  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-  background-size: 200px 200px;
+/* Bien sutil: una textura de público, no una foto protagonista.
+   Un leve desenfoque la separa de la página original. */
+.site-bg-photo {
+  opacity: 0.08;
+  filter: blur(2px);
+  transition: opacity 1.2s ease;
 }
 
-/* ===== DARKSIDE SCROLLBAR FIX ===== */
-
-html, body {
-  background: #0a0a0a;
+html[data-power="off"] .site-bg-photo {
+  opacity: 0.03;
 }
 
-/* Chrome / Brave / Edge */
-::-webkit-scrollbar {
-  width: 6px;
+/* Estática de radio sobre la portada (Darkside Radio): ruido que salta */
+@keyframes radio-static {
+  0% { background-position: 0 0; }
+  25% { background-position: -40px 20px; }
+  50% { background-position: 30px -30px; }
+  75% { background-position: -20px -10px; }
+  100% { background-position: 10px 40px; }
 }
 
-::-webkit-scrollbar-track {
-  background: transparent; /* clave para eliminar “blanco” */
+.radio-static {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='1' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode: screen;
+  animation: radio-static 0.25s steps(1) infinite;
 }
 
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 999px;
+@media (prefers-reduced-motion: reduce) {
+  .radio-static {
+    animation: none;
+  }
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
-}
-
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+/* Scroll horizontal sin barra (carruseles táctiles) */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+
+/* Barra de scroll fina en escritorio */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+/* Texto con contorno (titulares grandes tipo afiche) */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.35);
+}
+
+/* Barras del ecualizador del reproductor */
+@keyframes eq {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.eq-bar {
+  transform-origin: bottom;
+  animation: eq 0.9s ease-in-out infinite;
+}
+
+/* Barra de progreso de las historias del Underfest */
+@keyframes story-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Cinta de texto que se desplaza */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* La lista va repetida 3 veces por mitad: 90 s mantiene la velocidad */
+.marquee {
+  animation: marquee 90s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eq-bar,
+  .marquee {
+    animation: none;
+  }
 }
