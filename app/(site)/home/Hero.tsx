@@ -1,18 +1,28 @@
-import Image from "next/image";
+"use client";
 
-import { SERVICES } from "../data/home";
-import VinylStage from "./vinyl/VinylStage";
+import { useState } from "react";
+import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+
+import { MANIFESTO, SERVICES } from "../data/home";
+import DStage from "./DStage";
+import Metrics from "./Metrics";
+import { requestPowerOn } from "./power";
 
 /* ═══════════════════════════════════════════════════════════════
    APERTURA
-   Quiénes somos en una línea, el vinilo de Darkside's Pick (se toca
-   y suena) y los dos caminos principales: artistas y llamado.
+   Quiénes somos en una línea, la D en 3D (tocarla prende la página),
+   "Conocé a Darksideuy" (desplegable con el manifiesto y los números)
+   y el llamado de artistas.
    ═══════════════════════════════════════════════════════════════ */
 
 export default function Hero() {
+  const [open, setOpen] = useState(false);
+
   return (
     <section id="inicio" className="relative overflow-hidden">
-      {/* Resplandor rojo detrás del disco */}
+      {/* Resplandor rojo detrás de la D */}
       <div
         aria-hidden
         className="pointer-events-none absolute left-1/2 top-[38%] h-[80vw] w-[80vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-ds-red/20 blur-[90px] md:left-[72%] md:top-1/2 md:h-[44rem] md:w-[44rem]"
@@ -43,21 +53,51 @@ export default function Hero() {
             Mercedes, Uruguay — 2026
           </p>
 
-          {/* Accesos directos (en escritorio van acá; en celular, debajo del disco) */}
+          {/* Accesos (en escritorio van acá; en celular, debajo de la D) */}
           <div className="mt-8 hidden gap-3 md:flex">
-            <HeroLinks />
+            <HeroLinks open={open} onToggle={() => setOpen((o) => !o)} />
           </div>
         </div>
 
-        {/* El vinilo */}
+        {/* La D */}
         <div className="order-2">
-          <VinylStage />
+          <DStage />
         </div>
 
         <div className="order-3 flex flex-col gap-3 md:hidden">
-          <HeroLinks />
+          <HeroLinks open={open} onToggle={() => setOpen((o) => !o)} />
         </div>
       </div>
+
+      {/* ── Conocé a Darksideuy: manifiesto y números ── */}
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            id="conoce-darksideuy"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            className="relative overflow-hidden"
+          >
+            <div className="mx-auto max-w-6xl px-5 pb-14 md:px-10">
+              <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red">Conocé a Darksideuy</p>
+              <p className="mt-4 font-display text-[clamp(1.9rem,7.5vw,4.2rem)] font-bold uppercase leading-[0.95]">
+                {MANIFESTO.lead}
+              </p>
+              <div className="mt-8 grid gap-6 text-[15px] leading-7 text-white/70 md:grid-cols-2 md:gap-12">
+                {MANIFESTO.paragraphs.map((p) => (
+                  <p key={p}>{p}</p>
+                ))}
+              </div>
+              <p className="mt-8 border-l-2 border-ds-red pl-5 font-display text-xl font-bold uppercase leading-snug md:text-2xl">
+                {MANIFESTO.closing}
+              </p>
+              <Metrics className="mt-12" />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Lo que hacemos con cada artista, en una cinta */}
       <div aria-label="Servicios" className="relative border-y border-white/10 bg-black/40 py-3">
@@ -78,17 +118,22 @@ export default function Hero() {
   );
 }
 
-function HeroLinks() {
+function HeroLinks({ open, onToggle }: { open: boolean; onToggle: () => void }) {
   return (
     <>
-      <a
-        href="#artists"
-        className="flex min-h-[52px] flex-1 items-center justify-center whitespace-nowrap rounded-2xl bg-ds-red px-6 font-display text-sm font-bold uppercase tracking-[0.18em] shadow-[0_0_40px_rgba(229,9,20,0.35)] transition active:scale-[0.98] md:flex-none md:hover:brightness-110"
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={open}
+        aria-controls="conoce-darksideuy"
+        className="flex min-h-[52px] flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-ds-red px-6 font-display text-sm font-bold uppercase tracking-[0.18em] shadow-[0_0_40px_rgba(229,9,20,0.35)] transition active:scale-[0.98] md:flex-none md:hover:brightness-110"
       >
-        Conocé a los artistas
-      </a>
+        Conocé a Darksideuy
+        <ChevronDown size={17} className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
+      </button>
       <a
         href="#llamado-artistas"
+        onClick={() => requestPowerOn("llamado-artistas")}
         className="flex min-h-[52px] flex-1 items-center justify-center whitespace-nowrap rounded-2xl border border-white/20 px-6 font-display text-sm font-bold uppercase tracking-[0.18em] transition active:scale-[0.98] md:flex-none md:hover:border-ds-red"
       >
         Sumate al llamado

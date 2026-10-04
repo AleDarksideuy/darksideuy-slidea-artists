@@ -81,10 +81,12 @@ function Batea() {
     };
     update();
     el.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    /* también al aparecer (la home arranca con las secciones ocultas) */
+    const resize = new ResizeObserver(onScroll);
+    resize.observe(el);
     return () => {
       el.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      resize.disconnect();
       cancelAnimationFrame(frame);
     };
   }, [reducedMotion]);

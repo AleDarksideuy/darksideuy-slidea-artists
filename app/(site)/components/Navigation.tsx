@@ -7,6 +7,8 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Headphones, Mic2, Sparkles, Users, type LucideIcon } from "lucide-react";
 
+import { requestPowerOn } from "../home/power";
+
 type NavItem = { id: string; label: string; href: string; icon: LucideIcon };
 
 /* Los tres caminos principales de la home + el infoproducto */
@@ -106,6 +108,7 @@ export default function Navigation() {
               <li key={item.id}>
                 <Link
                   href={item.href}
+                  onClick={() => isHome && requestPowerOn(item.id)}
                   aria-current={isActive ? "location" : undefined}
                   className={`relative flex min-h-[56px] flex-col items-center justify-center gap-1 rounded-xl text-[10px] font-semibold uppercase tracking-[0.12em] transition-colors ${
                     isActive ? "text-white" : "text-white/55 active:text-white"
@@ -164,6 +167,7 @@ export default function Navigation() {
               <Link
                 key={item.id}
                 href={item.href}
+                onClick={() => isHome && requestPowerOn(item.id)}
                 aria-current={isActive ? "location" : undefined}
                 className={`group relative flex items-center gap-2 rounded-xl px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] transition-colors ${
                   isActive ? "text-white" : "text-white/65 hover:text-white"

@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Pause, Play, Share2, X } from "lucide-react";
 import { FaSpotify } from "react-icons/fa";
@@ -16,21 +15,6 @@ export default function MiniPlayer() {
   const { current, isPlaying, audio, toggle, close } = useMusic();
   const bar = useRef<HTMLDivElement>(null);
   const [copied, setCopied] = useState(false);
-  const pathname = usePathname();
-  const [heroVisible, setHeroVisible] = useState(false);
-
-  /* En la apertura ya está el control debajo del vinilo: ahí no se duplica */
-  useEffect(() => {
-    const hero = document.getElementById("inicio");
-    if (!hero) {
-      const frame = requestAnimationFrame(() => setHeroVisible(false));
-      return () => cancelAnimationFrame(frame);
-    }
-    const observer = new IntersectionObserver(([entry]) => setHeroVisible(entry.isIntersecting), { threshold: 0.35 });
-    observer.observe(hero);
-    return () => observer.disconnect();
-  }, [pathname]);
-
   /* Progreso sin re-render: se escribe directo en la barra */
   useEffect(() => {
     const el = audio.current;
@@ -57,7 +41,7 @@ export default function MiniPlayer() {
 
   return (
     <AnimatePresence>
-      {current && !heroVisible && (
+      {current && (
         <motion.div
           role="region"
           aria-label="Reproductor"

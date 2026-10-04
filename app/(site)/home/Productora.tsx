@@ -1,16 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
-import { CONTACT, FIC, MAGAZINE, MANIFESTO, METRICS, PARTNERS, TERRITORIO } from "../data/home";
+import { CONTACT, FIC, MAGAZINE, PARTNERS, TERRITORIO } from "../data/home";
 import { useReducedMotion } from "../lib/device";
 
 /* ═══════════════════════════════════════════════════════════════
    LA PRODUCTORA
-   Qué es Darkside y qué la respalda: manifiesto, números, FIC,
-   partners, revista y el próximo territorio.
+   Qué la respalda: FIC, partners, revista y el próximo territorio.
+   (El manifiesto y los números están en "Conocé a Darksideuy", arriba.)
    ═══════════════════════════════════════════════════════════════ */
 
 export default function Productora() {
@@ -18,25 +18,10 @@ export default function Productora() {
     <section id="productora" className="relative px-5 pt-24 md:px-10 md:pt-36">
       <div className="mx-auto max-w-6xl">
         <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red">La productora</p>
-
-        {/* Manifiesto */}
-        <p className="mt-4 font-display text-[clamp(1.9rem,7.5vw,4.2rem)] font-bold uppercase leading-[0.95]">
-          {MANIFESTO.lead}
-        </p>
-        <div className="mt-8 grid gap-6 text-[15px] leading-7 text-white/70 md:grid-cols-2 md:gap-12">
-          {MANIFESTO.paragraphs.map((p) => (
-            <p key={p}>{p}</p>
-          ))}
-        </div>
-        <p className="mt-8 border-l-2 border-ds-red pl-5 font-display text-xl font-bold uppercase leading-snug md:text-2xl">
-          {MANIFESTO.closing}
-        </p>
-
-        {/* Números */}
-        <Metrics />
+        <h2 className="mt-3 font-display text-[clamp(2.6rem,11vw,6rem)] font-bold uppercase leading-[0.9]">Respaldo</h2>
 
         {/* Respaldo */}
-        <div className="mt-16 grid gap-4 md:grid-cols-3">
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
           <article className="rounded-3xl border border-white/10 bg-ds-ink p-6 md:col-span-2">
             <div className="flex items-center justify-between gap-4">
               <Image src={FIC.logo} alt="FIC — Fondo de Incentivo Cultural" width={160} height={60} className="h-10 w-auto" />
@@ -88,51 +73,6 @@ export default function Productora() {
         <Territorio />
       </div>
     </section>
-  );
-}
-
-/* Los números cuentan hasta su valor cuando aparecen */
-function Metrics() {
-  const ref = useRef<HTMLDListElement>(null);
-  const reducedMotion = useReducedMotion();
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    let frame = 0;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) return;
-      observer.disconnect();
-      const start = performance.now();
-      const tick = (now: number) => {
-        const t = reducedMotion ? 1 : Math.min(1, (now - start) / 1200);
-        setProgress(1 - Math.pow(1 - t, 3));
-        if (t < 1) frame = requestAnimationFrame(tick);
-      };
-      frame = requestAnimationFrame(tick);
-    }, { threshold: 0.5 });
-    observer.observe(el);
-    return () => {
-      observer.disconnect();
-      cancelAnimationFrame(frame);
-    };
-  }, [reducedMotion]);
-
-  return (
-    <dl ref={ref} className="mt-14 grid grid-cols-3 divide-x divide-white/10 border-y border-white/10">
-      {METRICS.map((m) => (
-        <div key={m.label} className="px-2 py-6 text-center md:py-10">
-          <dt className="sr-only">{m.label}</dt>
-          <dd className="font-display text-[clamp(2.4rem,12vw,6rem)] font-bold leading-none tabular-nums" aria-label={`${m.value} ${m.label}`}>
-            {Math.round(m.value * progress)}
-          </dd>
-          <dd aria-hidden className="mt-2 font-mono text-[9px] uppercase tracking-[0.2em] text-white/50 md:text-[11px]">
-            {m.label}
-          </dd>
-        </div>
-      ))}
-    </dl>
   );
 }
 
