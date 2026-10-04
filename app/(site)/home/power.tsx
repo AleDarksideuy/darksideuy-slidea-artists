@@ -35,7 +35,14 @@ export function PowerProvider({ children }: { children: ReactNode }) {
   const onRef = useRef(on);
   useEffect(() => {
     onRef.current = on;
+    /* El fondo de público se ilumina al prender (ver .site-bg en globals.css) */
+    document.documentElement.dataset.power = on ? "on" : "off";
   }, [on]);
+
+  /* Fuera de la home (fichas de artista) el fondo queda iluminado */
+  useEffect(() => () => {
+    delete document.documentElement.dataset.power;
+  }, []);
 
   /* Prende y, si corresponde, lleva a una sección cuando ya está visible */
   const turnOn = useCallback((scrollTo?: string) => {

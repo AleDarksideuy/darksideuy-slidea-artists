@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Navigation from "./components/Navigation";
+import SiteBackground from "./components/SiteBackground";
 import { MusicProvider } from "./music/MusicProvider";
 import MiniPlayer from "./music/MiniPlayer";
 import { SITE } from "./data/site";
@@ -62,6 +63,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body className="relative min-h-full flex flex-col bg-black text-white overflow-x-hidden font-sans">
+        {/* La foto de público de fondo (la de la página original) */}
+        <SiteBackground />
+
           <MusicProvider>
             <Navigation />
 
