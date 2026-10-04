@@ -1,4 +1,3 @@
-import WelcomeModal from "./components/WelcomeModal";
 import Hero from "./home/Hero";
 import Lineup from "./home/Lineup";
 import Musica from "./home/Musica";
@@ -16,7 +15,6 @@ import { PowerProvider, PoweredSections } from "./home/power";
 export default function Home() {
   return (
     <main>
-      <WelcomeModal />
       <PowerProvider>
         <Hero />
         {/* Se muestran al tocar la D (o al bajar, usar el menú o entrar por un link) */}

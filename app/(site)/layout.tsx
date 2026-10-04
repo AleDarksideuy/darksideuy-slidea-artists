@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Navigation from "./components/Navigation";
-import { CtaVisibilityProvider } from "./context/CtaVisibilityContext";
 import { MusicProvider } from "./music/MusicProvider";
 import MiniPlayer from "./music/MiniPlayer";
 import { SITE } from "./data/site";
@@ -63,7 +62,6 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body className="relative min-h-full flex flex-col bg-black text-white overflow-x-hidden font-sans">
-        <CtaVisibilityProvider>
           <MusicProvider>
             <Navigation />
 
@@ -74,7 +72,6 @@ export default function RootLayout({
 
             <MiniPlayer />
           </MusicProvider>
-        </CtaVisibilityProvider>
 
         {/* Grano de película sobre todo (fotos incluidas): textura pareja.
             CSS en línea, sin imágenes externas */}
