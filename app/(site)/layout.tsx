@@ -5,6 +5,7 @@ import Navigation from "./components/Navigation";
 import SiteBackground from "./components/SiteBackground";
 import { MusicProvider } from "./music/MusicProvider";
 import MiniPlayer from "./music/MiniPlayer";
+import PlayerSheet from "./music/PlayerSheet";
 import { SITE } from "./data/site";
 
 const geistSans = Geist({
@@ -75,6 +76,7 @@ export default function RootLayout({
             </div>
 
             <MiniPlayer />
+            <PlayerSheet />
           </MusicProvider>
 
         {/* Grano de película sobre todo (fotos incluidas): textura pareja.

@@ -12,9 +12,24 @@ import { useMusic } from "./MusicProvider";
 /* Lo que está sonando: arriba de la barra del pulgar en celular,
    abajo a la derecha en escritorio. */
 export default function MiniPlayer() {
-  const { current, isPlaying, audio, toggle, close } = useMusic();
+  const { current, isPlaying, audio, toggle, close, setSheetOpen } = useMusic();
   const bar = useRef<HTMLDivElement>(null);
   const [copied, setCopied] = useState(false);
+  const { sheetOpen } = useMusic();
+  const [playerVisible, setPlayerVisible] = useState(false);
+
+  /* Mientras el Darkside Player de la sección Música está en pantalla, el
+     mini reproductor no hace falta (serían controles repetidos) */
+  useEffect(() => {
+    const el = document.getElementById("darkside-player");
+    if (!el) return;
+    const observer = new IntersectionObserver(([entry]) => setPlayerVisible(entry.isIntersecting), { threshold: 0.25 });
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      setPlayerVisible(false);
+    };
+  }, [current]);
   /* Progreso sin re-render: se escribe directo en la barra */
   useEffect(() => {
     const el = audio.current;
@@ -41,7 +56,7 @@ export default function MiniPlayer() {
 
   return (
     <AnimatePresence>
-      {current && (
+      {current && !sheetOpen && !playerVisible && (
         <motion.div
           role="region"
           aria-label="Reproductor"
@@ -53,13 +68,20 @@ export default function MiniPlayer() {
         >
           <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-ds-ink/95 shadow-[0_20px_60px_rgba(0,0,0,0.6)] backdrop-blur-xl">
             <div className="flex items-center gap-3 p-2 pr-3">
-              <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-xl">
-                <Image src={current.cover} alt="" fill sizes="44px" className="object-cover" />
-              </span>
-              <span className="min-w-0 flex-1">
-                <span className="block truncate text-sm font-semibold">{current.title}</span>
-                <span className="block truncate text-xs text-white/50">{current.artist}</span>
-              </span>
+              {/* Tocar la portada o el nombre abre el reproductor completo */}
+              <button
+                onClick={() => setSheetOpen(true)}
+                aria-label="Abrir el reproductor"
+                className="flex min-w-0 flex-1 items-center gap-3 text-left"
+              >
+                <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-xl">
+                  <Image src={current.cover} alt="" fill sizes="44px" className="object-cover" />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate text-sm font-semibold">{current.title}</span>
+                  <span className="block truncate text-xs text-white/50">{current.artist}</span>
+                </span>
+              </button>
 
               <button
                 onClick={share}

@@ -8,6 +8,8 @@ import { undergroundTracks, type Track } from "../data/discover";
    REPRODUCTOR COMPARTIDO
    Un solo <audio> para todo el sitio: la música sigue sonando al
    bajar por la home o al abrir la ficha de un artista.
+   Además analiza el audio (Web Audio) para las barras que reaccionan
+   a la música en el Darkside Player.
    Link directo a un tema: /?tema=<id>
    ═══════════════════════════════════════════════════════════════ */
 
@@ -16,7 +18,15 @@ type MusicContextValue = {
   current: Track | null;
   isPlaying: boolean;
   audio: React.RefObject<HTMLAudioElement | null>;
+  /* Analizador de frecuencias (null hasta el primer play, o si el navegador no lo permite) */
+  analyser: React.RefObject<AnalyserNode | null>;
+  /* Reproductor a pantalla completa (desde el mini reproductor) */
+  sheetOpen: boolean;
+  setSheetOpen: (open: boolean) => void;
   toggle: (id?: string) => void;
+  next: () => void;
+  prev: () => void;
+  seek: (seconds: number) => void;
   close: () => void;
 };
 
@@ -30,8 +40,11 @@ export function useMusic() {
 
 export function MusicProvider({ children }: { children: ReactNode }) {
   const audio = useRef<HTMLAudioElement | null>(null);
+  const analyser = useRef<AnalyserNode | null>(null);
+  const audioCtx = useRef<AudioContext | null>(null);
   const [currentId, setCurrentId] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [sheetOpen, setSheetOpen] = useState(false);
 
   const current = useMemo(() => undergroundTracks.find((t) => t.id === currentId) ?? null, [currentId]);
 
@@ -45,14 +58,39 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
+  /* El análisis de audio se arma en el primer toque (los navegadores lo
+     exigen). Si falla, la música suena igual y las barras se simulan. */
+  const ensureAnalyser = useCallback(() => {
+    const el = audio.current;
+    if (!el) return;
+    try {
+      if (!audioCtx.current) {
+        const Ctx = window.AudioContext ?? (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+        const ctx = new Ctx();
+        const source = ctx.createMediaElementSource(el);
+        const node = ctx.createAnalyser();
+        node.fftSize = 256;
+        node.smoothingTimeConstant = 0.78;
+        source.connect(node);
+        node.connect(ctx.destination);
+        audioCtx.current = ctx;
+        analyser.current = node;
+      }
+      if (audioCtx.current.state === "suspended") audioCtx.current.resume().catch(() => {});
+    } catch {
+      analyser.current = null;
+    }
+  }, []);
+
   const toggle = useCallback(
     (id?: string) => {
       const el = audio.current;
       if (!el) return;
-      const target = id ?? currentId;
+      const target = id ?? currentId ?? undergroundTracks[0]?.id;
       if (!target) return;
       const track = undergroundTracks.find((t) => t.id === target);
       if (!track) return;
+      ensureAnalyser();
 
       if (target === currentId && el.src) {
         if (el.paused) el.play().catch(() => {});
@@ -63,20 +101,50 @@ export function MusicProvider({ children }: { children: ReactNode }) {
       el.play().catch(() => {});
       setCurrentId(target);
     },
-    [currentId]
+    [currentId, ensureAnalyser]
   );
+
+  /* Cambiar de tema: si ya sonaba algo, el nuevo arranca solo */
+  const step = useCallback(
+    (dir: number) => {
+      const index = undergroundTracks.findIndex((t) => t.id === currentId);
+      const target = undergroundTracks[(index + dir + undergroundTracks.length) % undergroundTracks.length];
+      if (!target) return;
+      const el = audio.current;
+      if (!currentId || !el?.src) {
+        setCurrentId(target.id);
+        return;
+      }
+      ensureAnalyser();
+      el.src = encodeURI(target.preview);
+      el.play().catch(() => {});
+      setCurrentId(target.id);
+    },
+    [currentId, ensureAnalyser]
+  );
+
+  const next = useCallback(() => step(1), [step]);
+
+  /* Anterior: si ya pasaron unos segundos, vuelve al principio del tema */
+  const prev = useCallback(() => {
+    const el = audio.current;
+    if (el && el.currentTime > 3) {
+      el.currentTime = 0;
+      return;
+    }
+    step(-1);
+  }, [step]);
+
+  const seek = useCallback((seconds: number) => {
+    const el = audio.current;
+    if (el && Number.isFinite(seconds)) el.currentTime = Math.max(0, Math.min(seconds, el.duration || seconds));
+  }, []);
 
   const close = useCallback(() => {
     audio.current?.pause();
+    setSheetOpen(false);
     setCurrentId(null);
   }, []);
-
-  /* Al terminar un tema pasa al siguiente de la selección */
-  const next = useCallback(() => {
-    const index = undergroundTracks.findIndex((t) => t.id === currentId);
-    const following = undergroundTracks[(index + 1) % undergroundTracks.length];
-    if (following) toggle(following.id);
-  }, [currentId, toggle]);
 
   /* Controles en la pantalla de bloqueo del celular */
   useEffect(() => {
@@ -90,11 +158,25 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     navigator.mediaSession.setActionHandler("play", () => audio.current?.play());
     navigator.mediaSession.setActionHandler("pause", () => audio.current?.pause());
     navigator.mediaSession.setActionHandler("nexttrack", next);
-  }, [current, next]);
+    navigator.mediaSession.setActionHandler("previoustrack", prev);
+  }, [current, next, prev]);
 
   const value = useMemo(
-    () => ({ tracks: undergroundTracks, current, isPlaying, audio, toggle, close }),
-    [current, isPlaying, toggle, close]
+    () => ({
+      tracks: undergroundTracks,
+      current,
+      isPlaying,
+      audio,
+      analyser,
+      sheetOpen,
+      setSheetOpen,
+      toggle,
+      next,
+      prev,
+      seek,
+      close,
+    }),
+    [current, isPlaying, sheetOpen, toggle, next, prev, seek, close]
   );
 
   return (
