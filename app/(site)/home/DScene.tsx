@@ -21,16 +21,24 @@ type DSceneProps = {
   visible: boolean;
   quality: Quality;
   onReady: () => void;
+  onContextLost: () => void;
+  onContextRestored: () => void;
 };
 
-export default function DScene({ on, visible, quality, onReady }: DSceneProps) {
+export default function DScene({ on, visible, quality, onReady, onContextLost, onContextRestored }: DSceneProps) {
   return (
     <Canvas
       frameloop={visible ? "always" : "never"}
       dpr={quality === "low" ? 1 : [1, 1.75]}
       gl={{ antialias: quality === "high", alpha: true, powerPreference: "high-performance" }}
       camera={{ fov: 32, position: [0, 0, 5] }}
-      onCreated={onReady}
+      onCreated={({ gl }) => {
+        /* El celular puede liberar la placa de video al ir a otra app:
+           mientras tanto se ve la D plana */
+        gl.domElement.addEventListener("webglcontextlost", onContextLost);
+        gl.domElement.addEventListener("webglcontextrestored", onContextRestored);
+        onReady();
+      }}
       style={{ pointerEvents: "none" }}
       aria-hidden
     >

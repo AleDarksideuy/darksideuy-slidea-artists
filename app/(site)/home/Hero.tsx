@@ -101,11 +101,17 @@ export default function Hero() {
 
       {/* Lo que hacemos con cada artista, en una cinta */}
       <div aria-label="Servicios" className="relative border-y border-white/10 bg-black/40 py-3">
+        {/* Dos mitades iguales que se desplazan; cada mitad repite la lista
+            para ser más ancha que cualquier pantalla y que nunca quede un hueco */}
         <div className="flex w-max marquee">
           {[0, 1].map((copy) => (
             <ul key={copy} aria-hidden={copy === 1} className="flex shrink-0 items-center">
-              {SERVICES.map((service) => (
-                <li key={service} className="flex items-center gap-6 px-6 font-display text-sm font-bold uppercase tracking-[0.2em] text-white/70">
+              {[...SERVICES, ...SERVICES, ...SERVICES].map((service, i) => (
+                <li
+                  key={`${service}-${i}`}
+                  aria-hidden={i >= SERVICES.length || undefined}
+                  className="flex items-center gap-6 px-6 font-display text-sm font-bold uppercase tracking-[0.2em] text-white/70"
+                >
                   {service}
                   <span className="h-1.5 w-1.5 rounded-full bg-ds-red" />
                 </li>

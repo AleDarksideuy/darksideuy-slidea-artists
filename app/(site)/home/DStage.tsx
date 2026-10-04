@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { Component, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { ChevronDown, Power } from "lucide-react";
@@ -25,6 +25,21 @@ function useVisible(ref: React.RefObject<HTMLElement | null>) {
   return visible;
 }
 
+/* Si el 3D no se puede crear (o el navegador pierde la placa de video),
+   se muestra la D plana en lugar de un hueco */
+class SceneBoundary extends Component<{ onError: () => void; children: ReactNode }, { failed: boolean }> {
+  state = { failed: false };
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+  componentDidCatch() {
+    this.props.onError();
+  }
+  render() {
+    return this.state.failed ? null : this.props.children;
+  }
+}
+
 /* La D de la portada: tocarla prende la página */
 export default function DStage() {
   const { on, turnOn } = usePower();
@@ -34,9 +49,11 @@ export default function DStage() {
   const quality = useSyncExternalStore<Quality>(noopSubscribe, detectQuality, () => "low");
   const visible = useVisible(stage);
   const [ready, setReady] = useState(false);
+  const [failed, setFailed] = useState(false);
 
-  /* En celulares lentos, sin WebGL o con movimiento reducido: la D plana */
-  const use3D = webgl && quality === "high" && !reducedMotion;
+  /* La D en 3D también en celular (más liviana: menos resolución y
+     detalle). La plana queda para movimiento reducido o si el 3D falla. */
+  const use3D = webgl && !reducedMotion && !failed;
 
   return (
     <div className="flex flex-col items-center">
@@ -70,7 +87,21 @@ export default function DStage() {
         )}
         {use3D && (
           <span className={`absolute inset-0 transition-opacity duration-500 ${ready ? "opacity-100" : "opacity-0"}`}>
-            <DScene on={on} visible={visible} quality={quality} onReady={() => setReady(true)} />
+            <SceneBoundary
+              onError={() => {
+                setFailed(true);
+                setReady(false);
+              }}
+            >
+              <DScene
+                on={on}
+                visible={visible}
+                quality={quality}
+                onReady={() => setReady(true)}
+                onContextLost={() => setReady(false)}
+                onContextRestored={() => setReady(true)}
+              />
+            </SceneBoundary>
           </span>
         )}
       </button>

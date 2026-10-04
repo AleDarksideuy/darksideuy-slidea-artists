@@ -24,22 +24,12 @@ export function detectQuality(): Quality {
   return quality;
 }
 
-/* Se calcula una sola vez: cada getContext crea un contexto WebGL nuevo
-   y los navegadores permiten pocos a la vez. */
-let webgl: boolean | null = null;
-
+/* ¿El navegador soporta WebGL? Solo mira si existe la API: no crea un
+   contexto de prueba (al refrescar, la pestaña anterior a veces todavía
+   no liberó la placa de video y la prueba fallaba sin motivo real).
+   Si crear el 3D falla de verdad, el componente cae a la versión plana. */
 export function hasWebGL() {
-  if (webgl === null) {
-    try {
-      const canvas = document.createElement("canvas");
-      const gl = canvas.getContext("webgl2") || canvas.getContext("webgl");
-      webgl = Boolean(gl);
-      gl?.getExtension("WEBGL_lose_context")?.loseContext();
-    } catch {
-      webgl = false;
-    }
-  }
-  return webgl;
+  return typeof window !== "undefined" && ("WebGL2RenderingContext" in window || "WebGLRenderingContext" in window);
 }
 
 export function useMediaQuery(query: string) {

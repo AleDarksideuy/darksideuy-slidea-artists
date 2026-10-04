@@ -96,8 +96,9 @@ html {
   }
 }
 
+/* La lista va repetida 3 veces por mitad: 90 s mantiene la velocidad */
 .marquee {
-  animation: marquee 30s linear infinite;
+  animation: marquee 90s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
