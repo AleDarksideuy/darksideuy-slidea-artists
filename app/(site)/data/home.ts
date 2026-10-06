@@ -124,9 +124,8 @@ export const FORMATS = {
 export const PLAYLISTS = {
   text: "Estamos preparando y curando una selección de playlists de artistas por descubrir para cualquier momento o mood del día.",
   items: [
-    { name: "Dark Techno", subtitle: "Curated by Darkside" },
-    { name: "After Hours", subtitle: "Late night selections" },
-    { name: "Peak Time", subtitle: "Festival energy" },
+    { name: "SkatePark Underfest Playlist", subtitle: "by POC Music" },
+    { name: "Artistas Emergentes", subtitle: "Curated by Darkside" },
   ],
 };
 
