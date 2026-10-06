@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, Plus } from "lucide-react";
+import { ArrowUpRight, Lock, Plus } from "lucide-react";
 
 import { FORMATS, PRODUCTIONS } from "../data/home";
 
@@ -100,11 +100,22 @@ export default function Producciones() {
               const content = (
                 <>
                   <span className="relative block aspect-video overflow-hidden rounded-2xl border border-white/10 bg-ds-ink">
-                    {item.thumbnail ? (
-                      <Image src={item.thumbnail} alt={item.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-500 md:group-hover:scale-105" />
-                    ) : (
-                      <span className="absolute inset-0 flex items-center justify-center font-mono text-xs uppercase tracking-[0.3em] text-white/40">
-                        Próximamente
+                    {item.thumbnail && (
+                      <Image
+                        src={item.thumbnail}
+                        alt={item.url ? item.title : ""}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className={`object-cover transition-transform duration-500 ${item.url ? "md:group-hover:scale-105" : "scale-105 blur-[2px] brightness-[0.45] grayscale-[40%]"}`}
+                      />
+                    )}
+                    {/* Bloqueada hasta que tenga link */}
+                    {!item.url && (
+                      <span className="absolute inset-0 flex items-center justify-center">
+                        <span className="flex items-center gap-2 rounded-full border border-white/15 bg-black/75 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.3em] text-white/90 backdrop-blur-sm">
+                          <Lock size={14} className="text-ds-red-soft" />
+                          Próximamente
+                        </span>
                       </span>
                     )}
                   </span>
@@ -124,7 +135,7 @@ export default function Producciones() {
                       {content}
                     </a>
                   ) : (
-                    <div className="opacity-70">{content}</div>
+                    <div>{content}</div>
                   )}
                 </li>
               );

@@ -111,7 +111,8 @@ export const FORMATS = {
       url: "https://youtube.com/playlist?list=PLKYACo2D96OLjeM5eS2j981odUL3hZpZ5&si=DxIZDk50foa63hU6",
       thumbnail: "/thumbnails/living.webp",
     },
-    { id: "02", title: "Intervención Mercedes", url: "", thumbnail: null },
+    /* Sin url: se muestra bloqueada como "Próximamente" */
+    { id: "02", title: "El Patio Session", url: "", thumbnail: "/thumbnails/patio.webp" },
     {
       id: "03",
       title: "La Isla Sessions",
