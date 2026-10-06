@@ -10,7 +10,7 @@ export type SpotlightRelease = {
   release: string;
   type: string;
   year: string;
-  /* Fecha de lanzamiento "AAAA-MM", para ordenar */
+  /* Fecha de lanzamiento "AAAA-MM" o "AAAA-MM-DD", para ordenar */
   date: string;
   genre?: string;
   image: string;
@@ -36,8 +36,8 @@ const releases: SpotlightRelease[] = [
     release: "Porfiao",
     type: "Album",
     year: "2026",
-    /* Spotify solo da el año: el mes es aproximado, ajustar si hace falta */
-    date: "2026-01",
+    date: "2026-01-03",
+    genre: "Rap / Hip-Hop",
     image: "/releases/porfiao-cover2.webp",
     spotify: "https://open.spotify.com/intl-es/album/07t08qgwKvLTwTl9TKgAuF?si=5ORcxOB9S3G3ylk5IZMl1A",
     youtube: "https://youtube.com/playlist?list=PLirZ0CJi5fSXAogL1Q8AH9QW8_lXZ8C5d&si=YL4qa9d8Q7wKTKVQ",
@@ -47,8 +47,8 @@ const releases: SpotlightRelease[] = [
     artist: "NAZ",
     release: "Fundirme de nuevo en un Abrazo",
     type: "Album",
-    year: "2023",
-    date: "2023-01",
+    year: "2026",
+    date: "2026-04-12",
     image: "/releases/naz-cover.webp",
     spotify: "https://open.spotify.com/intl-es/album/5OoZMtkcph4FzXOgyTQcom?si=dPj8_7NGSymYqeoqIe2SKA",
     youtube: "https://youtube.com/playlist?list=PLGXkX-oM2avJABfYZvlaN28KT4AaBAyZg&si=ujrEOFQ0MDeIv0qz",
