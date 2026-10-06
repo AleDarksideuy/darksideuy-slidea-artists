@@ -166,7 +166,7 @@ export const PARTNERS = {
 };
 
 export const MAGAZINE = {
-  edition: "02",
+  edition: "03",
   text: "Plataforma editorial que documenta y amplifica las voces culturales del interior profundo. Cada edición es un corte transversal del ecosistema que estamos construyendo.",
 };
 
