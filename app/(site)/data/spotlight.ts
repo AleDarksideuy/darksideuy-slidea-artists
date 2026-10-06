@@ -12,7 +12,7 @@ export type SpotlightRelease = {
   year: string;
   /* Fecha de lanzamiento "AAAA-MM", para ordenar */
   date: string;
-  genre: string;
+  genre?: string;
   image: string;
   spotify?: string;
   youtube?: string;
@@ -31,26 +31,27 @@ const releases: SpotlightRelease[] = [
     spotify: "https://open.spotify.com/intl-es/album/4h0wRnIF4f49OemwwCOgnD",
   },
   {
-    id: 1,
-    artist: "Los Espejos",
-    release: "No La Mires Mas",
+    id: 6,
+    artist: "Cimarrones",
+    release: "Porfiao",
     type: "Album",
-    year: "2025",
-    date: "2025-07",
-    genre: "Rock",
-    image: "/artists/releases/No_La_Mires_Mas_Cover.jpg",
-    spotify: "https://open.spotify.com/intl-es/album/6mFX6M5lqDCX8uDC2nGuy9?si=N3NihFvrQUCHzim80uHGWQ",
+    year: "2026",
+    /* Spotify solo da el año: el mes es aproximado, ajustar si hace falta */
+    date: "2026-01",
+    image: "/releases/porfiao-cover2.webp",
+    spotify: "https://open.spotify.com/intl-es/album/07t08qgwKvLTwTl9TKgAuF?si=5ORcxOB9S3G3ylk5IZMl1A",
+    youtube: "https://youtube.com/playlist?list=PLirZ0CJi5fSXAogL1Q8AH9QW8_lXZ8C5d&si=YL4qa9d8Q7wKTKVQ",
   },
   {
-    id: 3,
-    artist: "Carlín Levratto",
-    release: "El Viaje",
-    type: "EP",
-    year: "2025",
-    date: "2025-12",
-    genre: "Música Popular",
-    image: "/artists/carlin levratto.webp",
-    spotify: "https://open.spotify.com/intl-es/album/4cE85eWxivS3nw7NC5sxZU?si=I4U2Xei3SMOJhlJpCr3-kg",
+    id: 7,
+    artist: "NAZ",
+    release: "Fundirme de nuevo en un Abrazo",
+    type: "Album",
+    year: "2023",
+    date: "2023-01",
+    image: "/releases/naz-cover.webp",
+    spotify: "https://open.spotify.com/intl-es/album/5OoZMtkcph4FzXOgyTQcom?si=dPj8_7NGSymYqeoqIe2SKA",
+    youtube: "https://youtube.com/playlist?list=PLGXkX-oM2avJABfYZvlaN28KT4AaBAyZg&si=ujrEOFQ0MDeIv0qz",
   },
   {
     id: 4,

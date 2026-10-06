@@ -57,7 +57,7 @@ function Spotlight() {
             </span>
             <span className="min-w-0 flex-1">
               <span className="block font-mono text-[10px] uppercase tracking-[0.2em] text-white/45">
-                {item.type} · {item.year} · {item.genre}
+                {[item.type, item.year, item.genre].filter(Boolean).join(" · ")}
               </span>
               <span className="block truncate font-display text-lg font-bold uppercase">{item.release}</span>
               <span className="block truncate text-sm text-white/60">{item.artist}</span>
