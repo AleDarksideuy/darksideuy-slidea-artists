@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Mail } from "lucide-react";
+import { ArrowUpRight, Lock, Mail } from "lucide-react";
 import { FaInstagram } from "react-icons/fa";
 
-import { CONTACT } from "../data/home";
+import { CONTACT, TU_SEMANA } from "../data/home";
 
 /* ═══════════════════════════════════════════════════════════════
    CONTACTO + PIE
@@ -66,9 +66,15 @@ export default function Contacto() {
             <a href="#llamado-artistas" className="md:hover:text-white">Llamado</a>
             <a href="#underfest" className="md:hover:text-white">Underfest</a>
             <a href="#producciones" className="md:hover:text-white">Producciones</a>
-            <Link href="/tu-semana-como-artista" className="inline-flex items-center gap-1 text-ds-red-soft md:hover:text-white">
-              Tu semana <ArrowUpRight size={14} />
-            </Link>
+            {TU_SEMANA.launched ? (
+              <Link href={TU_SEMANA.href} className="inline-flex items-center gap-1 text-ds-red-soft md:hover:text-white">
+                Tu semana <ArrowUpRight size={14} />
+              </Link>
+            ) : (
+              <a href="#tu-semana" className="inline-flex items-center gap-1 text-ds-red-soft md:hover:text-white">
+                Tu semana <Lock size={13} /> <span className="text-white/40">· pronto</span>
+              </a>
+            )}
           </nav>
         </div>
       </footer>

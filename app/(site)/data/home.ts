@@ -129,6 +129,18 @@ export const PLAYLISTS = {
 };
 
 export const TU_SEMANA = {
+  /* ── INTERRUPTOR DEL LANZAMIENTO ──
+     false: la home muestra el adelanto "Próximamente", el menú lo marca
+     con candado y /tu-semana-como-artista redirige al adelanto.
+     true: vuelve todo (sección, menú y página de venta). */
+  launched: false,
+  teaser: {
+    kicker: "Para artistas nuevos",
+    title: "Tu semana como artista",
+    text: "Estamos terminando el sistema con el que ordenamos a nuestros artistas, para que lo puedas usar por tu cuenta. Siete días, tres tareas por día. Muy pronto.",
+    hint: "Tocá un bloque para espiar",
+    follow: "Enterate primero en Instagram",
+  },
   kicker: "Para artistas nuevos",
   title: "¿Sabés en qué estado está tu carrera hoy?",
   text: "Siete días, tres tareas por día. Un diagnóstico real de lo que te falta para dar el próximo paso.",

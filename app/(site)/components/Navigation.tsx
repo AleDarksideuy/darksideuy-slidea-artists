@@ -5,9 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { Headphones, Mic2, Sparkles, Users, type LucideIcon } from "lucide-react";
+import { Headphones, Lock, Mic2, Sparkles, Users, type LucideIcon } from "lucide-react";
 
 import { requestPowerOn } from "../home/power";
+import { TU_SEMANA as TU_SEMANA_DATA } from "../data/home";
 
 type NavItem = { id: string; label: string; href: string; icon: LucideIcon };
 
@@ -17,7 +18,12 @@ const ITEMS: NavItem[] = [
   { id: "darkside-pick", label: "Música", href: "/#darkside-pick", icon: Headphones },
   { id: "llamado-artistas", label: "Llamado", href: "/#llamado-artistas", icon: Mic2 },
 ];
-const TU_SEMANA = { label: "Tu semana", href: "/tu-semana-como-artista" };
+/* Antes del lanzamiento lleva al adelanto de la home y se ve con candado */
+const TU_SEMANA = {
+  label: "Tu semana",
+  href: TU_SEMANA_DATA.launched ? "/tu-semana-como-artista" : "/#tu-semana",
+  locked: !TU_SEMANA_DATA.launched,
+};
 
 /* Qué sección de la home está en pantalla, para marcarla en el menú */
 function useActiveSection(enabled: boolean) {
@@ -130,9 +136,10 @@ export default function Navigation() {
           <li>
             <Link
               href={TU_SEMANA.href}
+              onClick={() => TU_SEMANA.locked && isHome && requestPowerOn("tu-semana")}
               className="flex min-h-[56px] flex-col items-center justify-center gap-1 rounded-xl bg-[#E50914]/15 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#ff5b63] active:bg-[#E50914]/25"
             >
-              <Sparkles className="h-5 w-5" strokeWidth={1.8} />
+              {TU_SEMANA.locked ? <Lock className="h-5 w-5" strokeWidth={1.8} /> : <Sparkles className="h-5 w-5" strokeWidth={1.8} />}
               <span>{TU_SEMANA.label}</span>
             </Link>
           </li>
@@ -193,10 +200,18 @@ export default function Navigation() {
 
           <Link
             href={TU_SEMANA.href}
+            onClick={() => TU_SEMANA.locked && isHome && requestPowerOn("tu-semana")}
             className="flex items-center gap-2 rounded-xl border border-[#E50914]/50 bg-[#E50914]/15 px-4 py-3 text-[10px] font-bold uppercase tracking-[0.16em] text-white shadow-[0_0_24px_rgba(229,9,20,0.25)] transition hover:bg-[#E50914]/25"
           >
-            <Sparkles className="h-[18px] w-[18px] text-[#E50914]" strokeWidth={1.7} />
+            {TU_SEMANA.locked ? (
+              <Lock className="h-[18px] w-[18px] text-[#E50914]" strokeWidth={1.7} />
+            ) : (
+              <Sparkles className="h-[18px] w-[18px] text-[#E50914]" strokeWidth={1.7} />
+            )}
             {TU_SEMANA.label} como artista
+            {TU_SEMANA.locked && (
+              <span className="rounded-full bg-[#E50914] px-2 py-0.5 text-[9px] tracking-[0.12em]">Pronto</span>
+            )}
           </Link>
         </nav>
       </header>

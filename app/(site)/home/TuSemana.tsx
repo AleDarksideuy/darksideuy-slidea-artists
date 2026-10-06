@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { TU_SEMANA } from "../data/home";
+import TuSemanaLocked from "./TuSemanaLocked";
 
 /* ═══════════════════════════════════════════════════════════════
    TU SEMANA COMO ARTISTA (infoproducto)
@@ -10,6 +11,9 @@ import { TU_SEMANA } from "../data/home";
    ═══════════════════════════════════════════════════════════════ */
 
 export default function TuSemana() {
+  /* Antes del lanzamiento: el adelanto con los bloques sellados */
+  if (!TU_SEMANA.launched) return <TuSemanaLocked />;
+
   return (
     <section id="tu-semana" className="relative pt-24 md:pt-36">
       <div className="mx-auto max-w-6xl px-5 md:px-10">
