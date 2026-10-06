@@ -89,6 +89,13 @@ html[data-power="off"] .site-bg-photo {
   }
 }
 
+/* Renglón censurado que "rechaza" la lectura (Próximamente) */
+@keyframes redacted-glitch {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-3px); }
+  100% { transform: translateX(3px); }
+}
+
 /* Scroll horizontal sin barra (carruseles táctiles) */
 .no-scrollbar {
   scrollbar-width: none;

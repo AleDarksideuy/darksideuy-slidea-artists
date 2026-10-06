@@ -8,7 +8,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Headphones, Lock, Mic2, Sparkles, Users, type LucideIcon } from "lucide-react";
 
 import { requestPowerOn } from "../home/power";
-import { TU_SEMANA as TU_SEMANA_DATA } from "../data/home";
 
 type NavItem = { id: string; label: string; href: string; icon: LucideIcon };
 
@@ -18,11 +17,16 @@ const ITEMS: NavItem[] = [
   { id: "darkside-pick", label: "Música", href: "/#darkside-pick", icon: Headphones },
   { id: "llamado-artistas", label: "Llamado", href: "/#llamado-artistas", icon: Mic2 },
 ];
-/* Antes del lanzamiento lleva al adelanto de la home y se ve con candado */
-const TU_SEMANA = {
-  label: "Tu semana",
-  href: TU_SEMANA_DATA.launched ? "/tu-semana-como-artista" : "/#tu-semana",
-  locked: !TU_SEMANA_DATA.launched,
+/* El botón del producto lo arma el layout en el servidor: antes del
+   lanzamiento dice "Próximamente" (con candado) y al navegador no le
+   llega ninguna pista de qué es. */
+export type ProductLink = {
+  label: string;
+  desktopLabel: string;
+  href: string;
+  locked: boolean;
+  /* sección de la home a la que lleva (para prender la página) */
+  sectionId?: string;
 };
 
 /* Qué sección de la home está en pantalla, para marcarla en el menú */
@@ -73,7 +77,7 @@ function usePastHero() {
   return past;
 }
 
-export default function Navigation() {
+export default function Navigation({ product: TU_SEMANA }: { product: ProductLink }) {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const active = useActiveSection(isHome);
@@ -136,7 +140,7 @@ export default function Navigation() {
           <li>
             <Link
               href={TU_SEMANA.href}
-              onClick={() => TU_SEMANA.locked && isHome && requestPowerOn("tu-semana")}
+              onClick={() => TU_SEMANA.sectionId && isHome && requestPowerOn(TU_SEMANA.sectionId)}
               className="flex min-h-[56px] flex-col items-center justify-center gap-1 rounded-xl bg-[#E50914]/15 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#ff5b63] active:bg-[#E50914]/25"
             >
               {TU_SEMANA.locked ? <Lock className="h-5 w-5" strokeWidth={1.8} /> : <Sparkles className="h-5 w-5" strokeWidth={1.8} />}
@@ -200,7 +204,7 @@ export default function Navigation() {
 
           <Link
             href={TU_SEMANA.href}
-            onClick={() => TU_SEMANA.locked && isHome && requestPowerOn("tu-semana")}
+            onClick={() => TU_SEMANA.sectionId && isHome && requestPowerOn(TU_SEMANA.sectionId)}
             className="flex items-center gap-2 rounded-xl border border-[#E50914]/50 bg-[#E50914]/15 px-4 py-3 text-[10px] font-bold uppercase tracking-[0.16em] text-white shadow-[0_0_24px_rgba(229,9,20,0.25)] transition hover:bg-[#E50914]/25"
           >
             {TU_SEMANA.locked ? (
@@ -208,10 +212,7 @@ export default function Navigation() {
             ) : (
               <Sparkles className="h-[18px] w-[18px] text-[#E50914]" strokeWidth={1.7} />
             )}
-            {TU_SEMANA.label} como artista
-            {TU_SEMANA.locked && (
-              <span className="rounded-full bg-[#E50914] px-2 py-0.5 text-[9px] tracking-[0.12em]">Pronto</span>
-            )}
+            {TU_SEMANA.desktopLabel}
           </Link>
         </nav>
       </header>

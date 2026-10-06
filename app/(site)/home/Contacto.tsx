@@ -4,6 +4,7 @@ import { ArrowUpRight, Lock, Mail } from "lucide-react";
 import { FaInstagram } from "react-icons/fa";
 
 import { CONTACT, TU_SEMANA } from "../data/home";
+import { TEASER } from "../data/proximamente";
 
 /* ═══════════════════════════════════════════════════════════════
    CONTACTO + PIE
@@ -71,8 +72,8 @@ export default function Contacto() {
                 Tu semana <ArrowUpRight size={14} />
               </Link>
             ) : (
-              <a href="#tu-semana" className="inline-flex items-center gap-1 text-ds-red-soft md:hover:text-white">
-                Tu semana <Lock size={13} /> <span className="text-white/40">· pronto</span>
+              <a href={`#${TEASER.id}`} className="inline-flex items-center gap-1 text-ds-red-soft md:hover:text-white">
+                Próximamente <Lock size={13} />
               </a>
             )}
           </nav>

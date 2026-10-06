@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import Navigation from "./components/Navigation";
+import Navigation, { type ProductLink } from "./components/Navigation";
+import { PRODUCT_LAUNCHED, TEASER } from "./data/proximamente";
 import SiteBackground from "./components/SiteBackground";
 import { MusicProvider } from "./music/MusicProvider";
 import MiniPlayer from "./music/MiniPlayer";
@@ -48,6 +49,12 @@ export const metadata: Metadata = {
   },
 };
 
+/* Botón del producto en el menú: se decide acá (servidor) para que,
+   antes del lanzamiento, al navegador no le llegue el nombre real */
+const PRODUCT_LINK: ProductLink = PRODUCT_LAUNCHED
+  ? { label: "Tu semana", desktopLabel: "Tu semana como artista", href: "/tu-semana-como-artista", locked: false }
+  : { label: "Pronto", desktopLabel: "Próximamente", href: `/#${TEASER.id}`, locked: true, sectionId: TEASER.id };
+
 export const viewport: Viewport = {
   themeColor: "#000000",
   colorScheme: "dark",
@@ -68,7 +75,7 @@ export default function RootLayout({
         <SiteBackground />
 
           <MusicProvider>
-            <Navigation />
+            <Navigation product={PRODUCT_LINK} />
 
             {/* En celular deja lugar a la barra inferior */}
             <div className="relative z-10 pb-[calc(4.5rem+env(safe-area-inset-bottom))] md:pb-0">
