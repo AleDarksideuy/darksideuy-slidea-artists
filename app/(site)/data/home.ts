@@ -181,7 +181,7 @@ export const CONTACT = {
   /* Formulario "Hablemos": los mensajes los envía Web3Forms al correo de
      arriba. La clave es pública por diseño (solo sirve para mandar a ese
      correo); se pide gratis en https://web3forms.com con ese correo. */
-  formKey: "",
+  formKey: "a98bbd81-0010-4317-8e02-ee95b75d4819",
   topics: ["Soy artista", "Sponsor / institución", "Prensa", "Otro"],
   instagram: "https://www.instagram.com/darkside.uy",
   sponsors:
