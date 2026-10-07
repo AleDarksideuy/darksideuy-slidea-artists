@@ -14,6 +14,10 @@ import { AnimatePresence, motion } from "framer-motion";
    ═══════════════════════════════════════════════════════════════ */
 
 const SESSION_KEY = "ds-power";
+
+/* Buscadores (Google, Bing…): no tocan la D ni bajan, así que entran con
+   la página ya prendida y ven el mismo contenido que una persona. */
+const CRAWLER_RE = /bot|crawler|spider|crawling|slurp|lighthouse|facebookexternalhit|whatsapp|embedly/i;
 export const POWER_EVENT = "ds:power-on";
 
 type PowerContextValue = { on: boolean; turnOn: (scrollTo?: string) => void };
@@ -70,7 +74,8 @@ export function PowerProvider({ children }: { children: ReactNode }) {
     try {
       remembered = sessionStorage.getItem(SESSION_KEY) === "1";
     } catch {}
-    if (hash || hasTrack || remembered) {
+    const crawler = CRAWLER_RE.test(navigator.userAgent);
+    if (hash || hasTrack || remembered || crawler) {
       const frame = requestAnimationFrame(() => {
         setOn(true);
         if (hash) requestAnimationFrame(() => document.getElementById(hash)?.scrollIntoView({ block: "start" }));

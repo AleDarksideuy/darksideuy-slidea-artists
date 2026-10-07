@@ -29,6 +29,8 @@ const spaceGrotesk = Space_Grotesk({
 /* La imagen para compartir la genera opengraph-image.tsx (y una por
    artista en artists/[slug]); acá van títulos y descripciones. */
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE.url),
+  alternates: { canonical: "/" },
   title: {
     default: SITE.title,
     template: `%s — ${SITE.name}`,

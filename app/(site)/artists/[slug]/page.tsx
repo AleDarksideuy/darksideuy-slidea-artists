@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { artists } from "../../data/artists";
 import ArtistProfile from "./ArtistProfile";
+import { ArtistJsonLd } from "../../components/JsonLd";
 
 type ArtistPageProps = {
   params: Promise<{ slug: string }>;
@@ -27,6 +28,7 @@ export async function generateMetadata({ params }: ArtistPageProps): Promise<Met
   return {
     title: artist.name,
     description,
+    alternates: { canonical: `/artists/${artist.slug}` },
     openGraph: { title: `${artist.name} — Darkside UY`, description, type: "profile" },
     twitter: { title: `${artist.name} — Darkside UY`, description },
   };
@@ -36,5 +38,10 @@ export default async function ArtistPage({ params }: ArtistPageProps) {
   const { slug } = await params;
   const artist = artists.find((a) => a.slug === slug);
   if (!artist) notFound();
-  return <ArtistProfile artist={artist} />;
+  return (
+    <>
+      <ArtistJsonLd artist={artist} />
+      <ArtistProfile artist={artist} />
+    </>
+  );
 }
