@@ -1,15 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Lock, Mail } from "lucide-react";
+import { ArrowUpRight, Lock } from "lucide-react";
 import { FaInstagram } from "react-icons/fa";
 
 import { CONTACT, TU_SEMANA } from "../data/home";
 import { TEASER } from "../data/proximamente";
+import ContactForm from "./ContactForm";
 
 /* ═══════════════════════════════════════════════════════════════
    CONTACTO + PIE
-   Dos caminos (sponsors e instituciones / artistas) y los accesos
-   directos para escribir.
+   Dos caminos (sponsors e instituciones / artistas) y el formulario
+   que manda el mensaje directo al correo de la productora.
    ═══════════════════════════════════════════════════════════════ */
 
 export default function Contacto() {
@@ -32,24 +33,16 @@ export default function Contacto() {
             ))}
           </div>
 
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <a
-              href={CONTACT.emailHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex min-h-[54px] flex-1 items-center justify-center gap-2 rounded-2xl bg-ds-red text-white px-6 font-display text-sm font-bold uppercase tracking-[0.14em] active:scale-[0.98] sm:flex-none md:hover:brightness-110"
-            >
-              <Mail size={17} /> {CONTACT.email}
-            </a>
-            <a
-              href={CONTACT.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex min-h-[54px] flex-1 items-center justify-center gap-2 rounded-2xl border border-white/20 px-6 font-display text-sm font-bold uppercase tracking-[0.14em] active:scale-[0.98] sm:flex-none md:hover:border-ds-red"
-            >
-              <FaInstagram size={18} /> @darkside.uy
-            </a>
-          </div>
+          <ContactForm />
+
+          <a
+            href={CONTACT.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex min-h-[48px] items-center gap-2 text-sm text-white/60 md:hover:text-white"
+          >
+            <FaInstagram size={17} /> O escribinos por Instagram: @darkside.uy
+          </a>
         </div>
       </section>
 

@@ -178,6 +178,8 @@ export const TERRITORIO = {
 export const CONTACT = {
   email: "productora@darksideuy.com",
   emailHref: "https://mail.google.com/mail/?view=cm&fs=1&to=productora@darksideuy.com",
+  /* Motivos del formulario "Hablemos" */
+  topics: ["Soy artista", "Sponsor / institución", "Prensa", "Otro"],
   instagram: "https://www.instagram.com/darkside.uy",
   sponsors:
     "El proyecto tiene track record, FIC ganado y metodología documentada. Si tu organización quiere estar donde la cultura ocurre antes de que sea mainstream, hablemos.",
