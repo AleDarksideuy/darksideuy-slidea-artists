@@ -178,7 +178,10 @@ export const TERRITORIO = {
 export const CONTACT = {
   email: "productora@darksideuy.com",
   emailHref: "https://mail.google.com/mail/?view=cm&fs=1&to=productora@darksideuy.com",
-  /* Motivos del formulario "Hablemos" */
+  /* Formulario "Hablemos": los mensajes los envía Web3Forms al correo de
+     arriba. La clave es pública por diseño (solo sirve para mandar a ese
+     correo); se pide gratis en https://web3forms.com con ese correo. */
+  formKey: "",
   topics: ["Soy artista", "Sponsor / institución", "Prensa", "Otro"],
   instagram: "https://www.instagram.com/darkside.uy",
   sponsors:
