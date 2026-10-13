@@ -236,49 +236,6 @@ export const artists: Artist[] = [
     
   },
 
-   {
-    slug: "los-espejos",
-    name: "LOS ESPEJOS",
-    legalName: "Los Espejos",
-    country: "Uruguay",
-    countryCode: "uy",
-    city: "Montevideo",
-    category: "Rock",
-    description: "",
-    image: "/artists/losespejos.webp",
-    avatar: "/artists/losespejosavatar.jpg",
-    heroVideo: "/artists/los espejos/losespejosclip.mp4",
-    instagram: "https://www.instagram.com/losespejosuy/",
-    youtube: "https://www.youtube.com/@losespejosuy",
-    spotify: "https://open.spotify.com/intl-es/artist/5P08EnfFwAuPjUGX6ZMR2w?si=1jPw7mTGRWOHjVA2sKp97g",
-    facebook: "",
-           releases: [
-  {
-    title: "No La Mires Más",
-
-    type: "Album",
-
-    cover: "/artists/releases/No_La_Mires_Mas_Cover.jpg",
-
-    description:
-      "Nuevo álbum, ya disponible en todas las plataformas.",
-
-    status: "Lanzado",
-
-    releaseDate: "Julio 2025",
-
-    
-  },
-  
-],
-  },
-
- 
-
-
-
-  
-
   {
     slug: "carlin-levratto",
     name: "CARLÍN LEVRATTO",
