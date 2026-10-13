@@ -162,3 +162,55 @@ html[data-power="off"] .site-bg-photo {
     animation: none;
   }
 }
+
+/* ═══ Juan Maidana: gráficos de TV ═══
+   Cada pieza (data-jm) entra con un barrido rápido cuando su bloque
+   (.jm-in) entra en pantalla. Sin animación, todo se ve ya en su lugar. */
+.jm-ticker {
+  animation: marquee 38s linear infinite;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .jm-in [data-jm] {
+    transition:
+      transform 0.42s cubic-bezier(0.2, 0.9, 0.2, 1),
+      clip-path 0.45s cubic-bezier(0.2, 0.9, 0.2, 1),
+      opacity 0.3s linear;
+    transition-delay: var(--d, 0ms);
+  }
+
+  .jm-in [data-jm="wipe"] {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .jm-in[data-in="false"] [data-jm="left"] {
+    transform: translateX(-110%);
+  }
+
+  .jm-in[data-in="false"] [data-jm="right"] {
+    transform: translateX(110%);
+  }
+
+  .jm-in[data-in="false"] [data-jm="wipe"] {
+    clip-path: polygon(0 0, 0 0, -20% 100%, -20% 100%);
+  }
+
+  .jm-in[data-in="false"] [data-jm="rise"] {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+
+  .jm-in [data-jm="grow"] {
+    transform-origin: left;
+  }
+
+  .jm-in[data-in="false"] [data-jm="grow"] {
+    transform: scaleX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jm-ticker {
+    animation: none;
+  }
+}

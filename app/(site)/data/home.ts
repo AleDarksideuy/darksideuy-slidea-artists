@@ -122,6 +122,35 @@ export const FORMATS = {
   ],
 };
 
+export const JUAN_MAIDANA = {
+  id: "juan-maidana",
+  name: "Juan Maidana",
+  surname: "Maidana",
+  role: "Creador de contenido · Mercedes, Soriano",
+  text: "Entrevistas de calle, humor y cobertura de eventos. Darkside lleva la planificación y la programación de todo su contenido.",
+  photo: "/juan-maidana/juan-maidana.webp",
+  /* El caso: la cobertura de la fiesta */
+  event: "Fiesta Nacional de la Primavera",
+  place: "Dolores · 10 y 11 de octubre de 2026",
+  total: 1804084,
+  totalLabel: "reproducciones",
+  /* El reparto de las reproducciones arma la barra proporcional */
+  platforms: [
+    { name: "Instagram", plays: 1341840 },
+    { name: "TikTok", plays: 387869 },
+    { name: "YouTube", plays: 74375 },
+  ],
+  stats: [
+    { value: 223, label: "piezas publicadas", detail: "124 Instagram · 29 TikTok · 70 YouTube" },
+    { value: 33, label: "horas de cobertura continua", detail: "Sábado 14:15 a domingo 23:31" },
+    { value: 3, label: "plataformas", detail: "Instagram · TikTok · YouTube" },
+    { value: 69, label: "textos escritos", detail: "Uno por video" },
+  ],
+  /* Este dato va siempre con su aclaración: no es una cifra del fin de semana */
+  followers: { value: 2097, label: "seguidores en Instagram", note: "en tres semanas de trabajo" },
+  closing: "Una cobertura completa de la fiesta, publicada mientras la fiesta pasaba.",
+};
+
 export const PLAYLISTS = {
   text: "Estamos preparando y curando una selección de playlists de artistas por descubrir para cualquier momento o mood del día.",
   items: [
