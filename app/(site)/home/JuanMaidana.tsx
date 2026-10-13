@@ -77,8 +77,7 @@ export default function JuanMaidana() {
   ];
 
   return (
-    /* Panel negro propio, con filo rojo arriba: corta con la sección anterior */
-    <section id={JM.id} className="relative mt-24 border-t-4 border-ds-red bg-black pt-12 md:mt-36 md:pt-20">
+    <section id={JM.id} className="relative pt-24 md:pt-36">
       <header className="mx-auto max-w-6xl px-5 md:px-10">
         <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red-soft">{JM.kicker}</p>
         <h2 className="mt-3 font-display text-[clamp(2.6rem,11vw,6rem)] font-bold uppercase leading-[0.9]">{JM.title}</h2>
@@ -237,7 +236,7 @@ export default function JuanMaidana() {
       </div>
 
       {/* ── Cinta de datos ── */}
-      <div className="mt-10 overflow-hidden border-t border-white/10 bg-ds-red text-white md:mt-16">
+      <div className="mt-10 overflow-hidden border-y border-white/10 bg-ds-ink md:mt-16">
         <div className="jm-ticker flex w-max">
           {[0, 1].map((copy) => (
             <ul key={copy} aria-hidden={copy === 1} className="flex shrink-0">
@@ -246,7 +245,7 @@ export default function JuanMaidana() {
                   key={item}
                   className="flex items-center gap-4 whitespace-nowrap py-3 pl-4 font-display text-xs font-bold uppercase tracking-[0.16em] md:text-sm"
                 >
-                  <span aria-hidden className="h-2 w-2 rotate-45 bg-black" />
+                  <span aria-hidden className="h-2 w-2 rotate-45 bg-ds-red" />
                   {item}
                 </li>
               ))}
