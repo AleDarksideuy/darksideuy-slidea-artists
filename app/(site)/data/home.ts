@@ -38,38 +38,38 @@ export const UNDERFEST = {
   since: "Since 2023",
   place: "Manzana 19 — Plaza de deportes",
   /* Foto general del evento: abre las historias */
-  cover: "/underfest/banner-6.jpg",
+  cover: "/underfest/portada.jpg",
   /* Cada experiencia con la foto que la muestra (sin foto: placa tipográfica) */
   experiences: [
     {
       number: "01",
       title: "Sesión de skate",
       text: "Skaters del litoral. Unión que impulsa el deporte a través de sesiones no competitivas.",
-      image: "/underfest/banner-2.jpg",
+      image: "/underfest/skate.jpg",
     },
     {
       number: "02",
       title: "Feria de emprendedores",
       text: "Emprendedores locales. Economía circular dentro del evento.",
-      image: "/underfest/banner-1 .jpg",
+      image: "/underfest/feria.jpg",
     },
     {
       number: "03",
       title: "Show en vivo",
       text: "Artistas musicales en vivo. La plaza como escenario.",
-      image: "/underfest/banner-3.jpg",
+      image: "/underfest/show-musical.jpg",
     },
     {
       number: "04",
       title: "Exposición de artes visuales",
       text: "Artistas del departamento. Intervención del espacio público.",
-      image: null,
+      image: "/underfest/exposicion-artes-visuales.jpg",
     },
     {
       number: "05",
       title: "Concurso de outfits",
       text: "Para la audiencia. La cultura como expresión individual.",
-      image: "/underfest/banner-4.jpg",
+      image: "/underfest/concurso-outfits.jpg",
     },
   ],
 };
