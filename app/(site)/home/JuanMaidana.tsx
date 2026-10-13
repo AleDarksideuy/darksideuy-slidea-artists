@@ -77,8 +77,14 @@ export default function JuanMaidana() {
   ];
 
   return (
-    <section id={JM.id} className="relative pt-24 md:pt-36">
-      <div className="mx-auto max-w-6xl md:grid md:grid-cols-[minmax(0,26rem)_1fr] md:items-start md:gap-12 md:px-10 lg:grid-cols-[minmax(0,30rem)_1fr] lg:gap-16">
+    /* Panel negro propio, con filo rojo arriba: corta con la sección anterior */
+    <section id={JM.id} className="relative mt-24 border-t-4 border-ds-red bg-black pt-12 md:mt-36 md:pt-20">
+      <header className="mx-auto max-w-6xl px-5 md:px-10">
+        <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red-soft">{JM.kicker}</p>
+        <h2 className="mt-3 font-display text-[clamp(2.6rem,11vw,6rem)] font-bold uppercase leading-[0.9]">{JM.title}</h2>
+      </header>
+
+      <div className="mx-auto mt-10 max-w-6xl md:mt-14 md:grid md:grid-cols-[minmax(0,26rem)_1fr] md:items-start md:gap-12 md:px-10 lg:grid-cols-[minmax(0,30rem)_1fr] lg:gap-16">
         {/* ── Apertura ── */}
         <div
           ref={opening}
@@ -135,13 +141,13 @@ export default function JuanMaidana() {
             >
               El caso · {JM.event}
             </p>
-            <h2
+            <h3
               data-jm="left"
               style={delay(300)}
               className="w-fit bg-ds-red py-2 pl-5 pr-10 font-display text-[clamp(1.9rem,10cqw,3rem)] font-bold uppercase leading-none text-white [clip-path:polygon(0_0,100%_0,calc(100%-1.25rem)_100%,0_100%)]"
             >
               {JM.name}
-            </h2>
+            </h3>
             <p
               data-jm="left"
               style={delay(380)}
@@ -160,7 +166,7 @@ export default function JuanMaidana() {
 
           <div data-jm="rise" style={delay(80)} className="mt-8 border-t border-white/10 pt-6">
             <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red-soft">El caso</p>
-            <h3 className="mt-2 font-display text-2xl font-bold uppercase leading-tight md:text-3xl">{JM.event}</h3>
+            <h4 className="mt-2 font-display text-2xl font-bold uppercase leading-tight md:text-3xl">{JM.event}</h4>
             <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.2em] text-white/50">{JM.place}</p>
           </div>
 
@@ -231,7 +237,7 @@ export default function JuanMaidana() {
       </div>
 
       {/* ── Cinta de datos ── */}
-      <div className="mt-10 overflow-hidden border-y border-white/10 bg-ds-ink md:mt-16">
+      <div className="mt-10 overflow-hidden border-t border-white/10 bg-ds-red text-white md:mt-16">
         <div className="jm-ticker flex w-max">
           {[0, 1].map((copy) => (
             <ul key={copy} aria-hidden={copy === 1} className="flex shrink-0">
@@ -240,7 +246,7 @@ export default function JuanMaidana() {
                   key={item}
                   className="flex items-center gap-4 whitespace-nowrap py-3 pl-4 font-display text-xs font-bold uppercase tracking-[0.16em] md:text-sm"
                 >
-                  <span aria-hidden className="h-2 w-2 rotate-45 bg-ds-red" />
+                  <span aria-hidden className="h-2 w-2 rotate-45 bg-black" />
                   {item}
                 </li>
               ))}

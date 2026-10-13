@@ -124,6 +124,9 @@ export const FORMATS = {
 
 export const JUAN_MAIDANA = {
   id: "juan-maidana",
+  /* Título de la sección: la separa de Producciones y Formatos visuales */
+  kicker: "Planificación y programación de contenido",
+  title: "Creadores",
   name: "Juan Maidana",
   surname: "Maidana",
   role: "Creador de contenido · Mercedes, Soriano",
