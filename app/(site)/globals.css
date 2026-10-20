@@ -176,7 +176,7 @@ html[data-power="off"] .site-bg-photo {
       transform 0.42s cubic-bezier(0.2, 0.9, 0.2, 1),
       clip-path 0.45s cubic-bezier(0.2, 0.9, 0.2, 1),
       opacity 0.3s linear;
-    transition-delay: var(--d, 0ms);
+    transition-delay: calc(var(--base, 0ms) + var(--d, 0ms));
   }
 
   .jm-in [data-jm="wipe"] {
@@ -207,10 +207,40 @@ html[data-power="off"] .site-bg-photo {
   .jm-in[data-in="false"] [data-jm="grow"] {
     transform: scaleX(0);
   }
+
+  /* Mosaicos de marcador: se dan vuelta como un tablero */
+  .jm-in [data-jm="flip"] {
+    transform-origin: top;
+  }
+
+  .jm-in[data-in="false"] [data-jm="flip"] {
+    opacity: 0;
+    transform: perspective(600px) rotateX(-90deg);
+  }
+
+  /* Cortina de repetición: espera a la izquierda y cruza una sola vez */
+  .jm-in [data-jm="stinger"] {
+    transition: none;
+    transform: translateX(-100%);
+  }
+
+  .jm-in[data-in="true"] [data-jm="stinger"] {
+    animation: jm-stinger 0.95s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+  }
+}
+
+@keyframes jm-stinger {
+  to {
+    transform: translateX(100%);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .jm-ticker {
     animation: none;
+  }
+
+  [data-jm="stinger"] {
+    display: none;
   }
 }

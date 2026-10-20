@@ -7,6 +7,8 @@ import { JUAN_MAIDANA as JM } from "../data/home";
 import { useReducedMotion } from "../lib/device";
 
 const COUNT_MS = 1600;
+/* La barra roja cruza primero; los datos entran detrás de ella */
+const STINGER_MS = 420;
 /* Instagram, TikTok y YouTube en la barra del reparto */
 const SHARE_COLORS = ["bg-ds-red", "bg-white", "bg-white/35"];
 
@@ -74,15 +76,15 @@ export default function JuanMaidana() {
   useEffect(() => {
     if (!shown) return;
     let frame = 0;
-    const start = performance.now();
+    const start = performance.now() + (reducedMotion ? 0 : STINGER_MS);
     const tick = (now: number) => {
-      const t = Math.min(1, (now - start) / COUNT_MS);
+      const t = Math.min(1, Math.max(0, now - start) / COUNT_MS);
       setProgress(1 - Math.pow(1 - t, 3));
       if (t < 1) frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [shown]);
+  }, [shown, reducedMotion]);
 
   /* Sin animación: los valores finales desde el principio */
   const count = (value: number) => fmt(Math.round(value * (reducedMotion ? 1 : progress)));
@@ -210,8 +212,19 @@ export default function JuanMaidana() {
             tabIndex={-1}
             hidden={!open}
             data-in={shown}
-            className="jm-in outline-none"
+            style={{ "--base": `${STINGER_MS}ms` } as CSSProperties}
+            className="jm-in relative overflow-hidden outline-none"
           >
+            {/* Cortina de repetición: cruza en diagonal y destapa el tablero */}
+            <div aria-hidden data-jm="stinger" className="pointer-events-none absolute inset-y-0 -left-1/2 z-10 w-[200%]">
+              <div className="absolute inset-y-0 left-[18%] w-[5%] -skew-x-12 bg-white" />
+              <div className="absolute inset-y-0 left-[24%] w-[52%] -skew-x-12 bg-ds-red" />
+              <div className="absolute left-[34%] top-10 w-[32%]">
+                <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/80">El caso</p>
+                <p className="mt-2 font-display text-3xl font-bold uppercase leading-none text-white md:text-5xl">{JM.event}</p>
+              </div>
+            </div>
+
             <p data-jm="rise" style={delay(140)} className="mt-6">
               <span className="sr-only">
                 {fmt(JM.total)} {JM.totalLabel}
@@ -247,7 +260,7 @@ export default function JuanMaidana() {
             {/* Mosaicos de marcador */}
             <ul className="mt-8 grid grid-cols-2 gap-2 md:gap-3">
               {JM.stats.map((s, i) => (
-                <li key={s.label} data-jm="rise" style={delay(380 + i * 60)} className="border border-white/10 border-t-ds-red bg-ds-ink p-4">
+                <li key={s.label} data-jm="flip" style={delay(380 + i * 90)} className="border border-white/10 border-t-ds-red bg-ds-ink p-4">
                   <span className="sr-only">{fmt(s.value)}</span>
                   <span aria-hidden className="block font-display text-5xl font-bold leading-none tabular-nums md:text-6xl">
                     {count(s.value)}
@@ -257,7 +270,7 @@ export default function JuanMaidana() {
                 </li>
               ))}
               {/* Los seguidores, siempre con su aclaración al lado */}
-              <li data-jm="rise" style={delay(620)} className="col-span-2 flex flex-wrap items-baseline gap-x-4 gap-y-1 bg-ds-red p-4 text-white">
+              <li data-jm="flip" style={delay(760)} className="col-span-2 flex flex-wrap items-baseline gap-x-4 gap-y-1 bg-ds-red p-4 text-white">
                 <span className="sr-only">+{fmt(JM.followers.value)}</span>
                 <span aria-hidden className="font-display text-5xl font-bold leading-none tabular-nums md:text-6xl">
                   +{count(JM.followers.value)}
@@ -280,21 +293,29 @@ export default function JuanMaidana() {
       </div>
 
       {/* ── Cinta de datos (aparece con el caso) ── */}
-      <div hidden={!open} className="mt-10 overflow-hidden border-y border-white/10 bg-ds-ink md:mt-16">
-        <div className="jm-ticker flex w-max">
-          {[0, 1].map((copy) => (
-            <ul key={copy} aria-hidden={copy === 1} className="flex shrink-0">
-              {ticker.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-center gap-4 whitespace-nowrap py-3 pl-4 font-display text-xs font-bold uppercase tracking-[0.16em] md:text-sm"
-                >
-                  <span aria-hidden className="h-2 w-2 rotate-45 bg-ds-red" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          ))}
+      <div
+        hidden={!open}
+        data-in={shown}
+        style={{ "--base": `${STINGER_MS}ms` } as CSSProperties}
+        className="jm-in mt-10 overflow-hidden border-y border-white/10 bg-ds-ink md:mt-16"
+      >
+        {/* La cinta ya se mueve con su propia animación: el barrido va en un envoltorio */}
+        <div data-jm="left" style={delay(820)}>
+          <div className="jm-ticker flex w-max">
+            {[0, 1].map((copy) => (
+              <ul key={copy} aria-hidden={copy === 1} className="flex shrink-0">
+                {ticker.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-center gap-4 whitespace-nowrap py-3 pl-4 font-display text-xs font-bold uppercase tracking-[0.16em] md:text-sm"
+                  >
+                    <span aria-hidden className="h-2 w-2 rotate-45 bg-ds-red" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            ))}
+          </div>
         </div>
       </div>
     </section>
