@@ -135,16 +135,16 @@ export const JUAN_MAIDANA = {
   /* El caso: la cobertura de la fiesta */
   event: "Fiesta Nacional de la Primavera",
   place: "Dolores · 10 y 11 de octubre de 2026",
-  total: 1804084,
+  total: 6051935,
   totalLabel: "reproducciones",
   /* El reparto de las reproducciones arma la barra proporcional */
   platforms: [
     { name: "Instagram", plays: 1341840 },
-    { name: "TikTok", plays: 387869 },
-    { name: "YouTube", plays: 74375 },
+    { name: "TikTok", plays: 1151265 },
+    { name: "YouTube", plays: 45359 },
   ],
   stats: [
-    { value: 223, label: "piezas publicadas", detail: "124 Instagram · 29 TikTok · 70 YouTube" },
+    { value: 788, label: "piezas publicadas", detail: "124 Instagram · 114 TikTok · 200 YouTube" },
     { value: 33, label: "horas de cobertura continua", detail: "Sábado 14:15 a domingo 23:31" },
     { value: 3, label: "plataformas", detail: "Instagram · TikTok · YouTube" },
     { value: 69, label: "textos escritos", detail: "Uno por video" },
