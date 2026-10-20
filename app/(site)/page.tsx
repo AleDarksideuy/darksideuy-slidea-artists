@@ -12,7 +12,7 @@ import { PowerProvider, PoweredSections } from "./home/power";
 import { SiteJsonLd } from "./components/JsonLd";
 
 /* El recorrido de la home, pensado para quien llega desde Instagram:
-   portada (tocar la D prende la página) → artistas → música → sumarse → eventos → trabajos → Juan Maidana →
+   portada (tocar la D prende la página) → Juan Maidana → artistas → música → sumarse → eventos → trabajos →
    infoproducto → la productora → contacto. */
 export default function Home() {
   return (
@@ -22,12 +22,12 @@ export default function Home() {
         <Hero />
         {/* Se muestran al tocar la D (o al bajar, usar el menú o entrar por un link) */}
         <PoweredSections>
+          <JuanMaidana />
           <Lineup />
           <Musica />
           <Llamado />
           <Underfest />
           <Producciones />
-          <JuanMaidana />
           <TuSemana />
           <Productora />
           <Contacto />
