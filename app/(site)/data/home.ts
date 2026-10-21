@@ -147,6 +147,48 @@ export const JUAN_MAIDANA = {
   closing: "Una cobertura completa de la fiesta, publicada mientras la fiesta pasaba.",
 };
 
+/* Skaters del Interior. Reglas de comunicación de la liga: el nombre es
+   "Skaters del Interior" (nunca "nacional"), no se nombran otras
+   organizaciones, no se publican montos ni datos de riders, y la final no
+   lleva fecha hasta que esté definida. La numeración es la de la liga. */
+export const LIGA_SKATERS = {
+  id: "skaters-del-interior",
+  kicker: "Skaters del Interior · La Liga",
+  title: ["Skaters", "del Interior"],
+  lead: "La única liga under del skate uruguayo.",
+  text: "Cada fecha tiene su propio ganador: no hay puntaje ni clasificación. En diciembre hay una final que premia a todos los que participaron.",
+  where: "Tres fechas entre setiembre y diciembre de 2026, en Mercedes, Soriano.",
+  backdrop: "Liga",
+  why: "En cada fecha aparecen riders de ciudades que están a cientos de kilómetros. Algunos llegan de lugares donde no hay ni una pista donde andar.",
+  whyStrong: "Por eso esto existe: para que no haya que irse del departamento para encontrarse con otros que hacen lo mismo.",
+  join: {
+    label: "Quién puede correr",
+    title: "Cualquiera con una tabla",
+    text: "La única condición es tener una tabla y ganas de andar. Se viene a compartir con colegas, a mirar de cerca a los que andan bien, y a ganarse un lugar que no lo da nadie más que la pista.",
+  },
+  /* date: día de la fecha (hora de Uruguay). Sin date, la fecha no está definida.
+     El estado (realizada / próxima) se calcula solo con el día de hoy. */
+  dates: [
+    { name: "Fecha 1", day: "Sábado 19 de setiembre", date: "2026-09-19", place: "Mercedes, Soriano" },
+    { name: "Fecha 2", day: "Sábado 31 de octubre", date: "2026-10-31", place: "Mercedes, Soriano", tag: "Halloween" },
+    { name: "Final", day: "Diciembre", date: null, place: "Mercedes, Soriano" },
+  ],
+  /* Tarjeta de la fecha 2: se muestra solo hasta que pasa el 31 */
+  next: {
+    date: "2026-10-31",
+    kicker: "Fecha 2 · Sábado 31 de octubre",
+    title: "Vuelve el skate a Mercedes",
+    text: "El 31 de octubre vuelve el skate a Mercedes. Segunda etapa de la liga Skaters del Interior, con riders de todo el país y, por primera vez, de la otra orilla. Es sábado y es Halloween: además de la fecha hay concurso de disfraces, y para ese no hace falta saber andar.",
+  },
+  /* Galería de la Fecha 1: vacía hasta tener las fotos (y el permiso para usarlas).
+     Cada foto: { src: "/skaters-del-interior/archivo.webp", alt: "…", width, height }.
+     Mientras esté vacía, la sección no muestra la galería. */
+  gallery: {
+    title: "Fecha 1 · Sábado 19 de setiembre",
+    photos: [] as { src: string; alt: string; width: number; height: number }[],
+  },
+};
+
 export const PLAYLISTS = {
   text: "Estamos preparando y curando una selección de playlists de artistas por descubrir para cualquier momento o mood del día.",
   items: [
