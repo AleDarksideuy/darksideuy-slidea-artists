@@ -224,7 +224,8 @@ html[data-power="off"] .site-bg-photo {
     transform: translateX(-100%);
   }
 
-  .jm-in[data-in="true"] [data-jm="stinger"] {
+  /* Hijo directo: la dispara solo el caso al abrirse, no el tablero que lo contiene */
+  .jm-in[data-in="true"] > [data-jm="stinger"] {
     animation: jm-stinger 0.95s cubic-bezier(0.7, 0, 0.3, 1) forwards;
   }
 }

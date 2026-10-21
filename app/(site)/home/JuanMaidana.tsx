@@ -9,8 +9,6 @@ import { useReducedMotion } from "../lib/device";
 const COUNT_MS = 1600;
 /* La barra roja cruza primero; los datos entran detrás de ella */
 const STINGER_MS = 420;
-/* Instagram, TikTok y YouTube en la barra del reparto */
-const SHARE_COLORS = ["bg-ds-red", "bg-white", "bg-white/35"];
 
 /* Miles con punto, sin depender del idioma del navegador */
 const fmt = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -92,8 +90,9 @@ export default function JuanMaidana() {
   const ticker = [
     `${JM.event} · ${JM.place}`,
     `${fmt(JM.total)} ${JM.totalLabel}`,
+    `${JM.reach.prefix} ${fmt(JM.reach.value)} ${JM.reach.label}`,
     ...JM.stats.map((s) => `${fmt(s.value)} ${s.label}`),
-    `+${fmt(JM.followers.value)} ${JM.followers.label} ${JM.followers.note}`,
+    JM.span.title,
   ];
 
   return (
@@ -104,11 +103,11 @@ export default function JuanMaidana() {
       </header>
 
       <div className="mx-auto mt-10 max-w-6xl md:mt-14 md:grid md:grid-cols-[minmax(0,26rem)_1fr] md:items-start md:gap-12 md:px-10 lg:grid-cols-[minmax(0,30rem)_1fr] lg:gap-16">
-        {/* ── Apertura ── */}
+        {/* ── Apertura ── (en compu llega hasta el final del tablero, con el alto de 3:4 como mínimo) */}
         <div
           ref={opening}
           data-in={openingIn}
-          className="jm-in @container relative aspect-[3/4] max-h-[84svh] w-full overflow-hidden bg-black md:max-h-none md:border md:border-white/10"
+          className="jm-in @container relative aspect-[3/4] max-h-[84svh] w-full overflow-hidden bg-black md:aspect-auto md:min-h-[34.75rem] md:max-h-none md:self-stretch md:border md:border-white/10 lg:min-h-[40rem]"
         >
           {/* Cortes diagonales */}
           <div
@@ -188,32 +187,34 @@ export default function JuanMaidana() {
             <h4 className="mt-2 font-display text-2xl font-bold uppercase leading-tight md:text-3xl">{JM.event}</h4>
             <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.2em] text-white/50">{JM.place}</p>
 
-            {!open && (
-              <button
-                type="button"
-                aria-expanded={open}
-                aria-controls="jm-caso"
-                onClick={() => setOpen(true)}
-                className="group mt-6 flex w-fit items-stretch font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-white"
-              >
-                <span className="bg-ds-red py-3 pl-5 pr-9 transition-colors [clip-path:polygon(0_0,100%_0,calc(100%-1rem)_100%,0_100%)] group-hover:bg-white group-hover:text-black">
-                  Conocé el caso
-                </span>
-                <span aria-hidden className="-ml-3 bg-ds-ink py-3 pl-5 pr-4 text-ds-red-soft [clip-path:polygon(1rem_0,100%_0,100%_100%,0_100%)]">
-                  ▶
-                </span>
-              </button>
-            )}
+            {/* Abierto: en celular desaparece; en compu guarda su lugar para que la foto no cambie de alto */}
+            <button
+              inert={open}
+              type="button"
+              aria-expanded={open}
+              aria-controls="jm-caso"
+              onClick={() => setOpen(true)}
+              className={`group mt-6 flex w-fit items-stretch font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-white ${open ? "invisible max-md:hidden" : ""}`}
+            >
+              <span className="bg-ds-red py-3 pl-5 pr-9 transition-colors [clip-path:polygon(0_0,100%_0,calc(100%-1rem)_100%,0_100%)] group-hover:bg-white group-hover:text-black">
+                Conocé el caso
+              </span>
+              <span aria-hidden className="-ml-3 bg-ds-ink py-3 pl-5 pr-4 text-ds-red-soft [clip-path:polygon(1rem_0,100%_0,100%_100%,0_100%)]">
+                ▶
+              </span>
+            </button>
           </div>
 
           <div
             id="jm-caso"
             ref={details}
             tabIndex={-1}
-            hidden={!open}
+            inert={!open}
+            aria-hidden={!open}
             data-in={shown}
             style={{ "--base": `${STINGER_MS}ms` } as CSSProperties}
-            className="jm-in relative overflow-hidden outline-none"
+            /* Cerrado: en celular no ocupa lugar; en compu reserva su alto para que la foto no salte al abrir */
+            className={`jm-in relative overflow-hidden outline-none ${open ? "" : "invisible max-md:hidden"}`}
           >
             {/* Cortina de repetición: cruza en diagonal y destapa el tablero */}
             <div aria-hidden data-jm="stinger" className="pointer-events-none absolute inset-y-0 -left-1/2 z-10 w-[200%]">
@@ -227,35 +228,23 @@ export default function JuanMaidana() {
 
             <p data-jm="rise" style={delay(140)} className="mt-6">
               <span className="sr-only">
-                {fmt(JM.total)} {JM.totalLabel}
+                {fmt(JM.total)} {JM.totalLabel} {JM.reach.prefix} {fmt(JM.reach.value)} {JM.reach.label}
               </span>
               <span aria-hidden className="block font-display text-[clamp(3rem,17vw,6rem)] font-bold leading-[0.9] tabular-nums">
                 {count(JM.total)}
               </span>
-              <span aria-hidden className="mt-2 block font-display text-lg font-bold uppercase tracking-[0.12em] text-ds-red md:text-xl">
-                {JM.totalLabel}
+              <span aria-hidden className="mt-2 block font-display text-lg font-bold uppercase leading-tight tracking-[0.12em] text-ds-red md:text-xl">
+                {JM.totalLabel} {JM.reach.prefix} {fmt(JM.reach.value)} {JM.reach.label}
               </span>
             </p>
 
-            {/* Reparto por plataforma, en proporción */}
-            <div className="mt-6">
-              <div data-jm="grow" style={delay(260)} aria-hidden className="flex h-3 gap-0.5 md:h-4">
-                {JM.platforms.map((p, i) => (
-                  <span key={p.name} className={SHARE_COLORS[i]} style={{ width: `${(p.plays / JM.total) * 100}%` }} />
-                ))}
-              </div>
-              <ul data-jm="rise" style={delay(320)} className="mt-3 grid grid-cols-3 gap-2">
-                {JM.platforms.map((p, i) => (
-                  <li key={p.name}>
-                    <span className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/55">
-                      <span aria-hidden className={`h-2 w-2 shrink-0 ${SHARE_COLORS[i]}`} />
-                      {p.name}
-                    </span>
-                    <span className="mt-1 block font-display text-base font-bold tabular-nums md:text-xl">{fmt(p.plays)}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <p
+              data-jm="rise"
+              style={delay(260)}
+              className="mt-8 border-l-2 border-ds-red pl-5 font-display text-xl font-bold uppercase leading-tight text-white/85 md:text-2xl"
+            >
+              {JM.closing}
+            </p>
 
             {/* Mosaicos de marcador */}
             <ul className="mt-8 grid grid-cols-2 gap-2 md:gap-3">
@@ -269,25 +258,12 @@ export default function JuanMaidana() {
                   <span className="mt-1 block text-xs text-white/50">{s.detail}</span>
                 </li>
               ))}
-              {/* Los seguidores, siempre con su aclaración al lado */}
-              <li data-jm="flip" style={delay(760)} className="col-span-2 flex flex-wrap items-baseline gap-x-4 gap-y-1 bg-ds-red p-4 text-white">
-                <span className="sr-only">+{fmt(JM.followers.value)}</span>
-                <span aria-hidden className="font-display text-5xl font-bold leading-none tabular-nums md:text-6xl">
-                  +{count(JM.followers.value)}
-                </span>
-                <span className="font-mono text-[11px] uppercase leading-snug tracking-[0.14em]">
-                  {JM.followers.label} <strong className="font-bold">{JM.followers.note}</strong>
-                </span>
+              {/* Franja de cierre, de ancho completo */}
+              <li data-jm="flip" style={delay(580)} className="col-span-2 border border-white/10 bg-ds-ink px-4 py-5 text-center">
+                <span className="block font-display text-3xl font-bold uppercase leading-none md:text-4xl">{JM.span.title}</span>
+                <span className="mt-2 block text-xs text-white/50">{JM.span.detail}</span>
               </li>
             </ul>
-
-            <p
-              data-jm="rise"
-              style={delay(700)}
-              className="mt-8 border-l-2 border-ds-red pl-5 font-display text-xl font-bold uppercase leading-tight text-white/85 md:text-2xl"
-            >
-              {JM.closing}
-            </p>
           </div>
         </div>
       </div>

@@ -137,20 +137,13 @@ export const JUAN_MAIDANA = {
   place: "Dolores · 10 y 11 de octubre de 2026",
   total: 6051935,
   totalLabel: "reproducciones",
-  /* El reparto de las reproducciones arma la barra proporcional */
-  platforms: [
-    { name: "Instagram", plays: 1341840 },
-    { name: "TikTok", plays: 1151265 },
-    { name: "YouTube", plays: 45359 },
-  ],
+  reach: { prefix: "y más de", value: 3795247, label: "cuentas alcanzadas" },
   stats: [
-    { value: 788, label: "piezas publicadas", detail: "124 Instagram · 114 TikTok · 200 YouTube" },
-    { value: 33, label: "horas de cobertura continua", detail: "Sábado 14:15 a domingo 23:31" },
-    { value: 3, label: "plataformas", detail: "Instagram · TikTok · YouTube" },
-    { value: 69, label: "textos escritos", detail: "Uno por video" },
+    { value: 788, label: "piezas publicadas", detail: "Reels · Carruseles · Stories" },
+    { value: 4, label: "plataformas", detail: "Instagram · TikTok · YouTube · Facebook" },
   ],
-  /* Este dato va siempre con su aclaración: no es una cifra del fin de semana */
-  followers: { value: 2097, label: "seguidores en Instagram", note: "en tres semanas de trabajo" },
+  /* Franja de ancho completo debajo de las tarjetas */
+  span: { title: "En solo 10 días", detail: "De Dolores a Nueva Palmira" },
   closing: "Una cobertura completa de la fiesta, publicada mientras la fiesta pasaba.",
 };
 
