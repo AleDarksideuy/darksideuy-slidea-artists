@@ -24,9 +24,8 @@ export default function Home() {
         {/* Se muestran al tocar la D (o al bajar, usar el menú o entrar por un link) */}
         <PoweredSections>
           <JuanMaidana />
-          {/* Ubicación provisoria: se define cuando la sección esté lista */}
-          <LigaSkaters />
           <Lineup />
+          <LigaSkaters />
           <Musica />
           <Llamado />
           <Underfest />
