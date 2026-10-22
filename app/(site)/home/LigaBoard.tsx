@@ -128,8 +128,8 @@ const loadImage = (src: string) =>
     img.src = src;
   });
 
-/* Pinta la forma del logo de un color, venga negro o blanco y con o sin fondo */
-function tinted(img: HTMLImageElement, color: string, darkIsInk: boolean) {
+/* Pinta la forma del logo (blanco, con o sin fondo) de un color */
+function tinted(img: HTMLImageElement, color: string) {
   const c = document.createElement("canvas");
   c.width = img.naturalWidth;
   c.height = img.naturalHeight;
@@ -139,8 +139,7 @@ function tinted(img: HTMLImageElement, color: string, darkIsInk: boolean) {
   const px = data.data;
   for (let i = 0; i < px.length; i += 4) {
     const lum = (px[i] * 0.299 + px[i + 1] * 0.587 + px[i + 2] * 0.114) / 255;
-    const ink = darkIsInk ? 1 - lum : lum;
-    px[i + 3] = Math.round(px[i + 3] * ink);
+    px[i + 3] = Math.round(px[i + 3] * lum);
   }
   ctx.putImageData(data, 0, 0);
   ctx.globalCompositeOperation = "source-in";
@@ -149,9 +148,9 @@ function tinted(img: HTMLImageElement, color: string, darkIsInk: boolean) {
   return c;
 }
 
-/* La lija: negra con grano, con la D en rojo y "Darkside UY" en blanco.
+/* La lija: negra con grano y "Darksideuy" en blanco, centrado.
    El logo va en la parte plana (nose y tail se levantan desde el 17 % de cada punta). */
-function gripTexture(width: number, monogram: HTMLImageElement | null, wordmark: HTMLImageElement | null, font: string) {
+function gripTexture(width: number, wordmark: HTMLImageElement | null, font: string) {
   const h = width / 4;
   const canvas = document.createElement("canvas");
   canvas.width = width;
@@ -160,21 +159,17 @@ function gripTexture(width: number, monogram: HTMLImageElement | null, wordmark:
   ctx.fillStyle = "#121212";
   ctx.fillRect(0, 0, width, h);
 
-  if (monogram) {
-    const d = tinted(monogram, "#e50914", true);
-    const size = h * 0.78;
-    ctx.drawImage(d, width * 0.2, (h - size) / 2, size, size);
-  }
   if (wordmark) {
-    const wm = tinted(wordmark, "#f2f2f2", false);
-    const ww = width * 0.42;
+    const wm = tinted(wordmark, "#f2f2f2");
+    const ww = width * 0.54;
     const wh = (ww * wordmark.naturalHeight) / wordmark.naturalWidth;
-    ctx.drawImage(wm, width * 0.38, (h - wh) / 2, ww, wh);
+    ctx.drawImage(wm, (width - ww) / 2, (h - wh) / 2, ww, wh);
   } else {
     ctx.fillStyle = "#f2f2f2";
     ctx.font = `700 ${h * 0.3}px ${font}`;
+    ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText("DARKSIDE UY", width * 0.38, h / 2);
+    ctx.fillText("DARKSIDEUY", width / 2, h / 2);
   }
 
   /* Grano de lija por encima de todo, logo incluido */
@@ -235,9 +230,9 @@ export default function LigaBoard({ visible, quality, onReady }: LigaBoardProps)
     let cleanup = () => {};
 
     const font = getComputedStyle(canvas).getPropertyValue("--font-space-grotesk").trim() || "sans-serif";
-    const logos = Promise.all([loadImage("/LOGO1.png").catch(() => null), loadImage("/Darksideuy.png").catch(() => null)]);
+    const logo = loadImage("/Darksideuy.png").catch(() => null);
 
-    logos.then(([monogram, wordmark]) => {
+    logo.then((wordmark) => {
       if (disposed) return;
 
       const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: !low, powerPreference: "high-performance" });
@@ -259,7 +254,7 @@ export default function LigaBoard({ visible, quality, onReady }: LigaBoardProps)
       scene.add(key, rim, bounce);
 
       /* Materiales: lija con el logo, abajo y canto de madera */
-      const gripTex = gripTexture(low ? 1024 : 2048, monogram, wordmark, font);
+      const gripTex = gripTexture(low ? 1024 : 2048, wordmark, font);
       const shadowTex = shadowTexture();
       const grip = new MeshStandardMaterial({ map: gripTex, roughness: 0.95, metalness: 0 });
       const under = new MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.6 });

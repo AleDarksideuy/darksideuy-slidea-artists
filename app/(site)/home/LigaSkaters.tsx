@@ -83,9 +83,8 @@ class BoardBoundary extends Component<{ onError: () => void; children: ReactNode
 /* Tabla plana: sin WebGL, con movimiento reducido o mientras carga el 3D */
 function FlatBoard() {
   return (
-    <div aria-hidden className="relative flex aspect-[4/1] w-[min(84%,40rem)] items-center gap-[5%] rounded-full border border-white/10 bg-[#121212] px-[18%]">
-      <Image src="/LOGO1.png" alt="" width={1080} height={1080} className="h-[70%] w-auto invert" />
-      <Image src="/Darksideuy.png" alt="" width={1817} height={394} className="h-auto w-[62%]" />
+    <div aria-hidden className="relative flex aspect-[4/1] w-[min(84%,40rem)] items-center justify-center rounded-full border border-white/10 bg-[#121212]">
+      <Image src="/Darksideuy.png" alt="" width={1817} height={394} className="h-auto w-[54%]" />
     </div>
   );
 }
