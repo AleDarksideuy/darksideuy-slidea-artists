@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 
 import { LIGA_SKATERS as LIGA } from "../data/home";
+import LigaGallery from "./LigaGallery";
 import { detectQuality, hasWebGL, useReducedMotion, type Quality } from "../lib/device";
 
 /* La tabla en 3D se descarga aparte, solo en el navegador y cuando la sección se acerca */
@@ -93,8 +94,8 @@ function FlatBoard() {
    SKATERS DEL INTERIOR — LA LIGA
    Una tabla de skate en 3D con el logo de Darkside en la lija, que entra
    con un shove-it sobre la línea del piso, con "LIGA" gigante detrás.
-   Abajo: por qué existe, quién puede correr, las tres fechas (con su estado calculado solo) y la tarjeta de la
-   próxima fecha mientras no haya pasado.
+   Abajo: por qué existe, quién puede correr, las tres fechas (con su estado calculado solo), la tarjeta de la
+   próxima fecha mientras no haya pasado y el rollo de fotos de la Fecha 1.
    ═══════════════════════════════════════════════════════════════ */
 
 export default function LigaSkaters() {
@@ -221,26 +222,8 @@ export default function LigaSkaters() {
           </article>
         )}
 
-        {/* ── Galería de la Fecha 1 (aparece cuando haya fotos en data/home.ts) ── */}
-        {LIGA.gallery.photos.length > 0 && (
-          <div className="mt-14 md:mt-20">
-            <h3 className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red-soft">{LIGA.gallery.title}</h3>
-            <ul className="mt-4 grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3">
-              {LIGA.gallery.photos.map((photo) => (
-                <li key={photo.src} className="relative aspect-[4/5] overflow-hidden bg-ds-ink">
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    width={photo.width}
-                    height={photo.height}
-                    sizes="(max-width: 768px) 50vw, 33vw"
-                    className="h-full w-full object-cover"
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {/* ── El rollo de la Fecha 1 ── */}
+        <LigaGallery />
       </div>
     </section>
   );

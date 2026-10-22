@@ -180,12 +180,23 @@ export const LIGA_SKATERS = {
     title: "Vuelve el skate a Mercedes",
     text: "El 31 de octubre vuelve el skate a Mercedes. Segunda etapa de la liga Skaters del Interior, con riders de todo el país y, por primera vez, de la otra orilla. Es sábado y es Halloween: además de la fecha hay concurso de disfraces, y para ese no hace falta saber andar.",
   },
-  /* Galería de la Fecha 1: vacía hasta tener las fotos (y el permiso para usarlas).
+  /* Galería de la Fecha 1, "el rollo". La primera foto es la grande del collage.
      Cada foto: { src: "/skaters-del-interior/archivo.webp", alt: "…", width, height }.
-     Mientras esté vacía, la sección no muestra la galería. */
+     Si la lista queda vacía, la sección no muestra la galería. */
   gallery: {
+    kicker: "El rollo de la Fecha 1",
     title: "Fecha 1 · Sábado 19 de setiembre",
-    photos: [] as { src: string; alt: string; width: number; height: number }[],
+    day: "19·09",
+    place: "Mercedes, Soriano",
+    photos: [
+      { src: "/skaters-del-interior/fecha1-05.webp", alt: "Rider en el aire contra el cielo, con la tabla bajo los pies y el público mirando desde abajo", width: 1440, height: 1800 },
+      { src: "/skaters-del-interior/fecha1-03.webp", alt: "Rider de gorra deslizando sobre el cajón azul, con la gente mirando detrás", width: 1440, height: 1800 },
+      { src: "/skaters-del-interior/fecha1-04.webp", alt: "Rider de negro saltando la baranda frente a la gente que mira desde la rampa", width: 1440, height: 1800 },
+      { src: "/skaters-del-interior/fecha1-02.webp", alt: "Rider en el aire con la tabla girando debajo de los pies", width: 1440, height: 1800 },
+      { src: "/skaters-del-interior/fecha1-07.webp", alt: "Rider de pantalón rojo andando sobre la rampa pintada, visto desde arriba", width: 1440, height: 1800 },
+      { src: "/skaters-del-interior/fecha1-01.webp", alt: "Rider sin remera con la tabla sobre la baranda, con las rampas celestes detrás", width: 1440, height: 1800 },
+      { src: "/skaters-del-interior/fecha1-06.webp", alt: "Rider con la tabla en vertical sobre el borde del cajón, al atardecer", width: 1440, height: 1800 },
+    ] as { src: string; alt: string; width: number; height: number }[],
   },
 };
 
