@@ -236,70 +236,10 @@ html[data-power="off"] .site-bg-photo {
   }
 }
 
-/* El rollo de la Fecha 1: en celular, cada cuadro lleva las perforaciones de la película */
-@media (max-width: 767px) {
-  .lg-frame {
-    padding-block: 14px;
-  }
-
-  .lg-frame::before,
-  .lg-frame::after {
-    content: "";
-    position: absolute;
-    inset-inline: 0;
-    height: 6px;
-    background: repeating-linear-gradient(90deg, transparent 0 5px, rgb(255 255 255 / 0.22) 5px 13px, transparent 13px 18px);
-  }
-
-  .lg-frame::before {
-    top: 2px;
-  }
-
-  .lg-frame::after {
-    bottom: 2px;
-  }
-}
-
+/* El rollo de la Fecha 1: en grande, cada foto aparece como recién revelada */
 @media (prefers-reduced-motion: no-preference) {
-  /* Cada foto cae girada, salta el flash y se revela del blanco y negro al color */
-  .lg-roll [data-lg] {
-    transition:
-      transform 0.7s cubic-bezier(0.2, 0.9, 0.25, 1.15),
-      opacity 0.35s linear;
-    transition-delay: var(--d, 0ms);
-  }
-
-  .lg-roll [data-lg] img {
-    transition:
-      filter 1.3s ease-out calc(var(--d, 0ms) + 0.25s),
-      scale 0.5s ease;
-  }
-
-  .lg-roll[data-in="false"] [data-lg] {
-    opacity: 0;
-    transform: translateY(2.5rem) rotate(var(--r, 0deg)) scale(0.94);
-  }
-
-  .lg-roll[data-in="false"] [data-lg] img {
-    filter: grayscale(1) contrast(1.25) brightness(1.15);
-  }
-
-  .lg-roll[data-in="true"] .lg-flash {
-    animation: lg-flash 0.6s ease-out var(--d, 0ms) both;
-  }
-
-  /* En grande, cada foto aparece como recién revelada */
   .lg-develop {
     animation: lg-develop 0.5s ease-out;
-  }
-}
-
-@keyframes lg-flash {
-  0% {
-    opacity: 0.9;
-  }
-  100% {
-    opacity: 0;
   }
 }
 

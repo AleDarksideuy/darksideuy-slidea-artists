@@ -222,9 +222,10 @@ export default function LigaSkaters() {
           </article>
         )}
 
-        {/* ── El rollo de la Fecha 1 ── */}
-        <LigaGallery />
       </div>
+
+      {/* ── El rollo de la Fecha 1: va a todo el ancho ── */}
+      <LigaGallery />
     </section>
   );
 }
