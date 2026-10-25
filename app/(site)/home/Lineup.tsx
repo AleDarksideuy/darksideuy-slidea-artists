@@ -8,6 +8,10 @@ import { ArrowUpRight, Share2 } from "lucide-react";
 import { artists, type Artist } from "../data/artists";
 import { shareLink } from "../lib/share";
 
+/* Quiénes aparecen en el lineup de la home (Zonno conserva su ficha, pero no va acá) */
+const HIDDEN = new Set(["zonno"]);
+const lineup = artists.filter((a) => !HIDDEN.has(a.slug));
+
 /* Lo último que publicó (o lo próximo que viene) */
 export function latestRelease(artist: Artist) {
   const releases = artist.releases ?? [];
@@ -44,7 +48,7 @@ export default function Lineup() {
     return () => observer.disconnect();
   }, []);
 
-  const artist = artists[active];
+  const artist = lineup[active];
   const release = latestRelease(artist);
 
   const share = async () => {
@@ -65,7 +69,7 @@ export default function Lineup() {
         <header className="mb-8 flex items-end justify-between gap-4 md:mb-14">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red-soft">
-              Lineup · {String(artists.length).padStart(2, "0")} artistas
+              Lineup · {String(lineup.length).padStart(2, "0")} artistas
             </p>
             <h2 className="mt-3 font-display text-[clamp(2.6rem,11vw,6rem)] font-bold uppercase leading-[0.9]">
               Nuestros
@@ -82,7 +86,7 @@ export default function Lineup() {
           {/* ── El cuadro fijo con el artista encendido ── */}
           <div className="sticky top-[calc(3.25rem+env(safe-area-inset-top))] z-10 h-[52svh] md:top-24 md:h-[78svh] md:self-start">
             <div className="relative h-full overflow-hidden rounded-3xl border border-white/10 bg-ds-ink">
-              {artists.map((a, i) => (
+              {lineup.map((a, i) => (
                 <Image
                   key={a.slug}
                   src={a.image}
@@ -129,7 +133,7 @@ export default function Lineup() {
 
           {/* ── Los nombres ── */}
           <ol className="relative pb-[30svh] pt-6 md:py-[30svh]">
-            {artists.map((a, i) => {
+            {lineup.map((a, i) => {
               const on = i === active;
               return (
                 <li
