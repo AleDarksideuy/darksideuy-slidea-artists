@@ -2,7 +2,17 @@ import type { NextConfig } from "next";
 import { PHASE_DEVELOPMENT_SERVER } from "next/constants";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  /* La landing del producto cambió de dirección: los links viejos
+     (Instagram, WhatsApp, buscadores) siguen funcionando */
+  async redirects() {
+    return [
+      {
+        source: "/tu-semana-como-artista/:path*",
+        destination: "/expediente-del-artista/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default function config(phase: string): NextConfig {

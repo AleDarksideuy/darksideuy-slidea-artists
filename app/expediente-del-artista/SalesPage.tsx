@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Motion from "./Motion";
-import styles from "./tu-semana-como-artista.module.css";
+import styles from "./expediente-del-artista.module.css";
 
 /* ═══════════════════════════════════════════════════════════════
    EDITAR ACÁ — es lo único que hay que tocar.

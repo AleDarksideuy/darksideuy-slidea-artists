@@ -223,7 +223,7 @@ export const TU_SEMANA = {
     "Lo que tenés que saber",
     "Tu archivo",
   ],
-  href: "/tu-semana-como-artista",
+  href: "/expediente-del-artista",
 };
 
 export const FIC = {

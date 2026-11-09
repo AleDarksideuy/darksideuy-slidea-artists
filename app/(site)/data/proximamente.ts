@@ -6,7 +6,7 @@
 
    INTERRUPTOR DEL LANZAMIENTO:
    false → adelanto "Próximamente" (sin nombre ni detalles), el menú dice
-           "Próximamente" y /tu-semana-como-artista redirige al adelanto.
+           "Próximamente" y /expediente-del-artista redirige al adelanto.
    true  → vuelve todo: sección, menú "Expediente" y página de venta.
    ═══════════════════════════════════════════════════════════════ */
 

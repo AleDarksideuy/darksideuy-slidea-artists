@@ -17,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     })),
     ...(PRODUCT_LAUNCHED
-      ? [{ url: `${SITE.url}/tu-semana-como-artista`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.7 }]
+      ? [{ url: `${SITE.url}/expediente-del-artista`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.7 }]
       : []),
   ];
 }

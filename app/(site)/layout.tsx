@@ -54,7 +54,7 @@ export const metadata: Metadata = {
 /* Botón del producto en el menú: se decide acá (servidor) para que,
    antes del lanzamiento, al navegador no le llegue el nombre real */
 const PRODUCT_LINK: ProductLink = PRODUCT_LAUNCHED
-  ? { label: "Expediente", desktopLabel: "Expediente del Artista", href: "/tu-semana-como-artista", locked: false }
+  ? { label: "Expediente", desktopLabel: "Expediente del Artista", href: "/expediente-del-artista", locked: false }
   : { label: "Pronto", desktopLabel: "Próximamente", href: `/#${TEASER.id}`, locked: true, sectionId: TEASER.id };
 
 export const viewport: Viewport = {

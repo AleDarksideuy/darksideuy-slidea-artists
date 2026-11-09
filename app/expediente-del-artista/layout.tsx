@@ -12,11 +12,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: TITLE,
   description: DESCRIPTION,
-  alternates: { canonical: "/tu-semana-como-artista" },
+  alternates: { canonical: "/expediente-del-artista" },
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
-    url: "/tu-semana-como-artista",
+    url: "/expediente-del-artista",
     siteName: "Darkside UY",
     locale: "es_UY",
     type: "website",
@@ -37,7 +37,7 @@ export const viewport: Viewport = {
 const HTML_BASE = { margin: 0, padding: 0, background: "#0a0a0b", overflowX: "hidden" as const, scrollBehavior: "smooth" as const };
 const BODY_BASE = { margin: 0, padding: 0, background: "#0a0a0b" };
 
-export default function TuSemanaComoArtistaLayout({
+export default function ExpedienteDelArtistaLayout({
   children,
 }: {
   children: React.ReactNode;
