@@ -13,7 +13,7 @@ import styles from "./expediente-del-artista.module.css";
 const PRECIO = "USD 4,20";
 
 /* Link de pago: pegar acá la URL del checkout cuando esté lista. */
-const LINK_PAGO = "https://pay.hotmart.com/Q107431346I";
+const LINK_PAGO = "https://pay.hotmart.com/K108414729D";
 
 /* Frases de la cinta que corre bajo el título */
 const CINTA = [
