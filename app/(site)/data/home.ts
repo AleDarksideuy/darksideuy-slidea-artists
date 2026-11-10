@@ -211,17 +211,17 @@ export const PLAYLISTS = {
 export const TU_SEMANA = {
   /* Se lanza con PRODUCT_LAUNCHED (data/proximamente.ts) */
   launched: PRODUCT_LAUNCHED,
-  kicker: "Para artistas nuevos",
-  title: "¿Sabés en qué estado está tu carrera hoy?",
-  text: "Siete días, tres tareas por día. Un diagnóstico real de lo que te falta para dar el próximo paso.",
+  kicker: "Expediente del Artista · Nivel 1",
+  title: "¿Cuánto de tu proyecto está escrito en algún lado?",
+  text: "El documento donde queda escrito todo lo que tu proyecto ya tiene. Lo cruza, te muestra lo que no estabas viendo y arma con tus datos los mensajes, el media kit y las postulaciones.",
+  /* Los seis grupos del archivo, en el orden del menú */
   blocks: [
-    "Tus siete días",
-    "Tu material dormido",
-    "Tus cuatro pilares",
-    "Tu ficha técnica",
-    "Tus textos",
-    "Tus fechas del año",
-    "Dónde estás parado",
+    "Empezar",
+    "Lo que tenés",
+    "Lo que mandás",
+    "Lo que viene",
+    "Lo que tenés que saber",
+    "Tu archivo",
   ],
   href: "/tu-semana-como-artista",
 };

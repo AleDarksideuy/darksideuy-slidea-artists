@@ -6,8 +6,7 @@ import Proximamente from "./Proximamente";
 
 /* ═══════════════════════════════════════════════════════════════
    EXPEDIENTE DEL ARTISTA (infoproducto)
-   La semana a la vista: siete bloques, uno por día, y el paso a la
-   página de venta.
+   Los seis grupos del archivo y el paso a la página de venta.
    ═══════════════════════════════════════════════════════════════ */
 
 export default function TuSemana() {
@@ -26,8 +25,8 @@ export default function TuSemana() {
             <p className="mt-4 max-w-lg text-sm text-white/70 md:text-base">{TU_SEMANA.text}</p>
           </div>
 
-          {/* La semana: un bloque por día */}
-          <ol className="no-scrollbar flex snap-x gap-2 overflow-x-auto px-6 pb-2 md:grid md:grid-cols-7 md:px-12">
+          {/* Los seis grupos del archivo */}
+          <ol className="no-scrollbar flex snap-x gap-2 overflow-x-auto px-6 pb-2 md:grid md:grid-cols-6 md:px-12">
             {TU_SEMANA.blocks.map((block, i) => (
               <li
                 key={block}
@@ -35,7 +34,7 @@ export default function TuSemana() {
                   i === TU_SEMANA.blocks.length - 1 ? "border-ds-red/60 bg-ds-red/15" : "border-white/10 bg-black/30"
                 }`}
               >
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/45">Día {i + 1}</span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/45">{String(i + 1).padStart(2, "0")}</span>
                 <span className="mt-6 font-display text-sm font-bold uppercase leading-tight">{block}</span>
               </li>
             ))}

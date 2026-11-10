@@ -39,7 +39,7 @@ export default async function Image() {
           DEL <span style={{ color: RED, marginLeft: 28 }}>ARTISTA</span>
         </div>
         <div style={{ display: "flex", fontSize: 34, color: "rgba(255,255,255,0.7)", marginTop: 40 }}>
-          Siete días, tres cosas por día.
+          Nivel 1 · Todo lo que tu proyecto ya tiene, por escrito.
         </div>
       </div>
     ),

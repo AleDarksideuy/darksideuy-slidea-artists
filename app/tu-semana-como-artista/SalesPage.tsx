@@ -15,20 +15,62 @@ const PRECIO = "USD 4,20";
 /* Link de pago: pegar acá la URL del checkout cuando esté lista. */
 const LINK_PAGO = "https://pay.hotmart.com/Q107431346I";
 
-/* Frases de la cinta que corre bajo el título (todas salen de la página) */
+/* Frases de la cinta que corre bajo el título */
 const CINTA = [
-  "Siete días",
-  "Tres cosas por día",
-  "Siete bloques",
-  "Un diagnóstico con números",
+  "Nivel 1",
+  "28 partes",
+  "El cruce",
+  "8 convocatorias",
+  "Sin cuenta, sin internet",
+];
+
+/* Lo que trae el archivo: los seis grupos y sus partes, tal cual
+   aparecen en el menú del Expediente (EXPEDIENTE - SISTEMA.html) */
+const GRUPOS = [
+  {
+    n: "Empezar",
+    partes: "Cómo se usa · De dónde sale esto · Qué te están pidiendo · El cruce",
+  },
+  {
+    n: "Lo que tenés",
+    partes: "Tu expediente · Tu agenda · Tus enlaces · Tus archivos originales",
+  },
+  {
+    n: "Lo que mandás",
+    partes:
+      "Booking · Te dijeron que sí · Cuánto cobrar · Media kit · Gacetilla de prensa · Rider y ficha técnica · Tu versión en inglés · Tus postulaciones",
+  },
+  {
+    n: "Lo que viene",
+    partes: "Lanzar un single · Convocatorias · El año del proyecto · Qué cuesta salir",
+  },
+  {
+    n: "Lo que tenés que saber",
+    partes:
+      "Institucionalidad · El acuerdo entre ustedes · Lo que te van a pedir · Tu equipo · Lo que no hay que hacer · Papeles mínimos",
+  },
+  {
+    n: "Tu archivo",
+    partes: "Guardar y exportar · Nivel 2",
+  },
+];
+
+/* Los seis niveles del Nivel 1 (XP necesaria para cada uno) */
+const NIVELES = [
+  ["Expediente abierto", "0", "Todavía no hay nada escrito. Todo lo que sigue ya existe: falta ponerlo en algún lado."],
+  ["Tu proyecto existe", "250", "Ya hay un proyecto con nombre y con obra escrita."],
+  ["Tenés con qué contestar", "700", "Si alguien te escribe hoy preguntando quién sos, tenés qué responder sin salir a buscar nada."],
+  ["Tenés con qué mandar", "1.250", "Podés escribirle a un lugar y mandarle material sin improvisar."],
+  ["Tenés con qué negociar", "1.900", "Sabés cuánto cobrar, qué preguntar antes de decir que sí y cómo insistir sin ser pesado."],
+  ["Expediente completo", "2.600", "Tu proyecto está entero y por escrito. Se abre el Nivel 2."],
 ];
 
 /* ─────────────────────────────────────────────────────────────── */
 
 export default function SalesPage() {
   return (
-    <div className={styles.page} id="tu-semana">
-      <Motion rootId="tu-semana" />
+    <div className={styles.page} id="expediente">
+      <Motion rootId="expediente" />
       <div className={styles.top}>
         <div className={styles.wrap}>
           <Link href="/" className={styles.brand}>
@@ -48,12 +90,12 @@ export default function SalesPage() {
       </div>
 
       <div className={styles.wrap}>
-        {/* 1 · LO QUE DIJISTE */}
+        {/* 1 · HERO */}
         <div className={styles.hero}>
           <div className={styles.ghost} aria-hidden="true">
-            07
+            01
           </div>
-          <div className={styles.eyebrow}>Para los que comentaron</div>
+          <div className={styles.eyebrow}>Nivel 1 · Para los que comentaron</div>
 
           <h1>
             <span className={styles.line}>
@@ -67,11 +109,10 @@ export default function SalesPage() {
           </h1>
 
           <div className={styles.lede}>
-            Siete días, tres cosas por día. Siete bloques que se completan de
-            a uno, y se terminan. <b>Arrancan el día que abrís el archivo</b>{" "}
-            — no el lunes, no cuando empiece el mes. Al día 7 sabés
-            exactamente en qué estás parado, porque lo calcula con tus
-            propios datos.
+            No es un curso. <b>Es el documento donde queda escrito todo lo
+            que tu proyecto ya tiene</b> — y una herramienta que lo cruza, te
+            muestra lo que tenías adelante sin verlo y arma con tus datos los
+            mensajes, el media kit y las postulaciones.
           </div>
 
           <div className={styles.said}>
@@ -115,10 +156,18 @@ export default function SalesPage() {
           <p>Podríamos no haber contestado nunca. Nos pareció peor.</p>
 
           <p>
-            <b>Así que hicimos otra cosa:</b> agarramos el sistema con el que
-            ordenamos a nuestros artistas y lo convertimos en un archivo que
-            podés usar solo, sin nosotros. No es el servicio. Es lo que hay
-            antes del servicio — y es lo que casi ningún artista tiene.
+            Trabajando con artistas apareció lo mismo una y otra vez:{" "}
+            <b>lo que el artista necesitaba ya existía, y era invisible.</b>{" "}
+            Un escenario importante que nadie había escrito en ningún lado. Un
+            contacto que ya había dicho que sí. Una grabación terminada
+            esperando desde hace dos años.
+          </p>
+
+          <p>
+            <b>Así que hicimos otra cosa:</b> construimos un sistema para
+            encontrar eso, y separamos la parte que un artista puede llevarse
+            y usar solo. No es el servicio. Es lo que hay antes del servicio —
+            y es lo que casi ningún artista tiene.
           </p>
         </section>
 
@@ -127,44 +176,44 @@ export default function SalesPage() {
           <div className={styles.kicker}>Qué es exactamente</div>
 
           <h2>
-            Un archivo que <span className={styles.r}>calcula.</span>
+            Un archivo que <span className={styles.r}>cruza.</span>
           </h2>
 
           <div className={styles.sub}>
-            No es un PDF. No es una plantilla de Notion. Es una herramienta
-            que se llena, se guarda sola y te devuelve un diagnóstico con
-            números.
+            Lo que frena a la mayoría de los proyectos no es lo que les
+            falta: es lo que tienen y no pueden mostrar, porque está repartido
+            en seis lugares y en la cabeza de alguien.{" "}
+            <b>Cargás una vez lo que tu proyecto tiene, y todo lo demás lee de
+            ahí.</b>
           </div>
 
           <div className={styles.mocks} data-stagger>
             <div className={styles.mock} data-spot>
-              <div className={styles.cap}>Bloque 07 · Dónde estás parado</div>
+              <div className={styles.cap}>El cruce · Lo que no estabas viendo</div>
               <div className={styles.ringrow}>
                 <div className={styles.ring}>
-                  <i data-count="74" data-suffix="%">74%</i>
+                  <i data-count="41" data-suffix="%">41%</i>
                 </div>
                 <div style={{ flex: 1, minWidth: 170 }}>
                   <div className={`${styles.gap} ${styles.g}`}>
                     <div className={styles.dot} />
                     <div>
-                      <b>Ficha técnica lista</b>
-                      <span>Ya la podés mandar hoy mismo.</span>
+                      <b>Martina ya trabajó con vos</b>
+                      <span>Una presentación suya vale más que diez mensajes fríos.</span>
                     </div>
                   </div>
                   <div className={`${styles.gap} ${styles.y}`}>
                     <div className={styles.dot} />
                     <div>
-                      <b>Te faltan 2 pilares</b>
-                      <span>
-                        Todo tu contenido le habla a quien ya te sigue.
-                      </span>
+                      <b>Tenés 3 temas grabados sin publicar</b>
+                      <span>Lo que falta es el trámite, no la música.</span>
                     </div>
                   </div>
                   <div className={`${styles.gap} ${styles.rr}`}>
                     <div className={styles.dot} />
                     <div>
-                      <b>Documentación incompleta</b>
-                      <span>Así se pierden los fondos.</span>
+                      <b>No tenés un video en vivo</b>
+                      <span>Nadie programa a ciegas.</span>
                     </div>
                   </div>
                 </div>
@@ -172,227 +221,187 @@ export default function SalesPage() {
             </div>
 
             <div className={styles.mock} data-spot>
-              <div className={styles.cap}>Bloque 04 · Tu ficha técnica</div>
+              <div className={styles.cap}>Convocatorias · ¿Estás en condiciones?</div>
               <div className={styles.trow}>
-                <div className={styles.tag} style={{ width: "auto", color: "#9a9aa4" }}>
-                  Formato
-                </div>
-                <div style={{ marginLeft: "auto", color: "#f2f2f4" }}>
-                  Trío eléctrico
-                </div>
+                <div style={{ color: "#f2f2f4" }}>SXSW · Austin</div>
+                <span className={`${styles.chip} ${styles.go}`}>4 de 6</span>
               </div>
               <div className={styles.trow}>
-                <div className={styles.tag} style={{ width: "auto", color: "#9a9aa4" }}>
-                  Duración
-                </div>
-                <div style={{ marginLeft: "auto", color: "#f2f2f4" }}>
-                  45 minutos
-                </div>
+                <div style={{ color: "#f2f2f4" }}>Circulart · Medellín</div>
+                <span className={`${styles.chip} ${styles.go}`}>3 de 5</span>
               </div>
               <div className={styles.trow}>
-                <div className={styles.tag} style={{ width: "auto", color: "#9a9aa4" }}>
-                  Canales
-                </div>
-                <div style={{ marginLeft: "auto", color: "#f2f2f4" }}>
-                  8 + 2 retornos
-                </div>
+                <div style={{ color: "#f2f2f4" }}>Fondos nacionales de cultura</div>
+                <span className={`${styles.chip} ${styles.ok}`}>Listo</span>
               </div>
               <div className={`${styles.trow} ${styles.hoy}`}>
                 <div className={styles.tag} style={{ width: "auto", color: "#ef4444" }}>
-                  Backline
+                  Te falta
                 </div>
                 <div className={styles.caret} style={{ marginLeft: "auto", color: "#9a9aa4" }}>
-                  sin completar
+                  video en vivo
                 </div>
               </div>
               <div style={{ fontSize: 12, color: "var(--mut)", marginTop: 10 }}>
-                Ocho campos, con un ejemplo de cómo se responde bien al lado
-                de cada uno. Se copia entera con un botón.
+                Ocho convocatorias, cruzadas con lo que ya cargaste. Te dice
+                qué te falta para cada una.
               </div>
             </div>
 
             <div className={`${styles.mock} ${styles.wide}`} data-spot>
-              <div className={styles.cap}>Bloque 05 · Tus textos</div>
+              <div className={styles.cap}>Booking · El mensaje que sí se abre</div>
               <div className={styles.fakeTa}>
-                Somos una banda que busca{" "}
+                Hola,{" "}
                 <span className={styles.generic}>
-                  transmitir emociones a través de la música
+                  somos una banda nueva y todavía estamos arrancando
                 </span>
-                , con influencias de varios géneros.
+                , perdón por molestarte…
               </div>
               <div className={`${styles.cnt} ${styles.bad}`}>
-                ⚠ Hay una frase genérica ahí adentro. Cambiala por un dato:
-                año, ciudad, formación, un lugar donde tocaste.
+                ⚠ Lo que nunca va. No mientas: simplemente no abras con tu
+                punto más débil.
               </div>
               <div style={{ height: 14 }} />
-              <div className={styles.fakeTa}>
-                Trío de rock indie de Paysandú. Tres discos desde 2019.
-                Cantamos en español.
+              <div className={styles.fakeTa} style={{ whiteSpace: "pre-line" }}>
+                {`Hola Laura, ¿cómo andás?
+Soy Marea Baja, proyecto de rock de Paysandú, desde 2019.
+Tocamos en la Patria Gaucha en 2023.
+Te escribo para saber cómo se postula a la próxima edición, y qué material necesitan.`}
               </div>
               <div className={styles.cnt}>
-                <span data-count="76">76</span> de 150 — está en medida
+                ✓ Armado con los datos de tu expediente. Se copia con un botón.
               </div>
             </div>
           </div>
 
           <div className={styles.blocks} data-stagger>
-            <div className={styles.blk} data-spot>
-              <div className={styles.n}>01</div>
-              <div>
-                <b>Tus siete días</b>
-                <span>Tres cosas por día. Arrancan cuando abrís el archivo.</span>
+            {GRUPOS.map((grupo, i) => (
+              <div
+                key={grupo.n}
+                className={i === GRUPOS.length - 1 ? `${styles.blk} ${styles.last}` : styles.blk}
+                data-spot
+              >
+                <div className={styles.n}>{String(i + 1).padStart(2, "0")}</div>
+                <div>
+                  <b>{grupo.n}</b>
+                  <span>{grupo.partes}</span>
+                </div>
               </div>
-            </div>
-            <div className={styles.blk} data-spot>
-              <div className={styles.n}>02</div>
-              <div>
-                <b>Tu material dormido</b>
-                <span>
-                  Convierte lo que ya grabaste en piezas posibles. Casi
-                  siempre sorprende.
-                </span>
-              </div>
-            </div>
-            <div className={styles.blk} data-spot>
-              <div className={styles.n}>03</div>
-              <div>
-                <b>Tus cuatro pilares</b>
-                <span>Te muestra a quién le estás hablando y a quién no.</span>
-              </div>
-            </div>
-            <div className={styles.blk} data-spot>
-              <div className={styles.n}>04</div>
-              <div>
-                <b>Tu ficha técnica</b>
-                <span>Lo primero que pide un lugar. Se copia con un botón.</span>
-              </div>
-            </div>
-            <div className={styles.blk} data-spot>
-              <div className={styles.n}>05</div>
-              <div>
-                <b>Tus textos</b>
-                <span>Las tres biografías, con detector de frases genéricas.</span>
-              </div>
-            </div>
-            <div className={styles.blk} data-spot>
-              <div className={styles.n}>06</div>
-              <div>
-                <b>Tus fechas del año</b>
-                <span>
-                  Ventanas de fondos y los papeles que hay que tener antes.
-                </span>
-              </div>
-            </div>
-            <div className={`${styles.blk} ${styles.last}`} data-spot>
-              <div className={styles.n}>07</div>
-              <div>
-                <b>Dónde estás parado</b>
-                <span>El diagnóstico. Seis ejes, calculado con todo lo de arriba.</span>
-              </div>
-            </div>
+            ))}
           </div>
 
           <p style={{ marginTop: 22, fontSize: 14, color: "var(--mut)" }}>
-            Funciona sin conexión. No hay que instalar nada ni crear ninguna
-            cuenta. <b>Todo lo que escribís queda guardado en tu navegador</b>{" "}
-            — no viaja a ningún servidor, ni siquiera al nuestro.
+            28 partes en seis grupos. <b>No hay orden obligatorio</b>, y
+            también hay un camino corto si no sabés por dónde empezar. Se
+            guarda solo, funciona sin internet y no hay cuenta ni contraseña.{" "}
+            <b>Todo lo que escribís queda en tu equipo</b> — no se envía a
+            ningún lado, ni siquiera a nosotros. Y lo descargás como archivo
+            para que no dependa de nada.
           </p>
         </section>
 
-        {/* 4 · QUE HACE POR VOS ESTA SEMANA */}
+        {/* 4 · QUE VAS A TENER */}
         <section>
-          <div className={styles.kicker}>A los siete días</div>
+          <div className={styles.kicker}>Cuando lo llenes</div>
 
           <h2>
-            Qué vas a tener <span className={styles.r}>el día 7.</span>
+            Qué vas a <span className={styles.r}>tener.</span>
           </h2>
 
           <div className={styles.sub}>
-            No en tres meses. En una semana, empiece el día que empiece.
+            Cargar lo básico lleva unos cuarenta minutos. Completarlo entero
+            es trabajo de varias semanas, porque hay cosas que vas a tener que
+            ir a buscar. <b>Esa búsqueda es el producto.</b>
           </div>
 
           <div className={styles.res} data-stagger>
             <div>
-              Tu ficha técnica escrita y lista para mandar, sin tener que
-              pensarla de nuevo nunca más.
+              Tu proyecto entero y por escrito, en un solo lugar: canciones,
+              antecedentes, contactos, enlaces y dónde está cada archivo
+              original.
             </div>
             <div>
-              Tus tres biografías —la de una línea, la de un párrafo y la
-              larga— resueltas.
+              Lo que se puede verificar de vos, separado de lo que solo se
+              dice. Es lo que distingue a los que consiguen fechas.
             </div>
             <div>
-              El número real de piezas de contenido que ya tenés grabadas y
-              no estás usando.
+              Los mensajes de booking, recontacto y prensa armados con tus
+              datos, listos para copiar.
             </div>
             <div>
-              Tres lugares contactados con la ficha y la bio adjuntas, que es
-              como se contesta un mensaje.
+              El contenido de tu media kit listo para pasar al diseño, y tu
+              rider, tu presupuesto y tu carta de condiciones en PDF.
             </div>
             <div>
-              Los papeles que te faltan para presentarte a un fondo,
-              identificados uno por uno.
+              Cuánto te cuesta salir a tocar y cuánto pedir — y si lo que te
+              ofrecen cubre tu número o estás pagando por tocar.
             </div>
             <div>
-              Y un diagnóstico que te dice, sin vueltas, qué podés resolver
-              solo y qué no.
+              Qué te falta para postular a ocho convocatorias, de SXSW y
+              Circulart a los fondos de cultura, cruzado con lo que ya
+              cargaste.
+            </div>
+            <div>
+              Las doce frases que te van a escribir —«mandame tu EPK»,
+              «pasame el rider», «¿tenés ISRC?»— traducidas, y si las tenés o
+              no.
+            </div>
+            <div>
+              Lo que nadie te cuenta: derechos de autor y de intérprete,
+              masters, ISRC, tu marca y el acuerdo entre ustedes.
             </div>
           </div>
         </section>
 
-        {/* 5 · SE TERMINA */}
+        {/* 5 · NIVELES */}
         <section>
-          <div className={styles.kicker}>Un dato que preferimos decirte</div>
+          <div className={styles.kicker}>Cómo avanza</div>
 
           <h2>
-            Esto se <span className={styles.r}>termina.</span>
+            Nivel 1 <span className={styles.r}>de varios.</span>
           </h2>
 
           <p>
-            Son siete jornadas y después no hay más tareas. No es una
-            suscripción, no es un sistema infinito y no te va a estar
-            pidiendo cosas dentro de tres meses.
-          </p>
-
-          <p>
-            <b>Lo que escribiste queda tuyo para siempre.</b> La ficha
-            técnica, las tres biografías, los papeles, el conteo de tu
-            material: todo sigue abierto y editable en el archivo, sin
-            límite de tiempo. Lo único que termina son las tareas diarias.
+            Cada cosa que cargás suma experiencia. No es un juego por el
+            juego: <b>el número sube cuando tu proyecto queda mejor
+            documentado</b>, y eso es exactamente lo que te hace falta el día
+            que alguien te pida algo.
           </p>
 
           <div className={styles.tw}>
             <table>
               <thead>
                 <tr>
-                  <th>Qué resuelve</th>
-                  <th>Qué no</th>
+                  <th>Nivel</th>
+                  <th>Qué significa</th>
                 </tr>
               </thead>
               <tbody data-stagger>
-                <tr>
-                  <td>Tener la ficha técnica escrita</td>
-                  <td>Trabajar un lanzamiento entero</td>
-                </tr>
-                <tr>
-                  <td>Tener las tres biografías</td>
-                  <td>Sostener la publicación semana a semana</td>
-                </tr>
-                <tr>
-                  <td>Saber qué papeles te faltan</td>
-                  <td>Hacer seguimiento de los lugares en el tiempo</td>
-                </tr>
-                <tr>
-                  <td>Saber en qué estás parado</td>
-                  <td>Medir tus números mes a mes</td>
-                </tr>
+                {NIVELES.map(([nombre, xp, texto], i) => (
+                  <tr key={nombre} className={i === NIVELES.length - 1 ? styles.now : undefined}>
+                    <td>
+                      <span className={styles.lvn}>{i + 1}</span>
+                      <b>{nombre}</b>
+                      <em className={styles.xp}>{xp} XP</em>
+                    </td>
+                    <td>{texto}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
 
           <p>
-            La columna de la izquierda se hace una vez y queda hecha.{" "}
-            <b>La de la derecha es otro trabajo, y no entra en siete días.</b>{" "}
-            Preferimos decirlo ahora que te lo prometas vos solo.
+            <b>Cuando tu expediente está completo, se abre el Nivel 2.</b> No
+            repite nada de este: arranca donde este termina. Subís tu
+            expediente y sigue desde ahí, con los puntos que ganaste. Deja de
+            ser sobre lo que tenés y pasa a ser sobre lo que hacés con eso.
+          </p>
+
+          <p>
+            Está bloqueado y no escondido, porque lo que viene después solo
+            sirve si lo de acá está hecho. <b>No hay truco para
+            desbloquearlo: se llena el expediente y se abre.</b>
           </p>
         </section>
 
@@ -421,7 +430,14 @@ export default function SalesPage() {
               Quiero el archivo
             </a>
             <div className={styles.pay}>
-Tarjeta de crédito o débito (incluye Prex, Midinero y prepagas habilitadas para pagos internacionales) o PayPal. Si estás fuera de Uruguay, contás con varios métodos de pago que se ajustan a tus necesidades. Todos los pagos se procesan a través de Hotmart, plataforma líder en venta de productos digitales en Latinoamérica, con más de 20 años en el mercado y protocolos de seguridad certificados.            </div>
+              Tarjeta de crédito o débito (incluye Prex, Midinero y prepagas
+              habilitadas para pagos internacionales) o PayPal. Si estás fuera
+              de Uruguay, contás con varios métodos de pago que se ajustan a
+              tus necesidades. Todos los pagos se procesan a través de
+              Hotmart, plataforma líder en venta de productos digitales en
+              Latinoamérica, con más de 20 años en el mercado y protocolos de
+              seguridad certificados.
+            </div>
           </div>
         </section>
 
@@ -434,40 +450,50 @@ Tarjeta de crédito o débito (incluye Prex, Midinero y prepagas habilitadas par
           </h2>
 
           <div className={styles.isnot} data-stagger>
-            <div>No es un curso. No hay videos, ni clases, ni módulos que ver.</div>
             <div>
-              No es una plantilla para completar y guardar. Está hecho para
-              abrirlo todos los días.
+              No es un curso y no te va a enseñar a hacer música. No hay
+              videos, ni clases, ni módulos que ver.
             </div>
             <div>
-              No te va a conseguir fechas ni prensa. Te va a dejar en
-              condiciones de salir a buscarlas.
-            </div>
-            <div>No graba, no edita y no diseña. Eso es trabajo de equipo, y es otra conversación.</div>
-            <div>
-              No es una asesoría. Si lo comprás esperando que alguien haga
-              el trabajo por vos, no lo compres.
+              No te va a conseguir fechas. No las consigue un archivo. Te deja
+              en condiciones de salir a buscarlas.
             </div>
             <div>
-              No es un sistema infinito. Son siete jornadas y se acaban. Lo
-              que cargues queda tuyo, pero las tareas terminan el día 7.
+              No graba, no edita y no diseña. El contenido del media kit lo
+              escribís vos; el diseño conviene que lo haga alguien que sabe.
+            </div>
+            <div>
+              No es asesoría legal. Todo lo legal lo lee un abogado
+              especializado, antes de firmar, siempre.
+            </div>
+            <div>
+              No es una asesoría. Si lo comprás esperando que alguien haga el
+              trabajo por vos, no lo compres.
+            </div>
+            <div>
+              No es una suscripción ni una plataforma. No te registrás en
+              ningún lado y lo que escribís no sale de tu equipo.
             </div>
           </div>
 
           <p style={{ marginTop: 22 }}>
-            Lo decimos así de claro porque preferimos vender menos y que
-            quien lo compre sepa qué está comprando.
+            No vas a encontrar en el archivo un solo lugar donde te empujemos
+            a contratarnos. <b>Si llenás todo, vas a llegar solo a los lugares
+            donde falta alguien.</b> Ahí sabés dónde encontrarnos.
           </p>
         </section>
 
         {/* CIERRE */}
         <div className={styles.close} data-auto>
           <h2>
-            Siete días haciendo
+            Demostranos que
             <br />
-            tres cosas <span className={styles.r}>por día.</span>
+            no <span className={styles.r}>funciona.</span>
           </h2>
-          <p>Suena poco. Fijate cuántas veces lo lograste.</p>
+          <p>
+            Llenalo entero y decinos que no apareció nada que no estuvieras
+            viendo.
+          </p>
           <a className={styles.buy} href="#precio">
             Empezar hoy
           </a>
