@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 
 import { SITE } from "../(site)/data/site";
 
-const TITLE = "Tu semana como artista — Darkside UY";
+const TITLE = "Expediente del Artista — Darkside UY";
 const DESCRIPTION =
   "El archivo que usamos internamente con un artista nuevo en su primera semana, adaptado para que lo uses solo. Siete bloques, siete días.";
 

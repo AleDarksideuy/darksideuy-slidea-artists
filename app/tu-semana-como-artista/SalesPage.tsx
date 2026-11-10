@@ -57,11 +57,11 @@ export default function SalesPage() {
 
           <h1>
             <span className={styles.line}>
-              <span>TU SEMANA</span>
+              <span>EXPEDIENTE</span>
             </span>{" "}
             <span className={styles.line}>
               <span>
-                COMO <span className={styles.r}>ARTISTA</span>
+                DEL <span className={styles.r}>ARTISTA</span>
               </span>
             </span>
           </h1>

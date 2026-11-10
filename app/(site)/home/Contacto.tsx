@@ -62,7 +62,7 @@ export default function Contacto() {
             <a href="#producciones" className="md:hover:text-white">Producciones</a>
             {TU_SEMANA.launched ? (
               <Link href={TU_SEMANA.href} className="inline-flex items-center gap-1 text-ds-red-soft md:hover:text-white">
-                Tu semana <ArrowUpRight size={14} />
+                Expediente <ArrowUpRight size={14} />
               </Link>
             ) : (
               <a href={`#${TEASER.id}`} className="inline-flex items-center gap-1 text-ds-red-soft md:hover:text-white">

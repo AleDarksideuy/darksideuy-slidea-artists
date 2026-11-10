@@ -5,7 +5,7 @@ import { TU_SEMANA } from "../data/home";
 import Proximamente from "./Proximamente";
 
 /* ═══════════════════════════════════════════════════════════════
-   TU SEMANA COMO ARTISTA (infoproducto)
+   EXPEDIENTE DEL ARTISTA (infoproducto)
    La semana a la vista: siete bloques, uno por día, y el paso a la
    página de venta.
    ═══════════════════════════════════════════════════════════════ */

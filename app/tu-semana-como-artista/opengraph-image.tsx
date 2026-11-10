@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 import { monogramData, OG_SIZE, RED } from "../(site)/og";
 
-export const alt = "Tu semana como artista — Darkside UY";
+export const alt = "Expediente del Artista — Darkside UY";
 export const size = OG_SIZE;
 export const contentType = "image/png";
 
@@ -33,10 +33,10 @@ export default async function Image() {
           </div>
         </div>
         <div style={{ display: "flex", fontSize: 118, fontWeight: 900, lineHeight: 0.95, letterSpacing: -4 }}>
-          TU SEMANA
+          EXPEDIENTE
         </div>
         <div style={{ display: "flex", fontSize: 118, fontWeight: 900, lineHeight: 0.95, letterSpacing: -4 }}>
-          COMO <span style={{ color: RED, marginLeft: 28 }}>ARTISTA</span>
+          DEL <span style={{ color: RED, marginLeft: 28 }}>ARTISTA</span>
         </div>
         <div style={{ display: "flex", fontSize: 34, color: "rgba(255,255,255,0.7)", marginTop: 40 }}>
           Siete días, tres cosas por día.
