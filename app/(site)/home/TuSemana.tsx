@@ -6,7 +6,7 @@ import Proximamente from "./Proximamente";
 
 /* ═══════════════════════════════════════════════════════════════
    EXPEDIENTE DEL ARTISTA (infoproducto)
-   Los seis grupos del archivo y el paso a la página de venta.
+   Los seis grupos del sistema y el paso a la página de venta.
    ═══════════════════════════════════════════════════════════════ */
 
 export default function TuSemana() {
@@ -25,7 +25,7 @@ export default function TuSemana() {
             <p className="mt-4 max-w-lg text-sm text-white/70 md:text-base">{TU_SEMANA.text}</p>
           </div>
 
-          {/* Los seis grupos del archivo */}
+          {/* Los seis grupos del sistema */}
           <ol className="no-scrollbar flex snap-x gap-2 overflow-x-auto px-6 pb-2 md:grid md:grid-cols-6 md:px-12">
             {TU_SEMANA.blocks.map((block, i) => (
               <li

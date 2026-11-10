@@ -4,7 +4,7 @@ import { SITE } from "../(site)/data/site";
 
 const TITLE = "Expediente del Artista — Darkside UY";
 const DESCRIPTION =
-  "Nivel 1. El documento donde queda escrito todo lo que tu proyecto ya tiene: lo cruza, te muestra lo que no estabas viendo y arma con tus datos los mensajes, el media kit y las postulaciones.";
+  "Nivel 1. El sistema que pone por escrito todo lo que tu proyecto ya tiene: lo cruza, te muestra lo que no estabas viendo y arma con tus datos los mensajes, el media kit y las postulaciones.";
 
 export const metadata: Metadata = {
   /* Esta página tiene su propio layout raíz: sin esto, la imagen al

@@ -213,8 +213,8 @@ export const TU_SEMANA = {
   launched: PRODUCT_LAUNCHED,
   kicker: "Expediente del Artista · Nivel 1",
   title: "¿Cuánto de tu proyecto está escrito en algún lado?",
-  text: "El documento donde queda escrito todo lo que tu proyecto ya tiene. Lo cruza, te muestra lo que no estabas viendo y arma con tus datos los mensajes, el media kit y las postulaciones.",
-  /* Los seis grupos del archivo, en el orden del menú */
+  text: "El sistema que pone por escrito todo lo que tu proyecto ya tiene. Lo cruza, te muestra lo que no estabas viendo y arma con tus datos los mensajes, el media kit y las postulaciones.",
+  /* Los seis grupos del sistema, en el orden del menú */
   blocks: [
     "Empezar",
     "Lo que tenés",

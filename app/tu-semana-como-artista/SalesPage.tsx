@@ -7,7 +7,7 @@ import styles from "./tu-semana-como-artista.module.css";
 /* ═══════════════════════════════════════════════════════════════
    EDITAR ACÁ — es lo único que hay que tocar.
 
-   PRECIO → el precio único del archivo, tal cual se muestra.
+   PRECIO → el precio único del sistema, tal cual se muestra.
    (Ojo: el monto que se cobra se cambia en Hotmart, no acá.)
    ═══════════════════════════════════════════════════════════════ */
 const PRECIO = "USD 4,20";
@@ -24,7 +24,7 @@ const CINTA = [
   "Sin cuenta, sin internet",
 ];
 
-/* Lo que trae el archivo: los seis grupos y sus partes, tal cual
+/* Lo que trae el sistema: los seis grupos y sus partes, tal cual
    aparecen en el menú del Expediente (EXPEDIENTE - SISTEMA.html) */
 const GRUPOS = [
   {
@@ -84,7 +84,7 @@ export default function SalesPage() {
             DARKSIDE <span style={{ color: "var(--redb)" }}>UY</span>
           </Link>
           <a className={styles.topcta} href="#precio">
-            Quiero el archivo
+            Quiero el sistema
           </a>
         </div>
       </div>
@@ -109,10 +109,10 @@ export default function SalesPage() {
           </h1>
 
           <div className={styles.lede}>
-            No es un curso. <b>Es el documento donde queda escrito todo lo
-            que tu proyecto ya tiene</b> — y una herramienta que lo cruza, te
-            muestra lo que tenías adelante sin verlo y arma con tus datos los
-            mensajes, el media kit y las postulaciones.
+            No es un curso. <b>Es un sistema que pone por escrito todo lo
+            que tu proyecto ya tiene</b>, lo cruza, te muestra lo que tenías
+            adelante sin verlo y arma con tus datos los mensajes, el media kit
+            y las postulaciones.
           </div>
 
           <div className={styles.said}>
@@ -147,8 +147,7 @@ export default function SalesPage() {
           </h2>
 
           <p>
-            Somos una productora chica. Trabajar con un artista de verdad
-            significa meses de producción, identidad visual, contenido,
+            Trabajar con un artista de verdad significa meses de producción, identidad visual, contenido,
             gestión de fechas y postulaciones. Eso no se hace con dos mil
             personas. No se hace ni con cincuenta.
           </p>
@@ -176,7 +175,7 @@ export default function SalesPage() {
           <div className={styles.kicker}>Qué es exactamente</div>
 
           <h2>
-            Un archivo que <span className={styles.r}>cruza.</span>
+            Un sistema que <span className={styles.r}>cruza.</span>
           </h2>
 
           <div className={styles.sub}>
@@ -427,7 +426,7 @@ Te escribo para saber cómo se postula a la próxima edición, y qué material n
             </div>
 
             <a className={styles.buy} href={LINK_PAGO || "#"}>
-              Quiero el archivo
+              Quiero el sistema
             </a>
             <div className={styles.pay}>
               Tarjeta de crédito o débito (incluye Prex, Midinero y prepagas
@@ -455,7 +454,7 @@ Te escribo para saber cómo se postula a la próxima edición, y qué material n
               videos, ni clases, ni módulos que ver.
             </div>
             <div>
-              No te va a conseguir fechas. No las consigue un archivo. Te deja
+              No te va a conseguir fechas. No las consigue un sistema. Te deja
               en condiciones de salir a buscarlas.
             </div>
             <div>
@@ -477,7 +476,7 @@ Te escribo para saber cómo se postula a la próxima edición, y qué material n
           </div>
 
           <p style={{ marginTop: 22 }}>
-            No vas a encontrar en el archivo un solo lugar donde te empujemos
+            No vas a encontrar en el sistema un solo lugar donde te empujemos
             a contratarnos. <b>Si llenás todo, vas a llegar solo a los lugares
             donde falta alguien.</b> Ahí sabés dónde encontrarnos.
           </p>
