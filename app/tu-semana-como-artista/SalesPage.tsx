@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import Motion from "./Motion";
 import styles from "./tu-semana-como-artista.module.css";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -14,11 +15,20 @@ const PRECIO = "USD 4,20";
 /* Link de pago: pegar acá la URL del checkout cuando esté lista. */
 const LINK_PAGO = "https://pay.hotmart.com/Q107431346I";
 
+/* Frases de la cinta que corre bajo el título (todas salen de la página) */
+const CINTA = [
+  "Siete días",
+  "Tres cosas por día",
+  "Siete bloques",
+  "Un diagnóstico con números",
+];
+
 /* ─────────────────────────────────────────────────────────────── */
 
 export default function SalesPage() {
   return (
-    <div className={styles.page}>
+    <div className={styles.page} id="tu-semana">
+      <Motion rootId="tu-semana" />
       <div className={styles.top}>
         <div className={styles.wrap}>
           <Link href="/" className={styles.brand}>
@@ -40,12 +50,20 @@ export default function SalesPage() {
       <div className={styles.wrap}>
         {/* 1 · LO QUE DIJISTE */}
         <div className={styles.hero}>
+          <div className={styles.ghost} aria-hidden="true">
+            07
+          </div>
           <div className={styles.eyebrow}>Para los que comentaron</div>
 
           <h1>
-            TU SEMANA
-            <br />
-            COMO <span className={styles.r}>ARTISTA</span>
+            <span className={styles.line}>
+              <span>TU SEMANA</span>
+            </span>{" "}
+            <span className={styles.line}>
+              <span>
+                COMO <span className={styles.r}>ARTISTA</span>
+              </span>
+            </span>
           </h1>
 
           <div className={styles.lede}>
@@ -64,7 +82,21 @@ export default function SalesPage() {
             </div>
           </div>
         </div>
+      </div>
 
+      <div className={styles.marquee} aria-hidden="true">
+        <div className={styles.track}>
+          {[0, 1].map((copy) => (
+            <div key={copy} className={styles.run}>
+              {CINTA.map((frase) => (
+                <span key={frase}>{frase}</span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.wrap}>
         {/* 2 · POR QUE NO PODEMOS TOMARLOS A TODOS */}
         <section>
           <div className={styles.kicker}>Empecemos por lo incómodo</div>
@@ -104,12 +136,12 @@ export default function SalesPage() {
             números.
           </div>
 
-          <div className={styles.mocks}>
-            <div className={styles.mock}>
+          <div className={styles.mocks} data-stagger>
+            <div className={styles.mock} data-spot>
               <div className={styles.cap}>Bloque 07 · Dónde estás parado</div>
               <div className={styles.ringrow}>
                 <div className={styles.ring}>
-                  <i>74%</i>
+                  <i data-count="74" data-suffix="%">74%</i>
                 </div>
                 <div style={{ flex: 1, minWidth: 170 }}>
                   <div className={`${styles.gap} ${styles.g}`}>
@@ -139,7 +171,7 @@ export default function SalesPage() {
               </div>
             </div>
 
-            <div className={styles.mock}>
+            <div className={styles.mock} data-spot>
               <div className={styles.cap}>Bloque 04 · Tu ficha técnica</div>
               <div className={styles.trow}>
                 <div className={styles.tag} style={{ width: "auto", color: "#9a9aa4" }}>
@@ -165,11 +197,11 @@ export default function SalesPage() {
                   8 + 2 retornos
                 </div>
               </div>
-              <div className={styles.trow} style={{ borderColor: "rgba(220,38,38,.45)" }}>
+              <div className={`${styles.trow} ${styles.hoy}`}>
                 <div className={styles.tag} style={{ width: "auto", color: "#ef4444" }}>
                   Backline
                 </div>
-                <div style={{ marginLeft: "auto", color: "#9a9aa4" }}>
+                <div className={styles.caret} style={{ marginLeft: "auto", color: "#9a9aa4" }}>
                   sin completar
                 </div>
               </div>
@@ -179,11 +211,14 @@ export default function SalesPage() {
               </div>
             </div>
 
-            <div className={`${styles.mock} ${styles.wide}`}>
+            <div className={`${styles.mock} ${styles.wide}`} data-spot>
               <div className={styles.cap}>Bloque 05 · Tus textos</div>
               <div className={styles.fakeTa}>
-                Somos una banda que busca transmitir emociones a través de la
-                música, con influencias de varios géneros.
+                Somos una banda que busca{" "}
+                <span className={styles.generic}>
+                  transmitir emociones a través de la música
+                </span>
+                , con influencias de varios géneros.
               </div>
               <div className={`${styles.cnt} ${styles.bad}`}>
                 ⚠ Hay una frase genérica ahí adentro. Cambiala por un dato:
@@ -194,19 +229,21 @@ export default function SalesPage() {
                 Trío de rock indie de Paysandú. Tres discos desde 2019.
                 Cantamos en español.
               </div>
-              <div className={styles.cnt}>76 de 150 — está en medida</div>
+              <div className={styles.cnt}>
+                <span data-count="76">76</span> de 150 — está en medida
+              </div>
             </div>
           </div>
 
-          <div className={styles.blocks}>
-            <div className={styles.blk}>
+          <div className={styles.blocks} data-stagger>
+            <div className={styles.blk} data-spot>
               <div className={styles.n}>01</div>
               <div>
                 <b>Tus siete días</b>
                 <span>Tres cosas por día. Arrancan cuando abrís el archivo.</span>
               </div>
             </div>
-            <div className={styles.blk}>
+            <div className={styles.blk} data-spot>
               <div className={styles.n}>02</div>
               <div>
                 <b>Tu material dormido</b>
@@ -216,28 +253,28 @@ export default function SalesPage() {
                 </span>
               </div>
             </div>
-            <div className={styles.blk}>
+            <div className={styles.blk} data-spot>
               <div className={styles.n}>03</div>
               <div>
                 <b>Tus cuatro pilares</b>
                 <span>Te muestra a quién le estás hablando y a quién no.</span>
               </div>
             </div>
-            <div className={styles.blk}>
+            <div className={styles.blk} data-spot>
               <div className={styles.n}>04</div>
               <div>
                 <b>Tu ficha técnica</b>
                 <span>Lo primero que pide un lugar. Se copia con un botón.</span>
               </div>
             </div>
-            <div className={styles.blk}>
+            <div className={styles.blk} data-spot>
               <div className={styles.n}>05</div>
               <div>
                 <b>Tus textos</b>
                 <span>Las tres biografías, con detector de frases genéricas.</span>
               </div>
             </div>
-            <div className={styles.blk}>
+            <div className={styles.blk} data-spot>
               <div className={styles.n}>06</div>
               <div>
                 <b>Tus fechas del año</b>
@@ -246,7 +283,7 @@ export default function SalesPage() {
                 </span>
               </div>
             </div>
-            <div className={styles.blk} style={{ borderColor: "rgba(220,38,38,.35)" }}>
+            <div className={`${styles.blk} ${styles.last}`} data-spot>
               <div className={styles.n}>07</div>
               <div>
                 <b>Dónde estás parado</b>
@@ -274,7 +311,7 @@ export default function SalesPage() {
             No en tres meses. En una semana, empiece el día que empiece.
           </div>
 
-          <div className={styles.res}>
+          <div className={styles.res} data-stagger>
             <div>
               Tu ficha técnica escrita y lista para mandar, sin tener que
               pensarla de nuevo nunca más.
@@ -331,7 +368,7 @@ export default function SalesPage() {
                   <th>Qué no</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody data-stagger>
                 <tr>
                   <td>Tener la ficha técnica escrita</td>
                   <td>Trabajar un lanzamiento entero</td>
@@ -396,7 +433,7 @@ Tarjeta de crédito o débito (incluye Prex, Midinero y prepagas habilitadas par
             Lo que <span className={styles.r}>no</span> es.
           </h2>
 
-          <div className={styles.isnot}>
+          <div className={styles.isnot} data-stagger>
             <div>No es un curso. No hay videos, ni clases, ni módulos que ver.</div>
             <div>
               No es una plantilla para completar y guardar. Está hecho para
@@ -424,7 +461,7 @@ Tarjeta de crédito o débito (incluye Prex, Midinero y prepagas habilitadas par
         </section>
 
         {/* CIERRE */}
-        <div className={styles.close}>
+        <div className={styles.close} data-auto>
           <h2>
             Siete días haciendo
             <br />
