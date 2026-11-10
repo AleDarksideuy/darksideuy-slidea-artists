@@ -101,19 +101,12 @@
 
 /* precio */
 .price{background:linear-gradient(135deg,#17171b,#0d0d0f);border:1px solid rgba(220,38,38,.35);border-radius:var(--r);padding:30px;margin-top:24px;text-align:center}
-.count{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:22px}
-.cu{background:var(--surface2);border:1px solid var(--line);border-radius:11px;padding:11px 15px;min-width:74px}
-.cu b{display:block;font-size:27px;font-weight:900;letter-spacing:-.03em;line-height:1}
-.cu span{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);font-weight:800}
-.old{font-size:20px;color:var(--mut2);text-decoration:line-through;font-weight:700}
 .new{font-size:clamp(46px,11vw,76px);font-weight:900;letter-spacing:-.045em;line-height:1;color:var(--redb);margin-top:4px}
 .cur{font-size:15px;color:var(--mut);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:8px}
-.after{font-size:14px;color:var(--yel);margin-top:14px;font-weight:700}
 .credit{font-size:14.5px;color:#d6d6dc;margin-top:16px;padding-top:16px;border-top:1px solid var(--line);max-width:520px;margin-left:auto;margin-right:auto}
 .credit b{color:#fff}
 .buy{display:inline-block;background:var(--red);color:#fff;text-decoration:none;border-radius:11px;padding:17px 42px;font-size:17px;font-weight:900;letter-spacing:.02em;margin-top:22px}
 .pay{font-size:12.5px;color:var(--mut2);margin-top:14px}
-.closed{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.3);border-radius:10px;padding:14px 18px;font-size:14px;color:#e8d9b0;margin-bottom:20px}
 
 /* lo que no es */
 .isnot{display:grid;gap:8px;margin-top:22px}

@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,86 +6,17 @@ import styles from "./tu-semana-como-artista.module.css";
 /* ═══════════════════════════════════════════════════════════════
    EDITAR ACÁ — es lo único que hay que tocar.
 
-   FIN_LANZAMIENTO → hasta cuándo vale el precio de lanzamiento.
-   Es UNA fecha, no un ciclo semanal: el archivo se vende todos
-   los días y el precio sube una sola vez, el día que dice acá.
-
-   Cuando faltan más de 7 días muestra la fecha.
-   En la última semana aparece el contador.
-   Pasada la fecha, el precio cambia solo al de lista.
-
-   Formato: año, mes-1, día, hora, minuto.
-   (el mes va menos uno: enero = 0, setiembre = 8)
+   PRECIO → el precio único del archivo, tal cual se muestra.
+   (Ojo: el monto que se cobra se cambia en Hotmart, no acá.)
    ═══════════════════════════════════════════════════════════════ */
-const FIN_LANZAMIENTO = new Date(2026, 8, 30, 23, 59);
-const PRECIO_LANZ = "USD 15";
-const PRECIO_LISTA = "USD 29";
-const FECHA_TXT = "30 de setiembre";
+const PRECIO = "USD 4,20";
 
 /* Link de pago: pegar acá la URL del checkout cuando esté lista. */
 const LINK_PAGO = "https://pay.hotmart.com/Q107431346I";
 
 /* ─────────────────────────────────────────────────────────────── */
 
-const DIA = 86400000;
-
-type Phase = "far" | "counting" | "closed";
-
-type Countdown = { d: number; h: number; m: number; s: number };
-
-function computeTick(): { phase: Phase; countdown: Countdown } {
-  const falta = FIN_LANZAMIENTO.getTime() - Date.now();
-
-  if (falta <= 0) {
-    return { phase: "closed", countdown: { d: 0, h: 0, m: 0, s: 0 } };
-  }
-
-  if (falta > 7 * DIA) {
-    return { phase: "far", countdown: { d: 0, h: 0, m: 0, s: 0 } };
-  }
-
-  const s = Math.floor(falta / 1000);
-  return {
-    phase: "counting",
-    countdown: {
-      d: Math.floor(s / 86400),
-      h: Math.floor((s % 86400) / 3600),
-      m: Math.floor((s % 3600) / 60),
-      s: s % 60,
-    },
-  };
-}
-
 export default function SalesPage() {
-  const [phase, setPhase] = useState<Phase>("far");
-  const [countdown, setCountdown] = useState<Countdown>({
-    d: 0,
-    h: 0,
-    m: 0,
-    s: 0,
-  });
-
-  useEffect(() => {
-    const tick = () => {
-      const next = computeTick();
-      setPhase(next.phase);
-      setCountdown(next.countdown);
-    };
-
-    tick();
-    const timer = setInterval(tick, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const precioActual = phase === "closed" ? PRECIO_LISTA : PRECIO_LANZ;
-  const curLbl = phase === "closed" ? "Precio de lista" : "Precio de lanzamiento";
-  const afterTxt =
-    phase === "far"
-      ? `Vale ${PRECIO_LANZ.replace("USD ", "")} hasta el ${FECHA_TXT}. Después queda en ${PRECIO_LISTA.replace("USD ", "")}.`
-      : phase === "counting"
-        ? `Después de esto queda en ${PRECIO_LISTA.replace("USD ", "")} y no vuelve a bajar.`
-        : "";
-
   return (
     <div className={styles.page}>
       <div className={styles.top}>
@@ -440,38 +368,8 @@ export default function SalesPage() {
           </h2>
 
           <div className={styles.price}>
-            {phase === "closed" && (
-              <div className={styles.closed}>
-                <b>El precio de lanzamiento terminó.</b> El archivo sigue
-                disponible al precio de lista.
-              </div>
-            )}
-
-            {phase === "counting" && (
-              <div className={styles.count}>
-                <div className={styles.cu}>
-                  <b>{countdown.d}</b>
-                  <span>días</span>
-                </div>
-                <div className={styles.cu}>
-                  <b>{countdown.h}</b>
-                  <span>horas</span>
-                </div>
-                <div className={styles.cu}>
-                  <b>{countdown.m}</b>
-                  <span>min</span>
-                </div>
-                <div className={styles.cu}>
-                  <b>{countdown.s}</b>
-                  <span>seg</span>
-                </div>
-              </div>
-            )}
-
-            {phase !== "closed" && <div className={styles.old}>{PRECIO_LISTA}</div>}
-            <div className={styles.new}>{precioActual}</div>
-            <div className={styles.cur}>{curLbl}</div>
-            {afterTxt && <div className={styles.after}>{afterTxt}</div>}
+            <div className={styles.new}>{PRECIO}</div>
+            <div className={styles.cur}>Pago único</div>
 
             <div className={styles.credit}>
               Y esto:{" "}
