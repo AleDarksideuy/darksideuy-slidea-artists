@@ -65,12 +65,46 @@ const NIVELES = [
   ["Expediente completo", "2.600", "Tu proyecto está entero y por escrito. Se abre el Nivel 2."],
 ];
 
+/* Brasas del fondo: posición, tamaño, duración y demora fijas (sin
+   azar) para que el servidor y el navegador dibujen lo mismo */
+const BRASAS = [
+  [6, 3, 19, 0, 30], [14, 2, 24, 6, -20], [23, 4, 21, 12, 40], [31, 2, 27, 3, -35],
+  [42, 3, 18, 9, 25], [51, 2, 26, 15, -15], [60, 4, 22, 1, 35], [68, 2, 25, 11, -40],
+  [77, 3, 20, 5, 20], [85, 2, 28, 14, -25], [93, 3, 23, 8, 15], [37, 2, 30, 18, -30],
+];
+
 /* ─────────────────────────────────────────────────────────────── */
 
 export default function SalesPage() {
   return (
     <div className={styles.page} id="expediente">
       <Motion rootId="expediente" />
+
+      {/* Fondo vivo: resplandores que respiran, grilla con zoom y brasas */}
+      <div className={styles.bg} aria-hidden="true">
+        <div className={styles.grid} />
+        <div className={styles.orbs}>
+          <i />
+          <i />
+          <i />
+        </div>
+        <div className={styles.embers}>
+          {BRASAS.map(([x, s, d, dl, dx]) => (
+            <span
+              key={x}
+              style={
+                {
+                  "--x": `${x}%`,
+                  "--s": `${s}px`,
+                  "--d": `${d}s`,
+                  "--dl": `-${dl}s`,
+                  "--dx": `${dx}px`,
+                } as React.CSSProperties
+              }
+            />
+          ))}
+        </div>
+      </div>
       <div className={styles.top}>
         <div className={styles.wrap}>
           <Link href="/" className={styles.brand}>

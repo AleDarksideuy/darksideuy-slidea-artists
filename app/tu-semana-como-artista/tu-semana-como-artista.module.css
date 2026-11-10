@@ -22,7 +22,28 @@
 }
 .page, .page *{box-sizing:border-box;margin:0;padding:0}
 .page ::selection{background:var(--red);color:#fff}
-.wrap{max-width:900px;margin:0 auto;padding:0 20px;position:relative}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+/* ───────── fondo vivo (fijo, detrás de todo) ───────── */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.grid{
+  position:absolute;inset:-12%;
+  background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+  background-size:56px 56px;
+  -webkit-mask-image:radial-gradient(ellipse 60% 55% at 50% 45%,#000,transparent 75%);
+  mask-image:radial-gradient(ellipse 60% 55% at 50% 45%,#000,transparent 75%);
+  animation:gridZoom 22s ease-in-out infinite alternate;will-change:transform;
+}
+.orbs{position:absolute;inset:0;translate:0 calc(var(--prog,0) * -180px)}
+.orbs i{position:absolute;border-radius:50%;will-change:transform}
+.orbs i:nth-child(1){width:72vmax;height:72vmax;left:-28vmax;top:-24vmax;background:radial-gradient(circle,rgba(220,38,38,.22),transparent 62%);animation:orbA 17s ease-in-out infinite alternate}
+.orbs i:nth-child(2){width:62vmax;height:62vmax;right:-26vmax;top:30vh;background:radial-gradient(circle,rgba(239,68,68,.15),transparent 62%);animation:orbB 23s ease-in-out infinite alternate}
+.orbs i:nth-child(3){width:54vmax;height:54vmax;left:8vw;bottom:-34vmax;background:radial-gradient(circle,rgba(160,12,24,.26),transparent 64%);animation:orbA 29s -9s ease-in-out infinite alternate}
+.embers span{
+  position:absolute;bottom:-12px;left:var(--x);width:var(--s);height:var(--s);border-radius:50%;
+  background:#ff5a5a;box-shadow:0 0 8px 2px rgba(239,68,68,.55);opacity:0;
+  animation:ember var(--d) linear var(--dl) infinite;will-change:transform,opacity;
+}
 
 /* grano de película por encima de todo */
 .page::after{
@@ -111,7 +132,9 @@
 .page section{padding:56px 0;border-top:1px solid var(--line);position:relative;scroll-margin-top:64px}
 .page section::before{
   content:"";position:absolute;top:-1px;left:0;width:90px;height:1px;
-  background:linear-gradient(90deg,var(--red),transparent);
+  background:linear-gradient(90deg,transparent,var(--redb),transparent);
+  box-shadow:0 0 10px rgba(239,68,68,.8);
+  animation:scan 7s ease-in-out infinite;
 }
 .kicker{display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.18em;color:var(--redb);text-transform:uppercase;font-weight:800;margin-bottom:11px}
 .kicker::before{content:"";width:22px;height:2px;background:var(--red);transform-origin:left;transition:transform .9s .15s var(--ease)}
@@ -284,7 +307,7 @@
 .close h2{margin-bottom:16px;font-size:clamp(32px,7vw,58px)}
 .close p{margin-left:auto;margin-right:auto}
 
-.page footer{padding:30px 0 44px;color:var(--mut2);font-size:12.5px;text-align:center;border-top:1px solid var(--line);letter-spacing:.06em}
+.page footer{position:relative;z-index:1;padding:30px 0 44px;color:var(--mut2);font-size:12.5px;text-align:center;border-top:1px solid var(--line);letter-spacing:.06em}
 .page footer a{color:var(--mut);text-decoration:none}
 
 /* ═══════ aparición al hacer scroll (solo con JS, ver Motion.tsx) ═══════ */
@@ -307,6 +330,11 @@
 .page[data-armed] .price:not([data-in]) .new{opacity:0;transform:scale(.7)}
 
 /* ═══════ keyframes ═══════ */
+@keyframes gridZoom{from{transform:scale(1)}to{transform:scale(1.2)}}
+@keyframes orbA{from{transform:translate(0,0) scale(.82)}to{transform:translate(9vw,7vh) scale(1.22)}}
+@keyframes orbB{from{transform:translate(0,0) scale(1.18)}to{transform:translate(-11vw,-9vh) scale(.84)}}
+@keyframes ember{0%{transform:translate(0,0);opacity:0}12%{opacity:.85}75%{opacity:.45}100%{transform:translate(var(--dx),-108vh);opacity:0}}
+@keyframes scan{0%{transform:translateX(0);opacity:0}15%{opacity:1}85%{opacity:1}100%{transform:translateX(calc(min(860px,100vw - 32px) - 90px));opacity:0}}
 @keyframes rise{from{transform:translateY(105%)}to{transform:none}}
 @keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -341,6 +369,8 @@
   .buy{width:100%;padding:17px 20px}
   .run span{font-size:12.5px}
   .close::before{width:420px;height:320px}
+  .embers span:nth-child(n+8){display:none}
+  .orbs i:nth-child(3){display:none}
 }
 
 @media(max-width:380px){
