@@ -143,7 +143,7 @@ export default function SalesPage() {
           </h1>
 
           <div className={styles.lede}>
-            No es un curso. <b>Es un sistema que pone por escrito todo lo
+            <b>Es un sistema que pone por escrito todo lo
             que tu proyecto ya tiene</b>, lo cruza, te muestra lo que tenías
             adelante sin verlo y arma con tus datos los mensajes, el media kit
             y las postulaciones.
@@ -484,7 +484,7 @@ Te escribo para saber cómo se postula a la próxima edición, y qué material n
 
           <div className={styles.isnot} data-stagger>
             <div>
-              No es un curso y no te va a enseñar a hacer música. No hay
+              No te va a enseñar a hacer música. No hay
               videos, ni clases, ni módulos que ver.
             </div>
             <div>
