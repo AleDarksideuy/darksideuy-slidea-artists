@@ -135,13 +135,15 @@ export const JUAN_MAIDANA = {
   /* El caso: la cobertura de la fiesta */
   event: "Fiesta Nacional de la Primavera",
   place: "Dolores · 10 y 11 de octubre de 2026",
-  total: 6051935,
+  total: 7820878,
   totalLabel: "reproducciones",
   reach: { prefix: "y más de", value: 3795247, label: "cuentas alcanzadas" },
   stats: [
-    { value: 788, label: "piezas publicadas", detail: "Reels · Carruseles · Stories" },
-    { value: 4, label: "plataformas", detail: "Instagram · TikTok · YouTube · Facebook" },
+    { value: 776, label: "piezas publicadas", detail: "Reels · Carruseles · Stories" },
+    { value: 3, label: "plataformas", detail: "Instagram · TikTok · YouTube" },
   ],
+  /* Marcas que acompañaron la cobertura (línea discreta debajo del tablero) */
+  sponsors: ["Distral 47", "Da Vinci", "Drabble", "Madre Pan", "Mercatto", "Oriental Seguros"],
   /* Franja de ancho completo debajo de las tarjetas */
   span: { title: "En solo 10 días", detail: "De Dolores a Nueva Palmira" },
   closing: "Una cobertura completa de la fiesta, publicada mientras la fiesta pasaba.",

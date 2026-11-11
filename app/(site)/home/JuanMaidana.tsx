@@ -264,6 +264,11 @@ export default function JuanMaidana() {
                 <span className="mt-2 block text-xs text-white/50">{JM.span.detail}</span>
               </li>
             </ul>
+
+            {/* Marcas que acompañaron: una línea chica, sin protagonismo */}
+            <p data-jm="rise" style={delay(680)} className="mt-5 font-mono text-[10px] uppercase leading-relaxed tracking-[0.14em] text-white/45">
+              Acompañaron · {JM.sponsors.join(" · ")}
+            </p>
           </div>
         </div>
       </div>
