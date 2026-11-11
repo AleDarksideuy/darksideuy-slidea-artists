@@ -260,7 +260,7 @@ export default function JuanMaidana() {
               ))}
               {/* Franja de cierre, de ancho completo */}
               <li data-jm="flip" style={delay(580)} className="col-span-2 border border-white/10 bg-ds-ink px-4 py-5 text-center">
-                <span className="block font-display text-3xl font-bold uppercase leading-none md:text-4xl">{JM.span.title}</span>
+                <span className="block text-balance font-display text-3xl font-bold uppercase leading-none md:text-4xl">{JM.span.title}</span>
                 <span className="mt-2 block text-xs text-white/50">{JM.span.detail}</span>
               </li>
             </ul>

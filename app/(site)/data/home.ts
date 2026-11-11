@@ -145,7 +145,7 @@ export const JUAN_MAIDANA = {
   /* Marcas que acompañaron la cobertura (línea discreta debajo del tablero) */
   sponsors: ["Distral 47", "Da Vinci", "Drabble", "Madre Pan", "Mercatto", "Oriental Seguros"],
   /* Franja de ancho completo debajo de las tarjetas */
-  span: { title: "En solo 10 días", detail: "De Dolores a Nueva Palmira" },
+  span: { title: "Del 10 de octubre al 5 de noviembre", detail: "De Dolores a Nueva Palmira" },
   closing: "Una cobertura completa de la fiesta, publicada mientras la fiesta pasaba.",
 };
 
