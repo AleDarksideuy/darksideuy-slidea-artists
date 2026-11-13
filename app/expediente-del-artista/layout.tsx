@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 
+import { PRODUCT_LAUNCHED } from "../(site)/data/proximamente";
 import { SITE } from "../(site)/data/site";
 
 const TITLE = "Expediente del Artista — Darkside UY";
@@ -13,6 +14,8 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: "/expediente-del-artista" },
+  /* Antes del lanzamiento: accesible solo por link, fuera de los buscadores */
+  ...(PRODUCT_LAUNCHED ? {} : { robots: { index: false, follow: false } }),
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,

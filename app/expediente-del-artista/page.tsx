@@ -1,12 +1,9 @@
-import { redirect } from "next/navigation";
-
-import { PRODUCT_LAUNCHED, TEASER } from "../(site)/data/proximamente";
 import SalesPage from "./SalesPage";
 
-/* Mientras el producto no se lanza (PRODUCT_LAUNCHED = false), esta
-   dirección lleva al adelanto "Próximamente" de la home. La página de
-   venta queda guardada en SalesPage.tsx, lista para el lanzamiento. */
+/* La página de venta responde siempre. Mientras el producto no se lanza
+   (PRODUCT_LAUNCHED = false) no se enlaza desde el sitio ni está en el
+   sitemap, y layout.tsx le pide a Google que no la indexe: solo llega
+   quien tiene el link. */
 export default function ExpedienteDelArtistaPage() {
-  if (!PRODUCT_LAUNCHED) redirect(`/#${TEASER.id}`);
   return <SalesPage />;
 }
