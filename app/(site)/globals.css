@@ -259,3 +259,115 @@ html[data-power="off"] .site-bg-photo {
     display: none;
   }
 }
+
+/* ═══ Cartelera: la marquesina ═══
+   Letras intercambiables sobre rieles y una fila de bombitas alrededor.
+   Al entrar en pantalla (.cartel[data-lit]) las bombitas titilan, se
+   prenden y quedan corriendo; las letras suben una atrás de la otra.
+   Sin animación: todo prendido y en su lugar. */
+.cartel-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.95em;
+  height: 1.24em;
+  border-radius: 0.12em;
+  background: linear-gradient(#f7f2e8, #e2dbcd);
+  color: #0b0b0b;
+  line-height: 1;
+  box-shadow:
+    0 0.08em 0 rgba(0, 0, 0, 0.6),
+    0 0 0.7em rgba(255, 214, 170, 0.12);
+  transform: rotate(var(--r, 0deg));
+}
+
+.cartel-tile-big {
+  width: 1.02em;
+}
+
+.cartel-bulbs {
+  --gap: 18px;
+  --band: 14px;
+  --bulb: radial-gradient(circle, #fff3e0 0 1.6px, rgba(255, 70, 80, 0.8) 2.4px, rgba(229, 9, 20, 0) 5px);
+}
+
+@media (min-width: 768px) {
+  .cartel-bulbs {
+    --gap: 22px;
+    --band: 18px;
+  }
+}
+
+.cartel-bulbs::before,
+.cartel-bulbs::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    var(--bulb) 0 0 / var(--gap) var(--band) repeat-x,
+    var(--bulb) 0 100% / var(--gap) var(--band) repeat-x,
+    var(--bulb) 0 0 / var(--band) var(--gap) repeat-y,
+    var(--bulb) 100% 0 / var(--band) var(--gap) repeat-y;
+}
+
+/* La segunda tanda de bombitas, intercaladas con la primera */
+.cartel-bulbs::after {
+  background-position:
+    calc(var(--gap) / 2) 0,
+    calc(var(--gap) / 2) 100%,
+    0 calc(var(--gap) / 2),
+    100% calc(var(--gap) / 2);
+}
+
+@keyframes cartel-on {
+  0% { opacity: 0.15; }
+  15% { opacity: 1; }
+  25% { opacity: 0.25; }
+  40% { opacity: 1; }
+  50% { opacity: 0.45; }
+  100% { opacity: 1; }
+}
+
+@keyframes cartel-chase {
+  0%,
+  49% { opacity: 1; }
+  50%,
+  100% { opacity: 0.28; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cartel[data-lit="false"] .cartel-bulbs::before,
+  .cartel[data-lit="false"] .cartel-bulbs::after {
+    opacity: 0.15;
+  }
+
+  .cartel[data-lit="true"] .cartel-bulbs::before {
+    animation:
+      cartel-on 0.9s linear both,
+      cartel-chase 1.3s linear 0.9s infinite;
+  }
+
+  .cartel[data-lit="true"] .cartel-bulbs::after {
+    animation:
+      cartel-on 0.9s linear both,
+      cartel-chase 1.3s linear 1.55s infinite;
+  }
+
+  /* Fuera de pantalla, quietas */
+  .cartel[data-visible="false"] .cartel-bulbs::before,
+  .cartel[data-visible="false"] .cartel-bulbs::after {
+    animation-play-state: paused;
+  }
+
+  .cartel-tile {
+    transition:
+      transform 0.55s cubic-bezier(0.2, 0.9, 0.25, 1.25),
+      opacity 0.25s linear;
+    transition-delay: calc(var(--i, 0) * 32ms + 0.3s);
+  }
+
+  .cartel[data-lit="false"] .cartel-tile {
+    opacity: 0;
+    transform: translateY(-0.9em) rotate(calc(var(--r, 0deg) * -6));
+  }
+}

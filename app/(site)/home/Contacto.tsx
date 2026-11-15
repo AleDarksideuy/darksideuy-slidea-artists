@@ -55,6 +55,7 @@ export default function Contacto() {
             </p>
           </div>
           <nav aria-label="Pie" className="grid grid-cols-2 gap-x-8 gap-y-3 text-sm text-white/60 sm:flex sm:gap-6">
+            <a href="#cartelera" className="md:hover:text-white">Cartelera</a>
             <a href="#artists" className="md:hover:text-white">Artistas</a>
             <a href="#darkside-pick" className="md:hover:text-white">Música</a>
             <a href="#llamado-artistas" className="md:hover:text-white">Llamado</a>

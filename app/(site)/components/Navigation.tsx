@@ -5,14 +5,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { Headphones, Lock, Mic2, Sparkles, Users, type LucideIcon } from "lucide-react";
+import { CalendarDays, Headphones, Lock, Mic2, Sparkles, Users, type LucideIcon } from "lucide-react";
 
 import { requestPowerOn } from "../home/power";
 
 type NavItem = { id: string; label: string; href: string; icon: LucideIcon };
 
-/* Los tres caminos principales de la home + el infoproducto */
+/* Los caminos principales de la home (en el orden de la página) + el infoproducto */
 const ITEMS: NavItem[] = [
+  { id: "cartelera", label: "Cartelera", href: "/#cartelera", icon: CalendarDays },
   { id: "artists", label: "Artistas", href: "/#artists", icon: Users },
   { id: "darkside-pick", label: "Música", href: "/#darkside-pick", icon: Headphones },
   { id: "llamado-artistas", label: "Llamado", href: "/#llamado-artistas", icon: Mic2 },
@@ -105,12 +106,14 @@ export default function Navigation({ product: TU_SEMANA }: { product: ProductLin
         )}
       </AnimatePresence>
 
-      {/* ═══════════════ CELULAR: barra al alcance del pulgar ═══════════════ */}
+      {/* ═══════════════ CELULAR: barra al alcance del pulgar ═══════════════
+          Cinco lugares: con letras menos separadas entran "Cartelera" y
+          "Expediente" en un celular de 360 px */}
       <nav
         aria-label="Principal"
         className="fixed inset-x-0 bottom-0 z-50 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:hidden"
       >
-        <ul className="grid grid-cols-4 rounded-2xl border border-white/10 bg-black/80 p-1 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+        <ul className="grid grid-cols-5 rounded-2xl border border-white/10 bg-black/80 p-1 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] backdrop-blur-xl">
           {ITEMS.map((item) => {
             const Icon = item.icon;
             const isActive = active === item.id;
@@ -120,7 +123,7 @@ export default function Navigation({ product: TU_SEMANA }: { product: ProductLin
                   href={item.href}
                   onClick={() => isHome && requestPowerOn(item.id)}
                   aria-current={isActive ? "location" : undefined}
-                  className={`relative flex min-h-[56px] flex-col items-center justify-center gap-1 rounded-xl text-[10px] font-semibold uppercase tracking-[0.12em] transition-colors ${
+                  className={`relative flex min-h-[56px] flex-col items-center justify-center gap-1 rounded-xl text-[10px] font-semibold uppercase tracking-[0.06em] transition-colors ${
                     isActive ? "text-white" : "text-white/55 active:text-white"
                   }`}
                 >
@@ -141,7 +144,7 @@ export default function Navigation({ product: TU_SEMANA }: { product: ProductLin
             <Link
               href={TU_SEMANA.href}
               onClick={() => TU_SEMANA.sectionId && isHome && requestPowerOn(TU_SEMANA.sectionId)}
-              className="flex min-h-[56px] flex-col items-center justify-center gap-1 rounded-xl bg-[#E50914]/15 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#ff5b63] active:bg-[#E50914]/25"
+              className="flex min-h-[56px] flex-col items-center justify-center gap-1 rounded-xl bg-[#E50914]/15 text-[10px] font-semibold uppercase tracking-[0.06em] text-[#ff5b63] active:bg-[#E50914]/25"
             >
               {TU_SEMANA.locked ? <Lock className="h-5 w-5" strokeWidth={1.8} /> : <Sparkles className="h-5 w-5" strokeWidth={1.8} />}
               <span>{TU_SEMANA.label}</span>

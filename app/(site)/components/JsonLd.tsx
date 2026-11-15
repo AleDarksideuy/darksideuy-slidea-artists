@@ -1,6 +1,8 @@
 import { CONTACT } from "../data/home";
-import type { Artist } from "../data/artists";
+import { artists, type Artist } from "../data/artists";
+import { EVENTS, type CarteleraEvent } from "../data/cartelera";
 import { SITE } from "../data/site";
+import { todayInUruguay } from "../lib/cartelera";
 
 /* ═══════════════════════════════════════════════════════════════
    DATOS ESTRUCTURADOS (schema.org)
@@ -33,8 +35,65 @@ const ORGANIZATION = {
   sameAs: [CONTACT.instagram],
 };
 
-/* Home: la productora y el sitio */
+const EVENT_STATUS = {
+  cancelado: "https://schema.org/EventCancelled",
+  postergado: "https://schema.org/EventPostponed",
+  agotado: "https://schema.org/EventScheduled",
+};
+
+/* Una fecha de la cartelera, como evento de Google (solo las que ya
+   tienen día: sin día no hay evento para Google) */
+function eventData(event: CarteleraEvent & { date: string }) {
+  const url = `${SITE.url}/#evento-${event.id}`;
+  const [locality, region] = event.city.split(",").map((s) => s.trim());
+  const entry = event.entry;
+  const offer =
+    entry &&
+    (entry.kind === "libre" || entry.price !== undefined) && {
+      "@type": "Offer",
+      price: entry.kind === "libre" ? 0 : entry.price,
+      priceCurrency: "UYU",
+      url: (entry.kind === "paga" && entry.link) || url,
+      availability: event.status === "agotado" ? "https://schema.org/SoldOut" : "https://schema.org/InStock",
+    };
+  const performers = (event.artists ?? []).map((name) => {
+    const artist = artists.find((a) => a.slug === name);
+    return artist
+      ? { "@type": "MusicGroup", name: artist.name, url: `${SITE.url}/artists/${artist.slug}` }
+      : { "@type": "PerformingGroup", name };
+  });
+
+  return {
+    "@type": "Event",
+    "@id": `${url}#event`,
+    name: event.title,
+    url,
+    startDate: event.time ? `${event.date}T${event.time}:00-03:00` : event.date,
+    eventStatus: event.status ? EVENT_STATUS[event.status] : "https://schema.org/EventScheduled",
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    location: {
+      "@type": "Place",
+      name: event.place ?? event.city,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: locality,
+        ...(region && { addressRegion: region }),
+        addressCountry: "UY",
+      },
+    },
+    image: abs(event.poster?.src ?? SITE.logo),
+    ...(event.text && { description: event.text }),
+    organizer: { "@id": `${SITE.url}/#organization` },
+    ...(performers.length && { performer: performers }),
+    ...(offer && { offers: offer }),
+  };
+}
+
+/* Home: la productora, el sitio y las fechas de la cartelera que
+   todavía no pasaron (al momento de publicar) */
 export function SiteJsonLd() {
+  const today = todayInUruguay();
+  const events = EVENTS.filter((e): e is CarteleraEvent & { date: string } => !!e.date && e.date >= today).map(eventData);
   return (
     <Script
       data={{
@@ -49,6 +108,7 @@ export function SiteJsonLd() {
             inLanguage: "es",
             publisher: { "@id": `${SITE.url}/#organization` },
           },
+          ...events,
         ],
       }}
     />
