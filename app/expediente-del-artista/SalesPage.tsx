@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Motion from "./Motion";
+import Vsl from "./Vsl";
 import styles from "./expediente-del-artista.module.css";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -148,6 +149,8 @@ export default function SalesPage() {
             adelante sin verlo y arma con tus datos los mensajes, el media kit
             y las postulaciones.
           </div>
+
+          <Vsl />
 
           <div className={styles.said}>
             <div className={styles.q}>«Quiero trabajar con ustedes.»</div>
