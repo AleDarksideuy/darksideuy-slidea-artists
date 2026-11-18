@@ -223,6 +223,15 @@ export default function SalesPage() {
             ahí.</b>
           </div>
 
+          {/* Loom: el sistema por dentro, con un proyecto de ejemplo */}
+          <Vsl
+            video="/expediente/loom.mp4"
+            portada="/expediente/loom-portada.webp"
+            etiqueta="Miralo por dentro · 1 min"
+            descripcion="Ver el Expediente del Artista por dentro (1 minuto)"
+            prioridad={false}
+          />
+
           <div className={styles.mocks} data-stagger>
             <div className={styles.mock} data-spot>
               <div className={styles.cap}>El cruce · Lo que no estabas viendo</div>
