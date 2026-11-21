@@ -462,15 +462,6 @@ Te escribo para saber cómo se postula a la próxima edición, y qué material n
             <div className={styles.new}>{PRECIO}</div>
             <div className={styles.cur}>Pago único</div>
 
-            <div className={styles.credit}>
-              Y esto:{" "}
-              <b>
-                si después trabajamos juntos, ese monto se te descuenta
-                entero del primer mes.
-              </b>{" "}
-              No es un descuento parcial ni un cupón. Es el total.
-            </div>
-
             <a className={styles.buy} href={LINK_PAGO || "#"}>
               Quiero el sistema
             </a>

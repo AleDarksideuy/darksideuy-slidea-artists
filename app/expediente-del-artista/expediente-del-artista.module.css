@@ -295,8 +295,6 @@
   display:inline-block;font-size:12.5px;color:var(--redb);font-weight:800;letter-spacing:.2em;text-transform:uppercase;margin-top:14px;
   padding:6px 14px;border:1px solid rgba(220,38,38,.4);border-radius:999px;background:rgba(220,38,38,.08);
 }
-.credit{font-size:14.5px;color:#d6d6dc;margin-top:22px;padding-top:20px;border-top:1px solid var(--line);max-width:520px;margin-left:auto;margin-right:auto}
-.credit b{color:#fff}
 .buy{
   position:relative;overflow:hidden;isolation:isolate;display:inline-block;
   background:linear-gradient(180deg,#ef4444,#c81e1e);color:#fff;text-decoration:none;border-radius:12px;

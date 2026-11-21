@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 
 import { PRODUCT_LAUNCHED } from "../(site)/data/proximamente";
 import { SITE } from "../(site)/data/site";
@@ -47,7 +48,12 @@ export default function ExpedienteDelArtistaLayout({
 }) {
   return (
     <html lang="es" style={HTML_BASE}>
-      <body style={BODY_BASE}>{children}</body>
+      <body style={BODY_BASE}>
+        {children}
+        {/* Contador de visitas (Vercel Web Analytics): cuánta gente entra
+            por el link directo y de dónde viene (referrer / ?utm_source=) */}
+        <Analytics />
+      </body>
     </html>
   );
 }
