@@ -12,7 +12,7 @@
    true  → vuelve todo: sección, menú "Expediente" y página de venta.
    ═══════════════════════════════════════════════════════════════ */
 
-export const PRODUCT_LAUNCHED = false;
+export const PRODUCT_LAUNCHED = true;
 
 export const TEASER = {
   id: "proximamente",
