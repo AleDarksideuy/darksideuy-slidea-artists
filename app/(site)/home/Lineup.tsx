@@ -23,7 +23,7 @@ export function latestRelease(artist: Artist) {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   NUESTROS ARTISTAS — EL LINEUP
+   PASARON POR DARKSIDE (artistas que trabajaron con la productora) — EL LINEUP
    Los nombres en grande, como en un afiche de festival. Al bajar, el
    nombre que pasa por la franja de lectura se enciende y su foto
    aparece en el cuadro fijo, con su último lanzamiento y accesos.
@@ -69,16 +69,16 @@ export default function Lineup() {
         <header className="mb-8 flex items-end justify-between gap-4 md:mb-14">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ds-red-soft">
-              Lineup · {String(lineup.length).padStart(2, "0")} artistas
+              Trabajamos con · {String(lineup.length).padStart(2, "0")} artistas
             </p>
             <h2 className="mt-3 font-display text-[clamp(2.6rem,11vw,6rem)] font-bold uppercase leading-[0.9]">
-              Nuestros
+              Pasaron por
               <br />
-              artistas
+              Darkside
             </h2>
           </div>
           <p className="hidden max-w-xs text-sm text-white/55 md:block">
-            Conocé a los artistas que actualmente forman parte del ecosistema Darkside.
+            Artistas que trabajaron con Darkside. Entrá a cada ficha para conocer su música.
           </p>
         </header>
 

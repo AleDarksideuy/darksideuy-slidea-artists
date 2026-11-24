@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: ArtistPageProps): Promise<Met
 
   const description =
     artist.description ||
-    `${artist.category} · ${artist.city}, ${artist.country}. Artista del ecosistema Darkside UY.`;
+    `${artist.category} · ${artist.city}, ${artist.country}. Trabajó con Darkside UY.`;
 
   return {
     title: artist.name,
