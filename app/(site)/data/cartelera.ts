@@ -56,6 +56,14 @@ export type CarteleraEvent = {
 
 export const EVENTS: CarteleraEvent[] = [
   {
+    id: "skatepark-underfest-diciembre",
+    date: "2026-12-12",
+    title: "SkatePark Underfest",
+    type: "Festival",
+    city: "Mercedes, Soriano",
+    info: "/#underfest",
+  },
+  {
     id: "final-skaters-del-interior",
     date: null,
     month: "2026-12",
